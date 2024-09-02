@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Jetbrains Rider
+Comment=Integrated Development Environment
+#Path=/home/dannym
+Exec=rider
+Icon=rider
+Terminal=false
+Categories=Development;IDE;Debugger;GUIDesigner;RevisionControl;
+StartupWMClass=jetbrains-rider
+StartupNotify=true

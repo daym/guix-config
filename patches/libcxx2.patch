@@ -1,0 +1,18 @@
+Description: If exceptions are disabled, don't report on them either
+Author: Danny Milosavljevic <dannym@scratchpost.org>
+Last-Update: 2024-03-02 12:16:00
+
+--- orig/llvm-project-12.0.1.src/libcxx/src/support/runtime/exception_pointer_unimplemented.ipp	2024-03-02 00:05:38.285877775 +0100
++++ llvm-project-12.0.1.src/libcxx/src/support/runtime/exception_pointer_unimplemented.ipp	2024-03-02 00:06:20.417733219 +0100
+@@ -14,9 +14,11 @@
+ 
+ exception_ptr::~exception_ptr() _NOEXCEPT
+ {
++#ifdef _EXCEPTIONS
+ #  warning exception_ptr not yet implemented
+   fprintf(stderr, "exception_ptr not yet implemented\n");
+   ::abort();
++#endif
+ }
+ 
+ exception_ptr::exception_ptr(const exception_ptr& other) _NOEXCEPT

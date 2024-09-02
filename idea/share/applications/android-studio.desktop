@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Android Studio
+Comment=Integrated Development Environment
+#Path=/home/dannym
+Exec=android-studio
+Icon=android-studio
+Terminal=false
+Categories=Development;IDE;Debugger;GUIDesigner;RevisionControl;
+StartupWMClass=jetbrains-idea
+StartupNotify=true

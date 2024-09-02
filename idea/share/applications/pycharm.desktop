@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=IntelliJ Pycharm
+Comment=Integrated Development Environment
+#Path=/home/dannym
+Exec=pycharm
+Icon=pycharm
+Terminal=false
+Categories=Development;IDE;Debugger;GUIDesigner;RevisionControl;
+StartupWMClass=jetbrains-pycharm
+StartupNotify=true

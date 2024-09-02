@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=IntelliJ IDEA
+Comment=Integrated Development Environment
+#Path=/home/dannym
+Exec=idea
+Icon=idea
+Terminal=false
+Categories=Development;IDE;Debugger;GUIDesigner;RevisionControl;
+StartupWMClass=jetbrains-idea
+StartupNotify=true
