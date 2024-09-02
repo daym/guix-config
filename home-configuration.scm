@@ -15,7 +15,7 @@
              (guix build-system gnu)
              (guix channels)
              (gnu home services desktop)
-             ;(gnu home services dict)
+                                        ;(gnu home services dict)
              (gnu home services dotfiles)
              (gnu home services fontutils)
              (gnu home services gnupg)
@@ -31,7 +31,7 @@
              (gnu home services sound)
              (gnu home services ssh)
              (gnu home services symlink-manager)
-             ;(gnu home services syncthing)
+                                        ;(gnu home services syncthing)
              (gnu home services xdg)
              (gnu packages linux) ; e2fsprogs
              (gnu packages gnome) ; libsecret
@@ -63,11 +63,11 @@
       (inherit p)
       (inputs
        (modify-inputs (package-inputs p)
-         (delete "pipewire"))))))
+                      (delete "pipewire"))))))
 
                                         ;doesn't apply
                                         ;(define patch6
-;  (options->transformation '((with-patch . "sway=/home/dannym/src/guix-config/sway-hidpi-xwayland.patch"))))
+                                        ;  (options->transformation '((with-patch . "sway=/home/dannym/src/guix-config/sway-hidpi-xwayland.patch"))))
 
 (define %source-dir (string-append (getcwd) "/idea"))
 
@@ -85,14 +85,14 @@
        (file-name (git-file-name name version))
        (sha256
         (base32 "1q360xhnmfnjgrkmzq69p2wc0rphz7fsbjzgn3hjw0a8kv3jsq0y"))))))
-    
-; Note: Community edition contains proprietary plugins: https://www.jetbrains.com/legal/community-bundled-plugins (Space Integration, Code With Me, Shared Indexes, Marketplace Licensing Support, Package Checker)
-; Note: Community products: android-studio, idea, pycharm
-; Note: Proprietary-only products: clion, phpstorm, webstorm, datagrip!, goland, dataspell, RubyMine, datalore, rustrover
-; Note: Other non-ide products: youtrack, teamcity
-; Note: .NET products: rider, dotTrace, dotMemory, dotCover
-; Note: VS extensions: resharper, resharper C++
-; TODO: e2fsprogs libe2p.so
+
+                                        ; Note: Community edition contains proprietary plugins: https://www.jetbrains.com/legal/community-bundled-plugins (Space Integration, Code With Me, Shared Indexes, Marketplace Licensing Support, Package Checker)
+                                        ; Note: Community products: android-studio, idea, pycharm
+                                        ; Note: Proprietary-only products: clion, phpstorm, webstorm, datagrip!, goland, dataspell, RubyMine, datalore, rustrover
+                                        ; Note: Other non-ide products: youtrack, teamcity
+                                        ; Note: .NET products: rider, dotTrace, dotMemory, dotCover
+                                        ; Note: VS extensions: resharper, resharper C++
+                                        ; TODO: e2fsprogs libe2p.so
 (define idea
   (package
     (name "idea")
@@ -117,19 +117,19 @@
                              (install-file full-file-name out-bin)
                              (chmod (string-append out-bin "/" file-name) #o755)
                              (wrap-program (string-append out-bin "/" file-name)
-                              `("LD_LIBRARY_PATH" prefix
-                                (,(string-append
-                                   (assoc-ref inputs "libsecret")
-                                   "/lib:"
-                                   (assoc-ref inputs "e2fsprogs")
-                                   "/lib")))
-                              `("JBR21" = (,(assoc-ref inputs "jbr21")))
-                              `("JBR17" = (,(assoc-ref inputs "jbr17")))
-                              `("RIDER_JDK" = (,(assoc-ref inputs "jbr21")))
-                              `("CLION_JDK" = (,(assoc-ref inputs "jbr21")))
-                              `("IDEA_JDK" = (,(assoc-ref inputs "jbr21")))
-                              `("STUDIO_JDK" = (,(assoc-ref inputs "jbr21")))
-                              `("PYCHARM_JDK" = (,(assoc-ref inputs "jbr21"))))))
+                               `("LD_LIBRARY_PATH" prefix
+                                 (,(string-append
+                                    (assoc-ref inputs "libsecret")
+                                    "/lib:"
+                                    (assoc-ref inputs "e2fsprogs")
+                                    "/lib")))
+                               `("JBR21" = (,(assoc-ref inputs "jbr21")))
+                               `("JBR17" = (,(assoc-ref inputs "jbr17")))
+                               `("RIDER_JDK" = (,(assoc-ref inputs "jbr21")))
+                               `("CLION_JDK" = (,(assoc-ref inputs "jbr21")))
+                               `("IDEA_JDK" = (,(assoc-ref inputs "jbr21")))
+                               `("STUDIO_JDK" = (,(assoc-ref inputs "jbr21")))
+                               `("PYCHARM_JDK" = (,(assoc-ref inputs "jbr21"))))))
                          '("android-studio" "idea" "pycharm" "rider"))
                (for-each (lambda (file-name)
                            (let ((dir-name
@@ -143,9 +143,9 @@
                            "share/icons/hicolor/64x64/apps/idea.png"))
                (mkdir-p out-share-applications)
                (for-each (lambda (file-name)
-                           ;(substitute* file-name
-                           ; (("^Exec=.*") (string-append "Exec="  "\n")))
-                           ; TODO make-desktop-entry-file
+                                        ;(substitute* file-name
+                                        ; (("^Exec=.*") (string-append "Exec="  "\n")))
+                                        ; TODO make-desktop-entry-file
                            (install-file file-name out-share-applications))
                          '("share/applications/android-studio.desktop"
                            "share/applications/idea.desktop"
@@ -154,7 +154,7 @@
      (list))
     (inputs
      `(("e2fsprogs" ,e2fsprogs)
-       ;("jbr11" ,jbr11 "jdk")
+                                        ;("jbr11" ,jbr11 "jdk")
        ("jbr17" ,jbr17 "jdk")
        ("jbr21" ,jbr21 "jdk")
        ("libsecret" ,libsecret)))
@@ -163,48 +163,80 @@
     (home-page "https://www.jetbrains.com/idea/")
     (license license:asl2.0)))
 
-(home-environment
- (packages (list ;;; System
 
-            (specification->package "wdisplays")
-                                        ;(specification->package "pipewire")
-            (specification->package "xdg-desktop-portal")
-            (specification->package "xdg-desktop-portal-gtk")
-            (specification->package "xdg-desktop-portal-wlr")
-            (specification->package "i3-wm")
-            (patch9 (specification->package "waybar"))
-            (specification->package "yambar-wayland")
-            ;; Auto screen config for Wayland
-            (specification->package "kanshi")
-            (specification->package "i3status")
-            (specification->package "dex")
-            (specification->package "sway")
-            (specification->package "swayidle")
-            (specification->package "swaylock")
-            (specification->package "vorta") ; backup
-            (specification->package "cryfs") ; backup
-            (specification->package "onedrive") ; backup
-            (specification->package "openbox") ; pure X11
-                                        ;(specification->package "obconf")
-            (specification->package "tint2") ; pure X11
-                                        ;(specification->package "windowmaker")
-            (specification->package "xbindkeys") ; pure X11
-            ;; Rewrites in Rust
+(define xorg-packages
+  (specifications->packages '("i3-wm" "openbox" "tint2" "xbindkeys" "xterm")
+                                        ;"shod"
+                                        ;"obconf" 
+                                        ; "windowmaker"
+                                        ; "fbautostart"
+                                        ; "fluxbox"
+                                        ; "cbatticon"
+                                        ; "rofi"
+                                        ; "numlockx"
+                                        ; "pinentry-rofi"
+                                        ; "redshift"
+                                        ; "xwininfo"
+                                        ; "xkbcomp"
+                                        ; "xpra"
+                                        ; "xdpyinfo"
+
+                  ;;; X
+
+                                        ;(specification->package "xclip")
+                                        ; "xev"
+                                        ; "xkill"
+                                        ;(specification->package "xprop")
+                                        ; "xrandr" ; pure X11
+                                        ;(specification->package "xdpyinfo")
+                                        ;(specification->package "xsetroot")
+                                        ;(specification->package "xset")
+                                        ;(specification->package "x11-ssh-askpass")
+                                        ;(specification->package "xfontsel")
+
+                            ))
+
+(define wayland-packages
+  (specifications->packages '("wdisplays"
+                              "kanshi" ; auto screen config
+                              "sway"
+                              "swayidle"
+                              "swaylock"
+                              "nwg-launchers"
+                              "rofi-wayland"
+                              "waypipe"
+                              "slurp" ; screenshot
+                              "scrot" ; screenshot
+                              "maim" ; screenshot; need no hold-drag
+                                        ; "grimshot" ; screenshot meta
+                              )))
+
+(define backup-packages
+  (specifications->packages '("vorta" "cryfs" "onedrive")))
+
+;; Rewrites in Rust
                                         ;(specification->package "fish")
-            ;; In Rust to begin with
+;; In Rust to begin with
                                         ;(specification->package "nushell")
-            (specification->package "nftables")
-            (specification->package "pulseaudio")
+
+(home-environment
+ (packages (append ;;; System
+
+            (specifications->packages '("xdg-desktop-portal" "xdg-desktop-portal-gtk" "xdg-desktop-portal-wlr"))
+            wayland-packages
+            backup-packages
+
+            (list
+            (patch9 (specification->package "waybar"))
+                                        ;(specification->package "yambar-wayland")
+            (specification->package "i3status") ; sway can use it
+
+            (specification->package "pulseaudio") ; TODO: really?
             (specification->package "polkit-gnome") ; ???
             (specification->package "hicolor-icon-theme")
             (specification->package "adwaita-icon-theme")
             (specification->package "dunst")
             (specification->package "bluez")
-                                        ;(specification->package "shod")
-                                        ;(specification->package "mcron")
-                                        ;(specification->package "fbautostart")
-            (specification->package "nwg-launchers")
-            (specification->package "rofi-wayland")
 
                   ;;; System/Laptop
             
@@ -214,23 +246,15 @@
                                         ;(specification->package "ccid") ; fingerprint reader?
                                         ;(specification->package "pcsc-lite")
 
-                                        ;(specification->package "cbatticon")
-                                        ;(specification->package "fluxbox")
-
                   ;;; System Tools
 
+            (specification->package "xrdb") ; compat for nheko
+            (specification->package "dex") ; generate and execute desktop files
                                         ; Used by qemu, apparently
             (specification->package "samba")
             (specification->package "udiskie")
             (specification->package "efibootmgr")
-            (specification->package "waypipe")
-            (specification->package "slurp") ; screenshot
-            (specification->package "scrot") ; screenshot
-            (specification->package "maim") ; screenshot; need no hold-drag
-                                        ;(specification->package "grimshot") ; screenshot meta
             (specification->package "roxterm")
-                                        ;(specification->package "terminology")
-            (specification->package "xterm") ; pure X11
             (specification->package "p7zip")
             (specification->package "zip")
             (specification->package "unzip")
@@ -238,7 +262,6 @@
             (specification->package "gkrellm")
             (specification->package "dos2unix")
             (specification->package "lshw")
-                                        ;(specification->package "rofi")
             (specification->package "pdfgrep")
             (specification->package "lm-sensors")
             (specification->package "xdg-utils")
@@ -257,15 +280,10 @@
             (specification->package "strace")
             (specification->package "screen")
             (specification->package "fzf")
-                                        ;(specification->package "redshift")
-                                        ;(specification->package "pinentry-rofi")
-                                        ;(specification->package "numlockx")
             (specification->package "tmon") ; temp monitoring
             (specification->package "file")
             (specification->package "rocminfo")
-                                        ;(specification->package "xwininfo")
             (specification->package "playerctl")
-            (specification->package "xkbcomp") ; pure X11
             (specification->package "pinentry-gnome3")
             (specification->package "gnome-keyring")
             (specification->package "dconf-editor")
@@ -336,11 +354,6 @@
 
             idea
 
-            ;(specification->package "zig")
-            ;(specification->package "zig-zls")
-
-            ;(specification->package "chicken") ; Scheme -> C -> executable
-            
             ;; Typescript compiler.
             (specification->package "rust-swc")
                                         ;(specification->package "vscodium")
@@ -348,9 +361,9 @@
             (specification->package "kicad")
             (specification->package "meld")
             (specification->package "gnuradio")
-            (specification->package "swi-prolog") ; has emacs lsp-mode integration
+                                        ;(specification->package "swi-prolog") ; has emacs lsp-mode integration
             (specification->package "asciidoc")
-            (specification->package "racket")
+                                        ;(specification->package "racket")
             (specification->package "gdb")
             (specification->package "rr")
                                         ;(specification->package "mercurial")
@@ -394,35 +407,35 @@
             ;; (specification->package "julia-ellipsisnotation")
             ;; (specification->package "julia-inversefunctions")
             ;; (specification->package "julia-measurements")
-            ; julia-xkbcommon-jll
-            ; julia-wayland-protocols-jll
-            ; julia-wayland-jll
+                                        ; julia-xkbcommon-jll
+                                        ; julia-wayland-protocols-jll
+                                        ; julia-wayland-jll
             (specification->package "jupyter")
             (specification->package "jupyter-guile-kernel")
             (specification->package "guile-ares-rs")
             (specification->package "diffoscope")
             (specification->package "diffstat")
             (specification->package "hugs")
-            (specification->package "gprolog")
-            ;(specification->package "fpc")
-            (specification->package "esbuild")
-            ;(specification->package "ocaml")
-            (specification->package "gforth") ; also has emacs support
-            (specification->package "clojure")
-            (specification->package "clojure-tools")
+                                        ;(specification->package "gprolog")
+                                        ;(specification->package "fpc")
+                                        ;(specification->package "esbuild")
+                                        ;(specification->package "ocaml")
+                                        ;(specification->package "gforth") ; also has emacs support
+                                        ;(specification->package "clojure")
+                                        ;(specification->package "clojure-tools")
             
                                         ; (specification->package "leiningen")
-            (specification->package "pure")
+                                        ;(specification->package "pure")
             (specification->package "kicad-symbols")
             (specification->package "kicad-footprints")
             (specification->package "godot")
-            (specification->package "glade")
-            ; hell no (specification->package "node")
+                                        ;(specification->package "glade")
+                                        ; hell no (specification->package "node")
             (specification->package "git-lfs")
-            ;(specification->package "sbcl")
-            ;(specification->package "sbcl-binpack") ; for textures
+                                        ;(specification->package "sbcl")
+                                        ;(specification->package "sbcl-binpack") ; for textures
             (specification->package "jq")
-            (specification->package "make")
+                                        ;(specification->package "make")
             (specification->package "expect")
                                         ;(specification->package "lazygit")
             (specification->package "direnv")
@@ -449,21 +462,6 @@
             (specification->package "emacs-pgtk")
             (specification->package "emacs-paredit")
             (specification->package "emacs-crdt")
-            ;; Required by emacs-ement
-                                        ;(specification->package "emacs-persist")
-            ;; Required by emacs-ement
-                                        ;(specification->package "emacs-plz")
-            ;; Required by emacs-ement
-                                        ;(specification->package "emacs-svg-lib")
-            ;; Required by emacs-ement
-                                        ;(specification->package "emacs-taxy")
-            ;; Required by emacs-ement
-                                        ;(specification->package "emacs-taxy-magit-section")
-            ;; Required by emacs-ement
-                                        ;(specification->package "emacs-ts")
-            ;; Required by emacs-ement
-                                        ;(specification->package "emacs-plz")
-            (specification->package "emacs-ement")
             (specification->package "emacs-magit")
             (specification->package "emacs-diff-hl") ; VC diff in the fringe
             (specification->package "emacs-inheritenv")
@@ -496,8 +494,8 @@
             (patch2 (specification->package "emacs-lsp-ui"))
                                         ; doesn't work (specification->package "emacs-lsp-docker")
                                         ; part of emacs since emacs 29 (specification->package "emacs-csharp-mode")
-            ;(specification->package "emacs-lsp-java") ; conflicts with our patched dap-mode
-            ;(specification->package "emacs-elpy") ; just use dap-python ; elpy is unmaintained
+                                        ;(specification->package "emacs-lsp-java") ; conflicts with our patched dap-mode
+                                        ;(specification->package "emacs-elpy") ; just use dap-python ; elpy is unmaintained
             (specification->package "emacs-tramp")
             (specification->package "emacs-agda2-mode")
             (specification->package "emacs-treemacs")
@@ -554,7 +552,7 @@
             (specification->package "tree-sitter-vhdl")
             (specification->package "emacs-eat")
                                         ; statistics: R, Julia, and JAGS.
-                                        (specification->package "emacs-ess")
+            (specification->package "emacs-ess")
 
             (specification->package "python-jupyter-client") ; required by emacs-jupyter (for no reason; why not just invoke "jupyter kernel"?)
             (specification->package "emacs-jupyter")
@@ -640,9 +638,9 @@
             (specification->package "emacs-elfeed-score")
             (specification->package "emacs-elfeed-org") ; subscriptions in org mode
             (specification->package "emacs-fortran-tags")
-            ; or celluloid for gtk
+                                        ; or celluloid for gtk
             (specification->package "emacs-mpv")
-            ;(specification->package "emacs-empv") ; ?
+                                        ;(specification->package "emacs-empv") ; ?
                                         ; emacs-ytel
             (specification->package "emacs-nov-el") ; for epub
             
@@ -664,17 +662,17 @@
                                         ;(specification->package "texmacs")
             (patch5 (let ((base (specification->package "mogan")))
                       (package (inherit base)
-                               (inputs
-                                (modify-inputs (package-inputs base)
-                                  (prepend qtwayland-5)))
+                        (inputs
+                         (modify-inputs (package-inputs base)
+                                        (prepend qtwayland-5)))
 
-                               )))
+                        )))
 
                   ;;; Theorem Proving
 
-            (specification->package "agda")
-            (specification->package "lean")
-            (specification->package "tla2tools")
+                                        ;(specification->package "agda")
+                                        ;(specification->package "lean")
+                                        ;(specification->package "tla2tools")
             (specification->package "tree-sitter-tlaplus")
 
                   ;;; Learning
@@ -706,19 +704,17 @@
 
             (specification->package "mailutils")
             (specification->package "iptables")
+            (specification->package "nftables")
                                         ;(specification->package "mpop") ; TODO: guix home service
             (specification->package "offlineimap3")
             (specification->package "freerdp")
             ;; Namespace "Gst" is not available
             ;; xpra needs to be installed on the remote host as well!
-            (specification->package "xpra") ; xpra start ssh://foo/ --start=xterm ; xpra attach ssh://foo/
-            (specification->package "xdpyinfo")
             (specification->package "openvpn")
             (specification->package "mosh")
             (specification->package "ublock-origin-chromium")
             (specification->package "gnupg")
             (specification->package "transmission")
-                                        ;(specification->package "claws-mail")
             (specification->package "openconnect")
             (specification->package "network-manager-openconnect")
             (specification->package "network-manager-openvpn")
@@ -741,7 +737,7 @@
             (specification->package "qrencode")
             (specification->package "remmina")
             (specification->package "rtorrent")
-            
+           
                   ;;; Python
 
             (specification->package "pypy")
@@ -752,6 +748,7 @@
             (specification->package "python-debugpy") ; DAP
 
             ;;; AI
+
             (specification->package "llama-cpp")
             (specification->package "emacs-gptel")
 
@@ -760,20 +757,6 @@
             (transform1 (specification->package "aapt2"))
             (transform1 (specification->package "adb"))
             (transform1 (specification->package "fastboot"))
-
-                  ;;; X
-            
-                                        ;(specification->package "xclip")
-            (specification->package "xev")
-            (specification->package "xkill")
-                                        ;(specification->package "xprop")
-            (specification->package "xrandr") ; pure X11
-                                        ;(specification->package "xdpyinfo")
-                                        ;(specification->package "xsetroot")
-            (specification->package "xrdb") ; compat for nheko
-                                        ;(specification->package "xset")
-                                        ;(specification->package "x11-ssh-askpass")
-                                        ;(specification->package "xfontsel")
 
                   ;;; Emulation/Container
 
@@ -847,9 +830,7 @@
             ;;; Network Admin
 
             (specification->package "k9s")
-            (specification->package "kubectl")
-
-            ))
+            (specification->package "kubectl"))))
  (services
   (list
     ;;;(service home-pulseaudio-rtp-sink-service-type)
