@@ -33,22 +33,30 @@
              (gnu home services symlink-manager)
              ;(gnu home services syncthing)
              (gnu home services xdg)
-             (gnu packages linux)
-             (gnu packages gnome)
-             (gnu packages java)
-             (gnu packages qt)
+             (gnu packages linux) ; e2fsprogs
+             (gnu packages gnome) ; libsecret
+             (gnu packages java) ; jbr
+             (gnu packages qt) ; qtwayland-5
              )
+
 (use-modules ((guix licenses) #:prefix license:))
-(define transform2
-  (options->transformation '((with-source . "youtube-dl=http://www.scratchpost.org/weitw/youtube-dl-master.tar.gz"))))
 (define transform1
-  (options->transformation '((with-patch . "libcxx@12.0.1=/home/dannym/doc/programming-2/Android/libcxx2.patch"))))
+  (options->transformation `((with-patch . ,(string-append "libcxx@12.0.1="
+                                                           "patches/libcxx2.patch")))))
+
 (define patch1
-  (options->transformation '((with-patch . "emacs-dap-mode=/home/dannym/src/dap-mode.patch"))))
+  (options->transformation `((with-patch . ,(string-append "emacs-dap-mode="
+                                                           "patches/dap-mode.patch")))))
+
 (define patch2
-  (options->transformation '((with-patch . "emacs-lsp-mode=/home/dannym/src/lsp-mode.patch"))))
+  (options->transformation `((with-patch . ,(string-append "emacs-lsp-mode="
+                                                           "patches/lsp-mode.patch")))))
+
 (define patch5
-  (options->transformation '((with-debug-info . "mogan") (with-patch . "mogan=/home/dannym/src/guix-config/mogan-wayland.patch"))))
+  (options->transformation `((with-debug-info . "mogan")
+                             (with-patch . ,(string-append "mogan="
+                                                           "patches/mogan-wayland.patch")))))
+
 (define patch9
   (lambda (p)
     (package
@@ -715,7 +723,6 @@
             (specification->package "network-manager-openconnect")
             (specification->package "network-manager-openvpn")
             (specification->package "ungoogled-chromium")
-                                        ;(transform2 (specification->package "youtube-dl"))
             (specification->package "icecat")
                                         ;(specification->package "gfeeds")
             (specification->package "gource") ; commit visualization
@@ -926,6 +933,7 @@
                                         ; "1EFB 0909 1F17 D28C CBF9  B13A 53D4 57B2 D636 EE82")))
                      )))
 
+   ;; Screencasting
    (simple-service 'custom-dbus-services home-dbus-service-type (list (specification->package "xdg-desktop-portal-wlr")))
 
    (service home-bash-service-type
@@ -934,8 +942,8 @@
                         ("ll" . "ls -l")
                         ("ls" . "ls -p --color=auto")))
              (bashrc (list (local-file
-                            "/home/dannym/src/guix-config/.bashrc"
+                            ".bashrc"
                             "bashrc")))
              (bash-profile (list (local-file
-                                  "/home/dannym/src/guix-config/.bash_profile"
+                                  ".bash_profile"
                                   "bash_profile"))))))))
