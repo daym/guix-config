@@ -59,6 +59,11 @@
                              (with-patch . ,(string-append "mogan="
                                                            "patches/mogan-wayland.patch")))))
 
+(define emacs-patch
+  (options->transformation `((with-debug-info . "mogan")
+                             (with-patch . ,(string-append "emacs-pgtk="
+                                                           "patches/emacs-tab-stops.patch")))))
+
 (define patch9
   (lambda (p)
     (package
@@ -72,7 +77,7 @@
                                         ;(define patch6
                                         ;  (options->transformation '((with-patch . "sway=/home/dannym/src/guix-config/sway-hidpi-xwayland.patch"))))
 
-(define emacs-pgtk (specification->package "emacs-pgtk"))
+(define emacs-pgtk (emacs-patch (specification->package "emacs-pgtk")))
 
 (define (package-with-emacs-pgtk p)
     (package
@@ -244,8 +249,9 @@
 (home-environment
  (packages (append ;;; System
 
-            (specifications->packages '("xdg-desktop-portal"
-                                        ;"xdg-desktop-portal-gtk" ; uses old xdg-desktop-portal so it will conflict
+            (list (@ (gnu packages freedesktop) xdg-desktop-portal)) ; otherwise it would pick up xdg-desktop-portal-next
+            (specifications->packages '( ; "xdg-desktop-portal"
+                                        "xdg-desktop-portal-gtk" ; uses old xdg-desktop-portal so it will conflict
                                         "xdg-desktop-portal-wlr"))
             wayland-packages
             backup-packages
@@ -277,12 +283,14 @@
             (specification->package "dex") ; generate and execute desktop files
                                         ; Used by qemu, apparently
             (specification->package "samba")
+            (specification->package "gnome-boxes") ; qemu frontend
             (specification->package "udiskie")
             (specification->package "efibootmgr")
             (specification->package "roxterm")
             (specification->package "p7zip")
             (specification->package "zip")
             (specification->package "unzip")
+            (specification->package "zstd")
                                         ;(specification->package "unrar")
             (specification->package "gkrellm")
             (specification->package "dos2unix")
@@ -345,6 +353,7 @@
 
                   ;;; Fonts
 
+;; FIXME use weird "ttf" targets etc
             (specification->package "font-google-noto")
             (specification->package "font-dejavu")
             (specification->package "font-google-noto-sans-cjk")
@@ -401,6 +410,7 @@
             (package-with-emacs-pgtk (specification->package "emacs-julia-repl"))
             (package-with-emacs-pgtk (specification->package "emacs-julia-snail"))
             (package-with-emacs-pgtk (specification->package "emacs-inf-ruby"))
+            (package-with-emacs-pgtk (specification->package "emacs-alchemist")) ; Elixir
             
             (list (specification->package "git") "send-email")
             (specification->package "nasm")
@@ -438,7 +448,7 @@
             (specification->package "jupyter")
             (specification->package "jupyter-guile-kernel")
             (specification->package "guile-ares-rs")
-            (specification->package "diffoscope")
+            ;(specification->package "diffoscope") ; requires u-boot-tools--and that doesn't build.
             (specification->package "diffstat")
             ;(specification->package "hugs") ; build failure with gcc 4.9.4
                                         ;(specification->package "gprolog")
@@ -513,6 +523,7 @@
             (package-with-emacs-pgtk (specification->package "emacs-emms"))
             (package-with-emacs-pgtk (specification->package "emacs-comment-tags"))              
             (package-with-emacs-pgtk (specification->package "emacs-embark"))
+            (package-with-emacs-pgtk (specification->package "emacs-outline-indent")) ; code folding and outlining
             ;; Used by emacs-dap-mode
             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-treemacs")))
             ;; Used by emacs-dap-mode
@@ -524,7 +535,7 @@
             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-ui")))
                                         ; doesn't work (package-with-emacs-pgtk (specification->package "emacs-lsp-docker"))
                                         ; part of emacs since emacs 29 (package-with-emacs-pgtk (specification->package "emacs-csharp-mode"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-lsp-java")) ; conflicts with our patched dap-mode
+                                        (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-java"))) ; conflicts with our patched dap-mode
                                         ;(package-with-emacs-pgtk (specification->package "emacs-elpy")) ; just use dap-python ; elpy is unmaintained
             ;(package-with-emacs-pgtk (specification->package "emacs-tramp")) ; I think that's part of emacs now
             (package-with-emacs-pgtk (specification->package "emacs-agda2-mode"))
@@ -663,7 +674,7 @@
             (package-with-emacs-pgtk (specification->package "emacs-jinja2-mode"))
             ;; Spaced repetition in org mode.
             (package-with-emacs-pgtk (specification->package "emacs-org-fc"))
-            ;; Visual undo.
+            ;; Visual undo tree.
             (package-with-emacs-pgtk (specification->package "emacs-vundo"))
             ;; Weather info
             (package-with-emacs-pgtk (specification->package "emacs-wttrin"))
@@ -674,6 +685,8 @@
                                         ; https://github.com/karthink/popper special-case popup windows in general.
             (package-with-emacs-pgtk (specification->package "emacs-popper"))
                                         ; TODO avy
+            ; doesn't native compile: (package-with-emacs-pgtk (specification->package "emacs-mastodon"))
+
             (package-with-emacs-pgtk (specification->package "emacs-elfeed")) ; RSS/Atom
             (package-with-emacs-pgtk (specification->package "emacs-elfeed-score"))
             (package-with-emacs-pgtk (specification->package "emacs-elfeed-org")) ; subscriptions in org mode
@@ -683,6 +696,8 @@
                                         ;(package-with-emacs-pgtk (specification->package "emacs-empv")) ; ?
                                         ; emacs-ytel
             (package-with-emacs-pgtk (specification->package "emacs-nov-el")) ; for epub
+            (package-with-emacs-pgtk (specification->package "dvisvgm")) ; for epub
+            (package-with-emacs-pgtk (specification->package "emacs-ztree")) ; directory diff
             
             ;; Guile IDE
             (package-with-emacs-pgtk (specification->package "emacs-arei"))
@@ -770,6 +785,7 @@
                                         ;(specification->package "davfs2")
             (specification->package "rclone")
             (specification->package "netcat")
+            (specification->package "htmlq")
             (specification->package "nmap")
             (specification->package "ntp")
                                         ;(specification->package "irssi")
@@ -778,6 +794,7 @@
             (specification->package "qrencode")
             (specification->package "remmina")
             (specification->package "rtorrent")
+            (specification->package "telegram-desktop")
            
                   ;;; Python
 
@@ -791,7 +808,7 @@
 
             ;;; AI
 
-            (specification->package "llama-cpp")
+            (specification->package "llama-cpp") ; can be tuned
             (package-with-emacs-pgtk (specification->package "emacs-gptel"))
 
                   ;;; Android
