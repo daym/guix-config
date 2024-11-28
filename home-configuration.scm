@@ -169,11 +169,12 @@
                                `("JBR21" = (,(assoc-ref inputs "jbr21")))
                                `("JBR17" = (,(assoc-ref inputs "jbr17")))
                                `("RIDER_JDK" = (,(assoc-ref inputs "jbr21")))
+                               `("MPS_JDK" = (,(assoc-ref inputs "jbr21")))
                                `("CLION_JDK" = (,(assoc-ref inputs "jbr21")))
                                `("IDEA_JDK" = (,(assoc-ref inputs "jbr21")))
                                `("STUDIO_JDK" = (,(assoc-ref inputs "jbr21")))
                                `("PYCHARM_JDK" = (,(assoc-ref inputs "jbr21"))))))
-                         '("android-studio" "idea" "pycharm" "rider"))
+                         '("android-studio" "idea" "pycharm" "rider" "mps"))
                (for-each (lambda (file-name)
                            (let ((dir-name
                                   (string-append out "/"
