@@ -5,15 +5,19 @@
 ;; See the "Replicating Guix" section in the manual.
 
 (use-modules (gnu home)
-             (gnu packages)
+             (gnu packages) ;; To extend %load-path with channels
              (gnu services)
              (guix transformations)
              (guix gexp)
+             (guix describe)
              (guix git-download)
-             (guix packages)
+             (guix download)
+	         (guix packages)
              (guix build-system)
              (guix build-system emacs)
              (guix build-system gnu)
+             (guix build-system python)
+             (guix build-system pyproject)
              (guix channels)
              (ice-9 match)
              (gnu home services desktop)
@@ -39,6 +43,10 @@
              (gnu packages gnome) ; libsecret
              (gnu packages java) ; jbr
              (gnu packages qt) ; qtwayland-5
+             (gnu packages check)
+             (gnu packages python-build)
+             (gnu packages python-check) ; python-mypy-extensions
+             (gnu packages python-xyz) ; python-black
              )
 
 (use-modules ((guix licenses) #:prefix license:))
@@ -63,6 +71,14 @@
   (options->transformation `((with-debug-info . "mogan")
                              (with-patch . ,(string-append "emacs-pgtk="
                                                            "patches/emacs-tab-stops.patch")))))
+
+(define ungoogled-chromium-patch
+  (options->transformation `( ;(with-debug-info . "ungoogled-chromium")
+                             (with-patch . ,(string-append "ungoogled-chromium="
+                                                           "patches/7b0d7f4.diff")))))
+
+(define llama-tune
+  (options->transformation `((tune . "znver3")))) ; Zen 3
 
 (define patch9
   (lambda (p)
@@ -190,6 +206,62 @@
     (home-page "https://www.jetbrains.com/idea/")
     (license license:asl2.0)))
 
+(define-public python-black-24
+  (package
+    (inherit (specification->package "python-black"))
+    (name "python-black")
+    (version "24.8.0")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "black" version))
+       (sha256
+        (base32 "0gyqiilf9pgc6px07aw4y8g4grzm77q5m27fp4w4qy5n41a98015"))))
+    (build-system pyproject-build-system)
+    (arguments
+     `(#:phases
+       (modify-phases %standard-phases
+         (add-after 'unpack 'patch-packaging
+           (lambda _
+             (substitute* "pyproject.toml"
+              ;; We have over 4000 dependents on packaging 21.
+              (("packaging>=22.0") "packaging>=21.0"))))
+         (add-after 'patch-source-shebangs 'use-absolute-file-names
+           (lambda* (#:key native-inputs inputs #:allow-other-keys)
+             (let* ((inpts (or native-inputs inputs))
+                    (python3 (search-input-file inpts "/bin/python3")))
+               (substitute* (find-files "tests" "\\.py$")
+                 (("#!/usr/bin/env python3(\\.[0-9]+)?" _ minor-version)
+                  (string-append "#!" python3 (if (string? minor-version)
+                                                  minor-version
+                                                  "")))))))
+         (replace 'check
+           (lambda* (#:key tests? #:allow-other-keys)
+             ;; python-packaging-bootstrap disagrees with that--and it doesn't
+             ;; seem important anyway.
+             (substitute* "tests/test_black.py"
+              (("\\(\">3.9,[!]=invalid\", None\\),")
+               "(\">3.9,!=invalid\", [TargetVersion.PY310, TargetVersion.PY311, TargetVersion.PY312, TargetVersion.PY313]),"))
+             (when tests? (invoke "pytest" "-vv" "-W" "ignore::DeprecationWarning")))))))
+    (native-inputs
+     (list python-pytest
+           python-pytest-aiohttp
+           python-hatchling
+           python-hatch-fancy-pypi-readme
+           python-hatch-vcs))
+    (propagated-inputs (list python-click
+                             python-mypy-extensions
+                             python-packaging
+                             python-pathspec
+                             python-platformdirs
+                             python-tomli
+                             python-typing-extensions))
+    (home-page "https://github.com/psf/black")
+    (synopsis "The uncompromising code formatter.")
+    (description "Black is the uncompromising Python code formatter.")
+    (license license:expat)))
+
+
 
 (define xorg-packages
   (specifications->packages '("i3-wm" "openbox" "tint2" "xbindkeys" "xterm")
@@ -249,9 +321,11 @@
 (home-environment
  (packages (append ;;; System
 
-            (list (@ (gnu packages freedesktop) xdg-desktop-portal)) ; otherwise it would pick up xdg-desktop-portal-next
-            (specifications->packages '( ; "xdg-desktop-portal"
-                                        "xdg-desktop-portal-gtk" ; uses old xdg-desktop-portal so it will conflict
+            (list (specification->package "xdg-dbus-proxy"))
+
+            ;(list (@ (gnu packages freedesktop) xdg-desktop-portal)) ; otherwise it would pick up xdg-desktop-portal-next
+            (specifications->packages '("xdg-desktop-portal"
+                                        ;"xdg-desktop-portal-gtk" ; uses old xdg-desktop-portal so it will conflict
                                         "xdg-desktop-portal-wlr"))
             wayland-packages
             backup-packages
@@ -315,7 +389,7 @@
             (specification->package "fzf")
             (specification->package "tmon") ; temp monitoring
             (specification->package "file")
-            ;(specification->package "rocminfo") ; rocm-clang-runtime build error
+            (specification->package "rocminfo") ; rocm-clang-runtime build error
             (specification->package "playerctl")
             (specification->package "pinentry-gnome3")
             (specification->package "gnome-keyring")
@@ -339,7 +413,7 @@
             (specification->package "ntfs-3g")
             (specification->package "ddcutil")
             
-            (specification->package "qmk")
+            ;(specification->package "qmk") ; req python-halo, python-twine, python-httpcore, python-uvicorn 
             (specification->package "dfu-util") ; to flash keyboard firmware
 
             (specification->package "d-feet") ; to look at dbus
@@ -394,7 +468,7 @@
             (specification->package "wireshark")
             (specification->package "kicad")
             (specification->package "meld")
-            (specification->package "gnuradio")
+            (specification->package "gnuradio") ;builds from source
                                         ;(specification->package "swi-prolog") ; has emacs lsp-mode integration
             (specification->package "asciidoc")
                                         ;(specification->package "racket")
@@ -495,6 +569,8 @@
             ;; For xenops
             (package-with-emacs-pgtk (specification->package "emacs-aio"))
             (package-with-emacs-pgtk (specification->package "emacs-lsp-booster"))
+            (package-with-emacs-pgtk (specification->package "emacs-undo-tree"))
+            (package-with-emacs-pgtk (specification->package "emacs-page-break-lines"))
             (package-with-emacs-pgtk emacs-pgtk) ; overly paranoid
             (package-with-emacs-pgtk (specification->package "emacs-paredit"))
             (package-with-emacs-pgtk (specification->package "emacs-crdt"))
@@ -545,6 +621,7 @@
             (patch2 (package-with-emacs-pgtk (specification->package "emacs-rustic")))
             (package-with-emacs-pgtk (specification->package "emacs-projectile"))
             (package-with-emacs-pgtk (specification->package "emacs-company"))
+            (package-with-emacs-pgtk (specification->package "emacs-company-org-block")) ; snippets with "<"
             (package-with-emacs-pgtk (specification->package "emacs-capf-autosuggest"))
             (package-with-emacs-pgtk (specification->package "emacs-flycheck"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-helm"))
@@ -557,6 +634,7 @@
             (package-with-emacs-pgtk (specification->package "emacs-haskell-mode"))
             (package-with-emacs-pgtk (specification->package "emacs-flycheck-guile"))
             (package-with-emacs-pgtk (specification->package "emacs-geiser-guile"))
+            ;; FIXME: Add parinfer-rust-emacs.
             (package-with-emacs-pgtk (specification->package "emacs-parinfer-mode"))
             (package-with-emacs-pgtk (specification->package "emacs-web-mode"))
             (package-with-emacs-pgtk (specification->package "emacs-git-timemachine"))
@@ -602,7 +680,7 @@
 
             (specification->package "python-jupyter-client") ; required by emacs-jupyter (for no reason; why not just invoke "jupyter kernel"?)
             (package-with-emacs-pgtk (specification->package "emacs-jupyter"))
-            (specification->package "python-black")
+            python-black-24
             ; TODO emacs-python-black ??
             (package-with-emacs-pgtk (specification->package "emacs-guix"))
             (package-with-emacs-pgtk (specification->package "emacs-erc-hl-nicks")) ; IRC nick coloring
@@ -693,7 +771,7 @@
             (package-with-emacs-pgtk (specification->package "emacs-fortran-tags"))
                                         ; or celluloid for gtk
             (package-with-emacs-pgtk (specification->package "emacs-mpv"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-empv")) ; ?
+            (package-with-emacs-pgtk (specification->package "emacs-empv")) ; ?
                                         ; emacs-ytel
             (package-with-emacs-pgtk (specification->package "emacs-nov-el")) ; for epub
             (package-with-emacs-pgtk (specification->package "dvisvgm")) ; for epub
@@ -774,6 +852,7 @@
             (specification->package "openconnect")
             (specification->package "network-manager-openconnect")
             (specification->package "network-manager-openvpn")
+            ;(ungoogled-chromium-patch )
             (specification->package "ungoogled-chromium")
             (specification->package "icecat")
                                         ;(specification->package "gfeeds")
@@ -808,14 +887,18 @@
 
             ;;; AI
 
-            (specification->package "llama-cpp") ; can be tuned
+            (llama-tune (specification->package "llama-cpp")) ; can be tuned
             (package-with-emacs-pgtk (specification->package "emacs-gptel"))
 
                   ;;; Android
             
+            (specification->package "aapt")
             (transform1 (specification->package "aapt2")) ; /tmp/guix-build-clang-runtime-12.0.1.drv-0/compiler-rt-12.0.1.src/lib/sanitizer_common/sanitizer_platform_limits_posix.cpp:154: crypt.h: No such file or directory
             (transform1 (specification->package "adb"))
             (transform1 (specification->package "fastboot"))
+            (transform1 (specification->package "apksigner"))
+            (transform1 (specification->package "zipalign"))
+            (specification->package "python-androguard") ; XML binary
             (transform1 (specification->package "etc1tool")) ; transform copied
             (specification->package "e2fsprogs")
 
@@ -825,16 +908,16 @@
             (specification->package "libvirt")
             (specification->package "flatpak")
             (specification->package "dosbox")
-            (specification->package "docker-compose")
+            ; (specification->package "docker-compose") ; buggy with podman
             (specification->package "podman")
             ;; Otherwise podman is very slow and takes enormous amount of storage.
             (specification->package "fuse-overlayfs")
-                                        ;(specification->package "podman-compose") ; unnecessary
+            (specification->package "podman-compose")
 
                   ;;; Games
 
             (specification->package "daikichi") ; fortune
-            (specification->package "fortunes-jkirchartz")
+            ;(specification->package "fortunes-jkirchartz")
             (specification->package "steam")
             (specification->package "freeciv")
 
