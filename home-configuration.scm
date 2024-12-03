@@ -14,6 +14,7 @@
              (guix download)
 	         (guix packages)
              (guix build-system)
+             (guix build-system cmake)
              (guix build-system emacs)
              (guix build-system gnu)
              (guix build-system python)
@@ -43,7 +44,16 @@
              (gnu packages gnome) ; libsecret
              (gnu packages java) ; jbr
              (gnu packages qt) ; qtwayland-5
+             (gnu packages guile)
+             (gnu packages perl)
+             (gnu packages python)
+             (gnu packages image)
+             (gnu packages sqlite)
+             (gnu packages pkg-config)
+             (gnu packages freedesktop)
              (gnu packages check)
+             (gnu packages crypto)
+             (gnu packages fontutils) ; freetype
              (gnu packages python-build)
              (gnu packages python-check) ; python-mypy-extensions
              (gnu packages python-xyz) ; python-black
@@ -67,10 +77,27 @@
                              (with-patch . ,(string-append "mogan="
                                                            "patches/mogan-wayland.patch")))))
 
+(define texmacs-patch
+  (options->transformation `( ;(with-debug-info . "qtbase")
+                             (with-debug-info . "texmacs-guile3")
+                             (with-patch . ,(string-append "texmacs-guile3="
+                                                           "patches/texmacs-wayland.patch")))))
+
 (define emacs-patch
-  (options->transformation `((with-debug-info . "mogan")
-                             (with-patch . ,(string-append "emacs-pgtk="
+  (options->transformation `((with-patch . ,(string-append "emacs-pgtk="
                                                            "patches/emacs-tab-stops.patch")))))
+
+(define nwg-launchers-patch
+  (options->transformation `((with-patch . ,(string-append "nwg-launchers="
+                                                           "patches/nwg-launchers-startup-notification.patch")))))
+
+(define sway-patch
+  (options->transformation `((with-patch . ,(string-append "sway="
+                                                           "patches/sway-busy-cursor.patch")))))
+
+(define emacs-gptel-patch
+  (options->transformation `((with-patch . ,(string-append "emacs-gptel="
+                             "patches/emacs-gptel.patch")))))
 
 (define ungoogled-chromium-patch
   (options->transformation `( ;(with-debug-info . "ungoogled-chromium")
@@ -207,6 +234,62 @@
     (home-page "https://www.jetbrains.com/idea/")
     (license license:asl2.0)))
 
+;; TODO: Precompile files like share/TeXmacs/progs/prog/prog-format.scm 
+(define-public texmacs-guile3
+  (package
+    (name "texmacs-guile3")
+    (version "2.1.4")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+                    (url "https://github.com/texmacs/texmacs.git")
+                    ;(branch "guile3_branch_2.1")
+                    (commit "guile3_branch_2.1")))
+      (file-name (git-file-name name version))
+      (sha256
+        (base32 "0f7l1sfbii25gawqsg27m31myvixb3xdxnsg5njlrnmp8xh1rs3v"))))
+    (build-system gnu-build-system)
+    (native-inputs
+     (list pkg-config xdg-utils))       ;for xdg-icon-resource
+    (inputs
+     (list freetype
+           guile-3.0
+           libjpeg-turbo
+           libxcrypt
+           perl
+           python-wrapper
+           qtbase-5
+           ; qtwayland-5 ; plugin--so it won't be picked up
+           qtsvg-5
+           sqlite))
+    (arguments
+     (list
+      #:tests? #f                       ; no check target
+      #:configure-flags
+      #~(list "--with-guile2" "--enable-guile2" "--enable-debug")
+      #:phases
+      #~(modify-phases %standard-phases
+          (add-after 'unpack 'fix-icon-directory
+            (lambda _
+              (substitute* "packages/linux/icons.sh"
+                (("/usr/share")
+                 (string-append #$output "/share")))))
+          (add-before 'configure 'gzip-flags
+            (lambda _
+              (setenv "CONFIG_SHELL" "sh")
+              (substitute* "Makefile.in"
+                (("^GZIP = gzip -f") "GZIP = gzip -f -n")))))))
+    (synopsis "Editing platform with special features for scientists")
+    (description
+     "GNU TeXmacs is a text editing platform which is specialized for
+scientists.  It is ideal for editing structured documents with different types
+of content.  It has robust support for mathematical formulas and plots.  It
+can also act as an interface to external mathematical programs such as R and
+Octave.  TeXmacs is completely extensible via Guile.")
+    (license license:gpl3+)
+    (home-page "https://www.texmacs.org/tmweb/home/welcome.en.html")))
+
 (define-public python-black-24
   (package
     (inherit (specification->package "python-black"))
@@ -299,10 +382,10 @@
 (define wayland-packages
   (specifications->packages '("wdisplays"
                               "kanshi" ; auto screen config
-                              "sway"
+                              ;"sway"
                               "swayidle"
                               "swaylock"
-                              "nwg-launchers"
+                              ;"nwg-launchers"
                               "rofi-wayland"
                               "waypipe"
                               "slurp" ; screenshot
@@ -329,6 +412,9 @@
                                         ;"xdg-desktop-portal-gtk" ; uses old xdg-desktop-portal so it will conflict
                                         "xdg-desktop-portal-wlr"))
             wayland-packages
+            (list (nwg-launchers-patch (specification->package "nwg-launchers")))
+            (list (sway-patch (specification->package "sway")))
+
             backup-packages
 
             (list
@@ -537,6 +623,7 @@
             
                                         ; (specification->package "leiningen")
                                         ;(specification->package "pure")
+            (specification->package "stellarium")
             (specification->package "kicad-symbols")
             (specification->package "kicad-footprints")
             (specification->package "godot")
@@ -601,6 +688,7 @@
             (package-with-emacs-pgtk (specification->package "emacs-comment-tags"))              
             (package-with-emacs-pgtk (specification->package "emacs-embark"))
             (package-with-emacs-pgtk (specification->package "emacs-outline-indent")) ; code folding and outlining
+            (package-with-emacs-pgtk (specification->package "emacs-rmsbolt")) ; godbolt
             ;; Used by emacs-dap-mode
             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-treemacs")))
             ;; Used by emacs-dap-mode
@@ -704,6 +792,7 @@
             (package-with-emacs-pgtk (specification->package "emacs-consult-flycheck"))
             (package-with-emacs-pgtk (specification->package "emacs-marginalia"))
             (package-with-emacs-pgtk (specification->package "emacs-orderless"))
+            (package-with-emacs-pgtk (specification->package "emacs-trashed"))
             (package-with-emacs-pgtk (specification->package "emacs-qrencode"))
             (package-with-emacs-pgtk (specification->package "emacs-forge"))
                                         ; Columns
@@ -793,7 +882,6 @@
                                         ; company-mode
                                         ; consult: Either use the default completion UI or ensure that exactly one of vertico-mode, mct-mode, or icomplete-mode is enabled. The unsupported modes selectrum-mode, ivy-mode, helm-mode, ido-mode and ido-ubiquitous-mode must be disabled.
                                         ; emacs vertico uses built-in completion; better than helm
-                                        ;(specification->package "texmacs")
             (patch5 (let ((base (specification->package "mogan")))
                       (package (inherit base)
                         (inputs
@@ -801,6 +889,8 @@
                                         (prepend qtwayland-5)))
 
                         )))
+                                        ;(texmacs-patch (specification->package "texmacs"))
+            (texmacs-patch texmacs-guile3)
 
                   ;;; Theorem Proving
 
@@ -889,7 +979,7 @@
             ;;; AI
 
             (llama-tune (specification->package "llama-cpp")) ; can be tuned
-            (package-with-emacs-pgtk (specification->package "emacs-gptel"))
+            (package-with-emacs-pgtk (emacs-gptel-patch (specification->package "emacs-gptel")))
 
                   ;;; Android
             
