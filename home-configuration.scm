@@ -729,6 +729,7 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-paredit"))
             (package-with-emacs-pgtk (specification->package "emacs-crdt"))
             (package-with-emacs-pgtk (specification->package "emacs-magit"))
+            (package-with-emacs-pgtk (specification->package "emacs-git-email"))
             (package-with-emacs-pgtk (specification->package "emacs-diff-hl")) ; VC diff in the fringe
             (package-with-emacs-pgtk (specification->package "emacs-color-theme-solarized"))
             (package-with-emacs-pgtk (specification->package "emacs-dtrt-indent"))
@@ -738,6 +739,7 @@ interfaces.")
             ;; For Lisp and Javascript; Note: emacs-sly is a fork
             (package-with-emacs-pgtk (specification->package "emacs-slime"))
             ;(package-with-emacs-pgtk (specification->package "emacs-org")) ; org 9.7.11 is included in emacs
+            ;(package-with-emacs-pgtk (specification->package "emacs-org-texlive-collection"))
             (package-with-emacs-pgtk (specification->package "emacs-org-edna"))
             ; TODO: package: (package-with-emacs-pgtk (specification->package "emacs-org-notify"))
             (package-with-emacs-pgtk (specification->package "emacs-org-node"))
@@ -766,7 +768,8 @@ interfaces.")
             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-ui")))
                                         ; doesn't work (package-with-emacs-pgtk (specification->package "emacs-lsp-docker"))
                                         ; part of emacs since emacs 29 (package-with-emacs-pgtk (specification->package "emacs-csharp-mode"))
-                                        (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-java"))) ; conflicts with our patched dap-mode
+            (patch2 (package-with-emacs-pgtk (specification->package "emacs-ccls"))) ; C LSP; conflicts with our patched dap-mode
+            (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-java"))) ; conflicts with our patched dap-mode
                                         ;(package-with-emacs-pgtk (specification->package "emacs-elpy")) ; just use dap-python ; elpy is unmaintained
             ;(package-with-emacs-pgtk (specification->package "emacs-tramp")) ; I think that's part of emacs now
             (package-with-emacs-pgtk (specification->package "emacs-agda2-mode"))
@@ -801,6 +804,7 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-flycheck-rust"))
             (package-with-emacs-pgtk (specification->package "emacs-rust-mode"))
             (package-with-emacs-pgtk (specification->package "emacs-docker"))
+            (package-with-emacs-pgtk (specification->package "emacs-dired-launch"))
             ;(specification->package "dvisvgm") ; TODO: Move that to manifest.scm of your project
                                         ; obsolete in favor of integrated tramp-container
                                         ;(package-with-emacs-pgtk (specification->package "emacs-docker-tramp"))
@@ -975,6 +979,7 @@ interfaces.")
             ;; but also scheduled/scored separately too (where org-drill falls short).
             ;; Use both, org-drill mostly for books, Anki for "standalone" facts.
             (package-with-emacs-pgtk (specification->package "emacs-anki-editor"))
+            (package-with-emacs-pgtk (specification->package "emacs-gnosis"))
             ;; https://github.com/louietan/anki-editor
             (package-with-emacs-pgtk (specification->package "emacs-org-drill"))
                                         ; similar: (package-with-emacs-pgtk (specification->package "emacs-gnosis"))
@@ -1042,7 +1047,7 @@ interfaces.")
             ;;; AI
 
             (llama-tune (specification->package "llama-cpp")) ; can be tuned
-            (package-with-emacs-pgtk (emacs-gptel-patch (specification->package "emacs-gptel")))
+            (package-with-emacs-pgtk (specification->package "emacs-gptel"))
 
                   ;;; Android
             
