@@ -1,6 +1,11 @@
 # Honor per-interactive-shell startup file
 if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
 
+#set > /tmp/goo-`/run/current-system/profile/bin/id  -u`-"`date`"
+
+# Not sure where else I would set that in time!
+#export WAYLAND_DISPLAY=wayland-1
+
 trap 'echo -ne "\033]2;$(history 1 | sed "s/^[ ]*[0-9]*[ ]*//g") | ${USER}@${HOSTNAME}\007"' DEBUG
 alias ls='ls -p --color'
 alias ll='ls -l'
@@ -48,13 +53,16 @@ then
 	export R_LIBS_SITE
 fi
 
-if [ -n "${WAYLAND_DISPLAY}" ]
+if [ "${XDG_SESSION_TYPE}" = "wayland" ]
 then
+	# export _JAVA_AWT_WM_NONREPARENTING=1
 	export QT_QPA_PLATFORM=wayland
 	export GDK_BACKEND=wayland # possible: wayland,x11
-	export XDG_CURRENT_DESKTOP=wayland
-	export XDG_SESSION_TYPE=wayland
+	export XDG_CURRENT_DESKTOP=sway
+	#export WAYLAND_DISPLAY=wayland-1
+	#XDG_SESSION_TYPE=wayland
 	export MOZ_ENABLE_WAYLAND=1
+	export ELECTRON_OZONE_PLATFORM_HINT=auto
 	# or --load-extension etc
 	# TODO --ozone-hint=auto
 	export CHROMIUM_FLAGS="--enable-remote-extensions --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapture --ozone-platform-hint=auto --allow-file-access-from-files"

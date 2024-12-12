@@ -8,7 +8,7 @@ diff -ru orig/qsbrdssq407hsajf74z60vp3rhgafjsl-mogan-1.1.1-checkout/src/Texmacs/
 -  set_env ("QT_QPA_PLATFORM", "xcb");
 -  set_env ("XDG_SESSION_TYPE", "x11");
 +  if (get_env ("XDG_SESSION_TYPE") == "wayland") {
-+    set_env ("QT_QPA_PLATFORM", "wayland");
++    set_env ("QT_QPA_PLATFORM", "wayland"); QGuiApplication::setAttribute(Qt::AA_DisableHighDpiScaling); QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 +  } else {
 +    set_env ("QT_QPA_PLATFORM", "xcb");
 +    set_env ("XDG_SESSION_TYPE", "x11");

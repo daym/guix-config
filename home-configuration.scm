@@ -41,10 +41,17 @@
                                         ;(gnu home services syncthing)
              (gnu home services xdg)
              (gnu packages linux) ; e2fsprogs
+             (guix build-system glib-or-gtk)
              (gnu packages gnome) ; libsecret
              (gnu packages java) ; jbr
              (gnu packages qt) ; qtwayland-5
              (gnu packages guile)
+             (gnu packages glib)
+             (gnu packages gtk)
+             (gnu packages autotools)
+             (gnu packages xml)
+             (gnu packages base)
+             (gnu packages gettext)
              (gnu packages perl)
              (gnu packages python)
              (gnu packages image)
@@ -882,15 +889,12 @@ Octave.  TeXmacs is completely extensible via Guile.")
                                         ; company-mode
                                         ; consult: Either use the default completion UI or ensure that exactly one of vertico-mode, mct-mode, or icomplete-mode is enabled. The unsupported modes selectrum-mode, ivy-mode, helm-mode, ido-mode and ido-ubiquitous-mode must be disabled.
                                         ; emacs vertico uses built-in completion; better than helm
-            (patch5 (let ((base (specification->package "mogan")))
+            (let ((base (specification->package "mogan")))
                       (package (inherit base)
                         (inputs
                          (modify-inputs (package-inputs base)
-                                        (prepend qtwayland-5)))
-
-                        )))
-                                        ;(texmacs-patch (specification->package "texmacs"))
-            (texmacs-patch texmacs-guile3)
+                                        (prepend qtwayland-5)))))
+            texmacs-guile3
 
                   ;;; Theorem Proving
 
