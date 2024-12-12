@@ -241,62 +241,6 @@
     (home-page "https://www.jetbrains.com/idea/")
     (license license:asl2.0)))
 
-;; TODO: Precompile files like share/TeXmacs/progs/prog/prog-format.scm 
-(define-public texmacs-guile3
-  (package
-    (name "texmacs-guile3")
-    (version "2.1.4")
-    (source
-     (origin
-       (method git-fetch)
-       (uri (git-reference
-                    (url "https://github.com/texmacs/texmacs.git")
-                    ;(branch "guile3_branch_2.1")
-                    (commit "guile3_branch_2.1")))
-      (file-name (git-file-name name version))
-      (sha256
-        (base32 "0f7l1sfbii25gawqsg27m31myvixb3xdxnsg5njlrnmp8xh1rs3v"))))
-    (build-system gnu-build-system)
-    (native-inputs
-     (list pkg-config xdg-utils))       ;for xdg-icon-resource
-    (inputs
-     (list freetype
-           guile-3.0
-           libjpeg-turbo
-           libxcrypt
-           perl
-           python-wrapper
-           qtbase-5
-           ; qtwayland-5 ; plugin--so it won't be picked up
-           qtsvg-5
-           sqlite))
-    (arguments
-     (list
-      #:tests? #f                       ; no check target
-      #:configure-flags
-      #~(list "--with-guile2" "--enable-guile2" "--enable-debug")
-      #:phases
-      #~(modify-phases %standard-phases
-          (add-after 'unpack 'fix-icon-directory
-            (lambda _
-              (substitute* "packages/linux/icons.sh"
-                (("/usr/share")
-                 (string-append #$output "/share")))))
-          (add-before 'configure 'gzip-flags
-            (lambda _
-              (setenv "CONFIG_SHELL" "sh")
-              (substitute* "Makefile.in"
-                (("^GZIP = gzip -f") "GZIP = gzip -f -n")))))))
-    (synopsis "Editing platform with special features for scientists")
-    (description
-     "GNU TeXmacs is a text editing platform which is specialized for
-scientists.  It is ideal for editing structured documents with different types
-of content.  It has robust support for mathematical formulas and plots.  It
-can also act as an interface to external mathematical programs such as R and
-Octave.  TeXmacs is completely extensible via Guile.")
-    (license license:gpl3+)
-    (home-page "https://www.texmacs.org/tmweb/home/welcome.en.html")))
-
 (define-public python-black-24
   (package
     (inherit (specification->package "python-black"))
@@ -958,7 +902,7 @@ interfaces.")
                          (modify-inputs (package-inputs base)
                                         ;(prepend qtwayland-5)
                                         ))))
-            texmacs-guile3
+            (specification->package "texmacs-guile3")
 
                   ;;; Theorem Proving
 
