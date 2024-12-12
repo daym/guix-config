@@ -102,9 +102,9 @@
   (options->transformation `((with-patch . ,(string-append "sway="
                                                            "patches/sway-busy-cursor.patch")))))
 
-(define emacs-gptel-patch
-  (options->transformation `((with-patch . ,(string-append "emacs-gptel="
-                             "patches/emacs-gptel.patch")))))
+;(define emacs-gptel-patch
+;  (options->transformation `((with-patch . ,(string-append "emacs-gptel="
+;                             "patches/emacs-gptel.patch")))))
 
 (define ungoogled-chromium-patch
   (options->transformation `( ;(with-debug-info . "ungoogled-chromium")
