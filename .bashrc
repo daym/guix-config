@@ -41,15 +41,16 @@ function current_command {
 PS0='\[\e]0;$(current_command)\a\]'
 PROMPT_COMMAND='PREV_COMMAND=""; export PREV_COMMAND'
 
-if [ -z "${GUIX_ENVIRONMENT}" ]
-then
-	# Tell npm where to store globally installed packages
-	# FIXME maybe later. npm config set prefix "${HOME}/.local/npm-packages"
-	#npm config set prefix "${HOME}/.local/node_modules"
-	#PATH="${HOME}/.local/node_modules/.bin:${PATH}"
-	PATH="${HOME}/.local/npm-packages/bin:${HOME}/src/docker-oreboot/docker-oreboot/toolchain/rust/bin:/var/lib/flatpak/exports/bin:${PATH}"
-	export PATH
-fi
+# Moved to .bash_profile
+#if [ -z "${GUIX_ENVIRONMENT}" ]
+#then
+#	# Tell npm where to store globally installed packages
+#	# FIXME maybe later. npm config set prefix "${HOME}/.local/npm-packages"
+#	#npm config set prefix "${HOME}/.local/node_modules"
+#	#PATH="${HOME}/.local/node_modules/.bin:${PATH}"
+#	PATH="${HOME}/.local/npm-packages/bin:${HOME}/src/docker-oreboot/docker-oreboot/toolchain/rust/bin:/var/lib/flatpak/exports/bin:${PATH}"
+#	export PATH
+#fi
 
 shopt -s histappend
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
@@ -97,7 +98,7 @@ TARGET_HOSTSPEC=daym@atrium.eng.oxide.computer
 export TARGET_HOSTSPEC
 
 # Make venv mandatory for using pip
-export PIP_REQUIRE_VIRTUALENV=1
-export MOZ_ENABLE_WAYLAND=1
-# For emacs-lsp-booster
-export LSP_USE_PLISTS=true
+#export PIP_REQUIRE_VIRTUALENV=1
+#export MOZ_ENABLE_WAYLAND=1
+## For emacs-lsp-booster
+#export LSP_USE_PLISTS=true

@@ -29,6 +29,12 @@ export PAGER="less -F"
 
 #--ignore-certificate-errors
 export PATH="${HOME}/.local/bin:${PATH}"
+# Tell npm where to store globally installed packages
+# FIXME maybe later. npm config set prefix "${HOME}/.local/npm-packages"
+#npm config set prefix "${HOME}/.local/node_modules"
+#PATH="${HOME}/.local/node_modules/.bin:${PATH}"
+export PATH="${HOME}/.local/npm-packages/bin:${HOME}/src/docker-oreboot/docker-oreboot/toolchain/rust/bin:/var/lib/flatpak/exports/bin:${PATH}"
+
 export TERMINAL=roxterm
 export GTK_CSD=0 # useless?
 #	https://manpages.ubuntu.com/manpages/bionic/man1/gtk3-nocsd.1.html
@@ -72,3 +78,8 @@ export SSH_AUTH_SOCK=/run/user/`id -u`/ssh-agent/socket
 
 # Give me a break.
 export GPG_TTY=$(tty)
+
+# Make venv mandatory for using pip
+export PIP_REQUIRE_VIRTUALENV=1
+# For emacs-lsp-booster
+export LSP_USE_PLISTS=true
