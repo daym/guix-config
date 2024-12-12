@@ -956,7 +956,8 @@ interfaces.")
                       (package (inherit base)
                         (inputs
                          (modify-inputs (package-inputs base)
-                                        (prepend qtwayland-5)))))
+                                        ;(prepend qtwayland-5)
+                                        ))))
             texmacs-guile3
 
                   ;;; Theorem Proving
