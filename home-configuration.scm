@@ -412,6 +412,37 @@ which uses GTK+ and various pieces of GNOME infrastructure, such as the
 interfaces.")
     (license license:lgpl2.1+)))
 
+(define-public gtkmm-3
+  (package
+    (inherit gtkmm)
+    (name "gtkmm")
+    (version "3.24.9-fixed")
+    (source
+     (origin
+       (method url-fetch)
+       (uri
+        (string-append "mirror://gnome/sources/" name "/"
+                       (version-major+minor version)  "/"
+                       name "-" version ".tar.xz"))
+       (sha256
+        (base32 "1kj4mla3z9kxhdby5w88nl744xkmq6xchf79m1kfa72p0kjbzm9h"))))
+    (propagated-inputs
+     (list atkmm-2.28
+           cairomm-1.14
+           glibmm-2.66
+           gtk+
+           pangomm-2.46))))
+
+(define-public cadabra2x
+  (package
+    (inherit (specification->package "cadabra2"))
+    (inputs
+     (list glibmm-2.66 gmp python boost gtkmm-3 sqlite python-gmpy2 python-sympy
+           python-mpmath python-matplotlib texlive-dvipng
+           `(,util-linux "lib")))))
+
+(define cadabra2 (specification->package "cadabra2"))
+
 (home-environment
  (packages (append ;;; System
 
@@ -1050,7 +1081,7 @@ interfaces.")
             (specification->package "texlive-ytableau") ; used by cadabra2 < 2.5.2
             (specification->package "texlive-setspace") ; used by cadabra2 < 2.5.2
             ;; Supported by texmacs
-            (specification->package "cadabra2")
+            cadabra2
             ;; Supported by texmacs
             (specification->package "giac")
             ;; Supported by texmacs
