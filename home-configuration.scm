@@ -9,6 +9,7 @@
              (gnu services)
              (guix transformations)
              (guix gexp)
+             (guix utils)
              (guix describe)
              (guix git-download)
              (guix download)
@@ -786,6 +787,7 @@ interfaces.")
             python-black-24
             ; TODO emacs-python-black ??
             (package-with-emacs-pgtk (specification->package "emacs-guix"))
+            (package-with-emacs-pgtk (specification->package "emacs-bluetooth"))
             (package-with-emacs-pgtk (specification->package "emacs-erc-hl-nicks")) ; IRC nick coloring
             (package-with-emacs-pgtk (specification->package "emacs-counsel"))
             (package-with-emacs-pgtk (specification->package "emacs-counsel-tramp"))
@@ -954,6 +956,7 @@ interfaces.")
             (specification->package "gnupg")
             (specification->package "transmission")
             (specification->package "openconnect")
+            (specification->package "blueman")
             (specification->package "network-manager-openconnect")
             (specification->package "network-manager-openvpn")
             ;(ungoogled-chromium-patch )
@@ -1191,7 +1194,7 @@ interfaces.")
                      )))
 
    ;; Screencasting
-   (simple-service 'custom-dbus-services home-dbus-service-type (list (specification->package "xdg-desktop-portal-wlr")))
+   (simple-service 'custom-dbus-services home-dbus-service-type (map specification->package (list "xdg-desktop-portal-wlr" "xdg-desktop-portal" "blueman")))
 
    (service home-bash-service-type
             (home-bash-configuration
