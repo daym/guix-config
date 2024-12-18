@@ -275,9 +275,9 @@
            (lambda* (#:key tests? #:allow-other-keys)
              ;; python-packaging-bootstrap disagrees with that--and it doesn't
              ;; seem important anyway.
-             (substitute* "tests/test_black.py"
-              (("\\(\">3.9,[!]=invalid\", None\\),")
-               "(\">3.9,!=invalid\", [TargetVersion.PY310, TargetVersion.PY311, TargetVersion.PY312, TargetVersion.PY313]),"))
+             ;(substitute* "tests/test_black.py"
+             ; (("\\(\">3.9,[!]=invalid\", None\\),")
+             ;  "(\">3.9,!=invalid\", [TargetVersion.PY310, TargetVersion.PY311, TargetVersion.PY312, TargetVersion.PY313]),"))
              (when tests? (invoke "pytest" "-vv" "-W" "ignore::DeprecationWarning")))))))
     (native-inputs
      (list python-pytest
