@@ -456,6 +456,7 @@ interfaces.")
             wayland-packages
             (list (nwg-launchers-patch (specification->package "nwg-launchers")))
             (list (sway-patch (specification->package "sway")))
+            (list (specification->package "wlogout"))
 
             backup-packages
 
