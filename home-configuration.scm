@@ -715,6 +715,9 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-pyvenv")) ; we're not really using that
             ;; For Lisp and Javascript; Note: emacs-sly is a fork
             (package-with-emacs-pgtk (specification->package "emacs-slime"))
+            (package-with-emacs-pgtk (specification->package "emacs-eldoc"))
+            (package-with-emacs-pgtk (specification->package "emacs-xref")) ; TODO: emacs-xref-union
+            (package-with-emacs-pgtk (specification->package "emacs-sesman"))
             ;(package-with-emacs-pgtk (specification->package "emacs-org")) ; org 9.7.11 is included in emacs
             ;(package-with-emacs-pgtk (specification->package "emacs-org-texlive-collection"))
             (package-with-emacs-pgtk (specification->package "emacs-org-edna"))
