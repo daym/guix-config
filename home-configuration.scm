@@ -201,6 +201,8 @@
                                     "/lib:"
                                     (assoc-ref inputs "e2fsprogs")
                                     "/lib")))
+                               ;; Otherwise GradleProjectSettings Jvm never get actually resolved when you select "#JAVA_HOME" in the Ctrl-S gradle "Gradle JVM" GUI. The next Gradle sync then will fail with mysterious error message "Invalid Gradle JDK configuration found.". Very unfun.
+                               `("JAVA_HOME" = (,(assoc-ref inputs "openjdk")))
                                `("JBR21" = (,(assoc-ref inputs "jbr21")))
                                `("JBR17" = (,(assoc-ref inputs "jbr17")))
                                `("RIDER_JDK" = (,(assoc-ref inputs "jbr21")))
@@ -234,6 +236,7 @@
     (inputs
      `(("e2fsprogs" ,e2fsprogs)
                                         ;("jbr11" ,jbr11 "jdk")
+       ("openjdk" ,openjdk "jdk")
        ("jbr17" ,jbr17 "jdk")
        ("jbr21" ,jbr21 "jdk")
        ("libsecret" ,libsecret)))
