@@ -770,7 +770,6 @@ interfaces.")
             ;(package-with-emacs-pgtk (specification->package "emacs-envrc"))
             ;; Understands guix.scm and manifest.scm natively
             (package-with-emacs-pgtk (specification->package "emacs-buffer-env"))
-            (package-with-emacs-pgtk (specification->package "emacs-inheritenv"))
             (package-with-emacs-pgtk (specification->package "emacs-clojure-mode"))
             (package-with-emacs-pgtk (specification->package "emacs-haskell-mode"))
             (package-with-emacs-pgtk (specification->package "emacs-flycheck-guile"))
@@ -876,8 +875,11 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-adoc-mode"))
             (package-with-emacs-pgtk (specification->package "emacs-tempel"))
             (package-with-emacs-pgtk (specification->package "emacs-debbugs"))
+            (package-with-emacs-pgtk (specification->package "emacs-inheritenv"))
             ;; Alternative: emacs-reformatter
+            ;(specification->package "emacs-format-all-the-code") ; can't because inheritenv.
             (package-with-emacs-pgtk (specification->package "emacs-format-all-the-code"))
+
             ;; For swank-js to use.  But it doesn't work with multiple major modes yet. TODO: css-mode;
             (package-with-emacs-pgtk (specification->package "emacs-js2-mode"))
                                         ; typescript mode done by combobulate
