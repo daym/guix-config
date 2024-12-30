@@ -943,7 +943,11 @@ interfaces.")
                          (modify-inputs (package-inputs base)
                                         ;(prepend qtwayland-5)
                                         ))))
+
+            ;; Scientist.
             (specification->package "texmacs-guile3")
+            (package-with-emacs-pgtk (specification->package "emacs-zotxt"))
+            (specification->package "zotero")
 
                   ;;; Theorem Proving
 
