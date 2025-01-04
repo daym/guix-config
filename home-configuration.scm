@@ -1067,6 +1067,7 @@ interfaces.")
             (specification->package "dosbox")
             ; (specification->package "docker-compose") ; buggy with podman
             (specification->package "podman")
+            (specification->package "kubectl")
             ;; Otherwise podman is very slow and takes enormous amount of storage.
             (specification->package "fuse-overlayfs")
             (specification->package "podman-compose")
