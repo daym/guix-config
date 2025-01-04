@@ -655,11 +655,13 @@ interfaces.")
                                         ; julia-wayland-jll
             (specification->package "jupyter")
             (specification->package "jupyter-guile-kernel")
+            (specification->package "emacs-code-cells")
             (specification->package "guile-ares-rs")
             ;(specification->package "diffoscope") ; requires u-boot-tools--and that doesn't build.
             (specification->package "diffstat")
             ;(specification->package "hugs") ; build failure with gcc 4.9.4
                                         ;(specification->package "gprolog")
+                                        ;(specification->package "trealla")
                                         ;(specification->package "fpc")
                                         ;(specification->package "esbuild")
                                         ;(specification->package "ocaml")
