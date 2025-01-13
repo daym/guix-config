@@ -656,6 +656,7 @@ interfaces.")
             (specification->package "jupyter")
             (specification->package "jupyter-guile-kernel")
             (specification->package "emacs-code-cells")
+            (specification->package "emacs-password-generator")
             (specification->package "guile-ares-rs")
             ;(specification->package "diffoscope") ; requires u-boot-tools--and that doesn't build.
             (specification->package "diffstat")
