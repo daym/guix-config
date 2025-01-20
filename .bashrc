@@ -38,7 +38,10 @@ function current_command {
 	echo "${history_line##*([[:space:])+([[:digit:]])+([[:space:]])}"
 }
 
-PS0='\[\e]0;$(current_command)\a\]'
+if ! [ "${TERM}" = "dumb" ]
+then
+    PS0='\[\e]0;$(current_command)\a\]'
+fi
 PROMPT_COMMAND='PREV_COMMAND=""; export PREV_COMMAND'
 
 # Moved to .bash_profile
