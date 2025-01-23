@@ -21,7 +21,12 @@ export LIBVIRT_DEFAULT_URI=qemu:///system
 export HISTSIZE=""
 export PYTHONIOENCODING=utf-8
 #export QT_PLUGIN_PATH="${HOME}/.guix-home/profile/lib/qt5/plugins"
-export PAGER="less -F"
+if [ "${TERM}" = "dumb" ]
+then
+    export PAGER="cat"
+else
+    export PAGER="less -F"
+fi
 
 # weird features above not needed!
 
@@ -35,7 +40,7 @@ export PATH="${HOME}/.local/bin:${PATH}"
 #PATH="${HOME}/.local/node_modules/.bin:${PATH}"
 export PATH="${HOME}/.local/npm-packages/bin:${HOME}/src/docker-oreboot/docker-oreboot/toolchain/rust/bin:/var/lib/flatpak/exports/bin:${PATH}"
 
-export TERMINAL=roxterm
+export TERMINAL=foot
 export GTK_CSD=0 # useless?
 #	https://manpages.ubuntu.com/manpages/bionic/man1/gtk3-nocsd.1.html
 #export EDITOR="nano -w"
