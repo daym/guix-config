@@ -1114,9 +1114,9 @@ interfaces.")
 
                   ;;; Science
 
-            (specification->package "texlive-pgfopts") ; used by cadabra2 < 2.5.2
-            (specification->package "texlive-ytableau") ; used by cadabra2 < 2.5.2
-            (specification->package "texlive-setspace") ; used by cadabra2 < 2.5.2
+            ;(specification->package "texlive-pgfopts") ; used by cadabra2 < 2.5.2
+            ;(specification->package "texlive-ytableau") ; used by cadabra2 < 2.5.2
+            ;(specification->package "texlive-setspace") ; used by cadabra2 < 2.5.2
             ;; Supported by texmacs
             cadabra2
             ;; Supported by texmacs
