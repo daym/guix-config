@@ -960,12 +960,12 @@ interfaces.")
                                         ; company-mode
                                         ; consult: Either use the default completion UI or ensure that exactly one of vertico-mode, mct-mode, or icomplete-mode is enabled. The unsupported modes selectrum-mode, ivy-mode, helm-mode, ido-mode and ido-ubiquitous-mode must be disabled.
                                         ; emacs vertico uses built-in completion; better than helm
-            (let ((base (specification->package "mogan")))
-                      (package (inherit base)
-                        (inputs
-                         (modify-inputs (package-inputs base)
-                                        ;(prepend qtwayland-5)
-                                        ))))
+            ;(let ((base (specification->package "mogan")))
+            ;          (package (inherit base)
+            ;            (inputs
+            ;             (modify-inputs (package-inputs base)
+            ;                            ;(prepend qtwayland-5)
+            ;                            ))))
 
             ;; Scientist.
             (specification->package "texmacs-guile3")
