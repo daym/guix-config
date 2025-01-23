@@ -625,7 +625,7 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-alchemist")) ; Elixir
             
             (list (specification->package "git") "send-email")
-            (specification->package "nasm")
+            ;(specification->package "nasm")
             ;; (specification->package "julia")
             ;; (specification->package "julia-intervalsets")
             ;; (specification->package "julia-logexpfunctions")
