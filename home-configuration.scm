@@ -341,6 +341,8 @@
                               ;"sway"
                               "swayidle"
                               "swaylock"
+                              "wl-clipboard"
+                              "cliphist" ; or maybe wl-clip-persist ; in any case requires wl-clipboard
                               ;"nwg-launchers"
                               "rofi-wayland"
                               "waypipe"
