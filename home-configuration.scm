@@ -1132,7 +1132,7 @@ interfaces.")
             ;; Symbolic math, supported by texmacs and emacs
             (specification->package "maxima")
                                         ;(specification->package "texlive-breqn")
-            (specification->package "texlive-tensor")
+            ;(specification->package "texlive-tensor")
             ;; Supported by texmacs
             (specification->package "scilab")
 
