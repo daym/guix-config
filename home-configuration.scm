@@ -150,21 +150,6 @@
 
 (define %source-dir (string-append (getcwd) "/idea"))
 
-(define (dap-trunk base)
-  (package
-    (inherit base)
-    (name "emacs-dap-mode")
-    (version "22af181d627577968f03213ba59d02458d3e734a")
-    (source
-     (origin
-       (method git-fetch)
-       (uri (git-reference
-             (url "https://github.com/emacs-lsp/dap-mode")
-             (commit version)))
-       (file-name (git-file-name name version))
-       (sha256
-        (base32 "1q360xhnmfnjgrkmzq69p2wc0rphz7fsbjzgn3hjw0a8kv3jsq0y"))))))
-
                                         ; Note: Community edition contains proprietary plugins: https://www.jetbrains.com/legal/community-bundled-plugins (Space Integration, Code With Me, Shared Indexes, Marketplace Licensing Support, Package Checker)
                                         ; Note: Community products: android-studio, idea, pycharm
                                         ; Note: Proprietary-only products: clion, phpstorm, webstorm, datagrip!, goland, dataspell, RubyMine, datalore, rustrover
