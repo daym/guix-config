@@ -1057,7 +1057,7 @@ interfaces.")
             (specification->package "python-lsp-server")
             (specification->package "python-sympy")
             (specification->package "python-sentencepiece")
-            (specification->package "python-debugpy") ; DAP
+            (specification->package "python-debugpy") ; DAP ; requires pydevd
 
             ;;; AI
 
