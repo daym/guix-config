@@ -731,6 +731,8 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-xref")) ; TODO: emacs-xref-union
             (package-with-emacs-pgtk (specification->package "emacs-sesman"))
             ;(package-with-emacs-pgtk (specification->package "emacs-org")) ; org 9.7.11 is included in emacs
+            ;(package-with-emacs-pgtk (specification->package "emacs-org-element")) ; tree
+
             ;(package-with-emacs-pgtk (specification->package "emacs-org-texlive-collection"))
             (package-with-emacs-pgtk (specification->package "emacs-org-edna"))
             ; TODO: package: (package-with-emacs-pgtk (specification->package "emacs-org-notify"))
