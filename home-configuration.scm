@@ -842,7 +842,7 @@ interfaces.")
             python-black-24
             ; TODO emacs-python-black ??
             (package-with-emacs-pgtk (specification->package "emacs-elixir-mode"))
-            (package-with-emacs-pgtk (specification->package "emacs-guix"))
+            ; FIXME (package-with-emacs-pgtk (specification->package "emacs-guix"))
             (package-with-emacs-pgtk (specification->package "emacs-bluetooth"))
             (package-with-emacs-pgtk (specification->package "emacs-osm"))
             (package-with-emacs-pgtk (specification->package "emacs-erc-hl-nicks")) ; IRC nick coloring
