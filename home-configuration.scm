@@ -903,6 +903,8 @@ interfaces.")
             ;; For swank-js to use.  But it doesn't work with multiple major modes yet. TODO: css-mode;
             (package-with-emacs-pgtk (specification->package "emacs-js2-mode"))
                                         ; typescript mode done by combobulate
+            ;; Allows the user to see/edit a range of a buffer in another buffer.
+            (package-with-emacs-pgtk (specification->package "emacs-edit-indirect"))
             ;; This one works with multiple major modes (and thus with Vue JS, mmm)
                                         ; shipped by default (package-with-emacs-pgtk (specification->package "emacs-js-mode"))
             ;; Allows multiple major modes to coexist in one buffer
