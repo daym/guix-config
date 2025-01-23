@@ -905,7 +905,7 @@ interfaces.")
                                         ; shipped by default (package-with-emacs-pgtk (specification->package "emacs-js-mode"))
             ;; Allows multiple major modes to coexist in one buffer
             (package-with-emacs-pgtk (specification->package "emacs-mmm-mode"))
-            ;; For Clojure. Supports light table.
+            ;; For Clojure. Supports light table via M-x cider-enlighten-mode
             (package-with-emacs-pgtk (specification->package "emacs-cider"))
             (package-with-emacs-pgtk (specification->package "emacs-vala-mode"))
             ;; Shows number of search results in status bar
