@@ -618,6 +618,8 @@ interfaces.")
                                         ; Reverse Engineering
             (specification->package "radare2")
             (package-with-emacs-pgtk (specification->package "emacs-vlf")) ; very large files
+            (package-with-emacs-pgtk (specification->package "emacs-tuareg")) ; ocaml
+            (package-with-emacs-pgtk (specification->package "emacs-yaml-mode"))
             (package-with-emacs-pgtk (specification->package "emacs-julia-mode")) ; uses yaml which hangs
             (package-with-emacs-pgtk (specification->package "emacs-julia-repl"))
             (package-with-emacs-pgtk (specification->package "emacs-julia-snail"))
