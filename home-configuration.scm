@@ -918,6 +918,8 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-jinja2-mode"))
             ;; Spaced repetition in org mode.
             (package-with-emacs-pgtk (specification->package "emacs-org-fc"))
+            ;; vcard vcf
+            (package-with-emacs-pgtk (specification->package "emacs-org-vcard"))
             ;; Visual undo tree.
             (package-with-emacs-pgtk (specification->package "emacs-vundo"))
             ;; Weather info
