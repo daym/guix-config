@@ -767,6 +767,7 @@ interfaces.")
             (patch2 (package-with-emacs-pgtk (specification->package "emacs-rustic")))
             (package-with-emacs-pgtk (specification->package "emacs-projectile"))
             (package-with-emacs-pgtk (specification->package "emacs-company"))
+            (patch2 (package-with-emacs-pgtk (specification->package "emacs-company-lsp")))
             (package-with-emacs-pgtk (specification->package "emacs-company-org-block")) ; snippets with "<"
             (package-with-emacs-pgtk (specification->package "emacs-capf-autosuggest"))
             (package-with-emacs-pgtk (specification->package "emacs-flycheck"))
