@@ -72,6 +72,7 @@
   (options->transformation `((with-patch . ,(string-append "libcxx@12.0.1="
                                                            "patches/libcxx2.patch")))))
 
+;; TODO: We don't use it anymore--but maybe it would be a good idea for Guix to have it.
 (define patch1
   (options->transformation `((with-patch . ,(string-append "emacs-dap-mode="
                                                            "patches/dap-mode.patch")))))
