@@ -995,6 +995,7 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-gnosis"))
             ;; https://github.com/louietan/anki-editor
             (package-with-emacs-pgtk (specification->package "emacs-org-drill"))
+            (package-with-emacs-pgtk (specification->package "emacs-org-sticky-header"))
                                         ; similar: (package-with-emacs-pgtk (specification->package "emacs-gnosis"))
 
             (specification->package "pandoc")
