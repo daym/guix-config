@@ -757,6 +757,12 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-bui"))
             ;; Used by emacs-dap-mode (popup)
             (package-with-emacs-pgtk (specification->package "emacs-posframe"))
+
+            (package-with-emacs-pgtk (specification->package "emacs-beacon"))
+            (package-with-emacs-pgtk (specification->package "emacs-bar-cursor"))
+            (package-with-emacs-pgtk (specification->package "emacs-wakib-keys"))
+            (package-with-emacs-pgtk (specification->package "emacs-treemacs-nerd-icons"))
+            ;; Alternative: emacs-dape
             (patch2 (package-with-emacs-pgtk (specification->package "emacs-dap-mode")))
             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-mode")))
             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-ui")))
