@@ -1,0 +1,20 @@
+--- orig/TeXmacs/./src/Plugins/Qt/QTMPipeLink.cpp	2024-03-11 14:21:46.000000000 +0100
++++ texmacs/./src/Plugins/Qt/QTMPipeLink.cpp	2024-12-03 02:49:55.148812710 +0100
+@@ -48,8 +48,16 @@
+ bool
+ QTMPipeLink::launchCmd () {
+   if (state () != QProcess::NotRunning) killProcess (1000);
++  QString command = utf8_to_qstring(cmd);
++  QStringList args = splitCommand(command);
++  if (args.isEmpty()) {
++    qWarning("QProcess::startCommand: empty or whitespace-only command was provided");
++    return false;
++  }
++  const QString program = args.takeFirst();
++
+   //FIXME: is UTF8 the right encoding here?
+-  QProcess::start(utf8_to_qstring(cmd));
++  QProcess::start(program, args);
+   bool r= waitForStarted ();
+   if (r) {
+     connect (this, SIGNAL(readyReadStandardOutput ()), SLOT(readErrOut ()));

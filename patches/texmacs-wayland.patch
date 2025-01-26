@@ -1,0 +1,38 @@
+diff -ru orig/qsbrdssq407hsajf74z60vp3rhgafjsl-mogan-1.1.1-checkout/src/Texmacs/Texmacs/texmacs.cpp qsbrdssq407hsajf74z60vp3rhgafjsl-mogan-1.1.1-checkout/src/Texmacs/Texmacs/texmacs.cpp
+--- orig/qsbrdssq407hsajf74z60vp3rhgafjsl-mogan-1.1.1-checkout/src/Texmacs/Texmacs/texmacs.cpp	2024-05-10 01:51:55.312256939 +0200
++++ qsbrdssq407hsajf74z60vp3rhgafjsl-mogan-1.1.1-checkout/src/Texmacs/Texmacs/texmacs.cpp	2024-05-10 01:52:43.659909394 +0200
+@@ -685,8 +685,12 @@
+ #ifndef OS_MINGW
+   set_env ("LC_NUMERIC", "POSIX");
+ #ifndef OS_MACOS
+-  set_env ("QT_QPA_PLATFORM", "xcb");
+-  set_env ("XDG_SESSION_TYPE", "x11");
++  if (get_env ("XDG_SESSION_TYPE") == "wayland") {
++    set_env ("QT_QPA_PLATFORM", "wayland"); QGuiApplication::setAttribute(Qt::AA_DisableHighDpiScaling); QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
++  } else {
++    set_env ("QT_QPA_PLATFORM", "xcb");
++    set_env ("XDG_SESSION_TYPE", "x11");
++  }
+ #endif
+ #endif
+ #ifdef MACOSX_EXTENSIONS
+--- orig/TeXmacs/./src/Plugins/Qt/QTMPipeLink.cpp	2024-03-11 14:21:46.000000000 +0100
++++ texmacs/./src/Plugins/Qt/QTMPipeLink.cpp	2024-12-03 02:49:55.148812710 +0100
+@@ -48,8 +48,16 @@
+ bool
+ QTMPipeLink::launchCmd () {
+   if (state () != QProcess::NotRunning) killProcess (1000);
++  QString command = utf8_to_qstring(cmd);
++  QStringList args = QProcess::splitCommand(command);
++  if (args.isEmpty()) {
++    qWarning("QProcess::startCommand: empty or whitespace-only command was provided");
++    return false;
++  }
++  const QString program = args.takeFirst();
++   qWarning("program %s\n", qUtf8Printable(program));
+   //FIXME: is UTF8 the right encoding here?
+-  QProcess::start(utf8_to_qstring(cmd));
++  QProcess::start(program, args);
+   bool r= waitForStarted ();
+   if (r) {
+     connect (this, SIGNAL(readyReadStandardOutput ()), SLOT(readErrOut ()));

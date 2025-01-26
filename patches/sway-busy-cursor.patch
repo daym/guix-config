@@ -1,0 +1,187 @@
+diff -ru orig/7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/include/sway/input/cursor.h 7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/include/sway/input/cursor.h
+--- orig/7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/include/sway/input/cursor.h	2024-11-30 19:28:24.297846443 +0100
++++ 7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/include/sway/input/cursor.h	2024-11-30 20:03:42.090898503 +0100
+@@ -98,7 +98,7 @@
+  */
+ void cursor_rebase(struct sway_cursor *cursor);
+ void cursor_rebase_all(void);
+-void cursor_update_image(struct sway_cursor *cursor, struct sway_node *node);
++void cursor_update_image(struct sway_seat *seat, struct sway_cursor *cursor, struct sway_node *node);
+ 
+ void cursor_handle_activity_from_idle_source(struct sway_cursor *cursor,
+ 		enum sway_input_idle_source idle_source);
+diff -ru orig/7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/include/sway/input/seat.h 7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/include/sway/input/seat.h
+--- orig/7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/include/sway/input/seat.h	2024-11-30 19:28:24.297846443 +0100
++++ 7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/include/sway/input/seat.h	2024-11-30 20:05:40.101109460 +0100
+@@ -81,6 +81,7 @@
+ };
+ 
+ struct sway_seat {
++	bool busy;
+ 	struct wlr_seat *wlr_seat;
+ 	struct sway_cursor *cursor;
+ 
+diff -ru orig/7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/desktop/xwayland.c 7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/desktop/xwayland.c
+--- orig/7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/desktop/xwayland.c	2024-11-30 19:28:24.305846422 +0100
++++ 7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/desktop/xwayland.c	2024-11-30 21:03:05.175822035 +0100
+@@ -120,6 +120,13 @@
+ 	}
+ 	struct sway_seat *seat = input_manager_current_seat();
+ 	struct sway_container *focus = seat_get_focused_container(seat);
++
++            if (seat && seat->cursor) {
++    sway_log(SWAY_ERROR, "XX startup notification 3 xwayland");
++                seat->busy = false;
++                cursor_set_image(seat->cursor, "left_ptr", NULL);
++            }
++
+ 	if (focus && focus->view && focus->view->pid != xsurface->pid) {
+ 		return;
+ 	}
+@@ -671,6 +678,15 @@
+ 	if (xsurface->surface == NULL || !xsurface->surface->mapped) {
+ 		return;
+ 	}
++
++struct sway_seat *seat = input_manager_current_seat();
++
++            if (seat && seat->cursor) {
++    sway_log(SWAY_ERROR, "XX startup notification 3 xwayland managed");
++                seat->busy = false;
++                cursor_set_image(seat->cursor, "left_ptr", NULL);
++            }
++
+ 	view_request_activate(view, NULL);
+ 
+ 	transaction_commit_dirty();
+diff -ru orig/7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/input/cursor.c 7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/input/cursor.c
+--- orig/7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/input/cursor.c	2024-11-30 19:28:24.305846422 +0100
++++ 7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/input/cursor.c	2024-11-30 20:10:10.440567590 +0100
+@@ -159,9 +159,11 @@
+ 	}
+ }
+ 
+-void cursor_update_image(struct sway_cursor *cursor,
++void cursor_update_image(struct sway_seat *seat, struct sway_cursor *cursor,
+ 		struct sway_node *node) {
+-	if (node && node->type == N_CONTAINER) {
++	if (seat->busy) {
++		cursor_set_image(cursor, "watch", NULL);
++	} else if (node && node->type == N_CONTAINER) {
+ 		// Try a node's resize edge
+ 		enum wlr_edges edge = find_resize_edge(node->sway_container, NULL, cursor);
+ 		if (edge == WLR_EDGE_NONE) {
+diff -ru orig/7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/input/seatop_default.c 7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/input/seatop_default.c
+--- orig/7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/input/seatop_default.c	2024-11-30 19:28:24.305846422 +0100
++++ 7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/input/seatop_default.c	2024-11-30 20:02:49.619730997 +0100
+@@ -622,7 +622,7 @@
+ 			wlr_seat_pointer_notify_motion(seat->wlr_seat, time_msec, sx, sy);
+ 		}
+ 	} else {
+-		cursor_update_image(cursor, node);
++		cursor_update_image(seat, cursor, node);
+ 		wlr_seat_pointer_notify_clear_focus(seat->wlr_seat);
+ 	}
+ 
+@@ -652,7 +652,7 @@
+ 			wlr_tablet_v2_tablet_tool_notify_motion(tool->tablet_v2_tool, sx, sy);
+ 		}
+ 	} else {
+-		cursor_update_image(cursor, node);
++		cursor_update_image(seat, cursor, node);
+ 		wlr_tablet_v2_tablet_tool_notify_proximity_out(tool->tablet_v2_tool);
+ 	}
+ 
+@@ -1120,7 +1120,7 @@
+ 			wlr_seat_pointer_notify_motion(seat->wlr_seat, time_msec, sx, sy);
+ 		}
+ 	} else {
+-		cursor_update_image(cursor, e->previous_node);
++		cursor_update_image(seat, cursor, e->previous_node);
+ 		wlr_seat_pointer_notify_clear_focus(seat->wlr_seat);
+ 	}
+ }
+diff -ru orig/7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/tree/view.c 7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/tree/view.c
+--- orig/7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/tree/view.c	2024-11-30 19:28:24.305846422 +0100
++++ 7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/tree/view.c	2024-11-30 19:28:11.617880213 +0100
+@@ -523,6 +523,7 @@
+ 	if (ctx == NULL) {
+ 		return;
+ 	}
++
+ 	launcher_ctx_consume(ctx);
+ 
+ 	view->ctx = ctx;
+diff -ru orig/7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/xdg_activation_v1.c 7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/xdg_activation_v1.c
+--- orig/7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/xdg_activation_v1.c	2024-11-30 19:28:24.305846422 +0100
++++ 7s4i39bdbf0di2fr104isjgdiilqy9ix-sway-1.10-checkout/sway/xdg_activation_v1.c	2024-11-30 20:34:18.638312270 +0100
+@@ -3,10 +3,21 @@
+ #include "sway/desktop/launcher.h"
+ #include "sway/tree/view.h"
+ #include "sway/tree/workspace.h"
++#include "sway/input/cursor.h"
++#include "log.h"
++
++//static int handle_activation_timeout(void *data) {
++//    struct sway_seat *seat = data;
++//    if (seat && seat->cursor) {
++//        cursor_set_image(seat->cursor, "left_ptr", NULL);
++//    }
++//    return 0;
++//}
+ 
+ void xdg_activation_v1_handle_request_activate(struct wl_listener *listener,
+ 		void *data) {
+ 	const struct wlr_xdg_activation_v1_request_activate_event *event = data;
++	sway_log(SWAY_ERROR, "XX handle request activate");
+ 
+ 	struct wlr_xdg_surface *xdg_surface =
+ 		wlr_xdg_surface_try_from_wlr_surface(event->surface);
+@@ -24,6 +35,8 @@
+ 	}
+ 
+ 	if (!xdg_surface->surface->mapped) {
++	sway_log(SWAY_ERROR, "XX startup notification");
++
+ 		// This is a startup notification. If we are tracking it, the data
+ 		// field is a launcher_ctx.
+ 		if (ctx->activated) {
+@@ -31,12 +44,20 @@
+ 			// for a startup notification. It will be destroyed
+ 			return;
+ 		} else {
++	sway_log(SWAY_ERROR, "XX startup notification 2");
++			struct sway_seat *seat = input_manager_current_seat(); // FIXME seat somehow
++			if (seat && seat->cursor) {
++	sway_log(SWAY_ERROR, "XX startup notification 3");
++				seat->busy = false;
++				cursor_set_image(seat->cursor, "left_ptr", NULL);
++			}
+ 			ctx->activated = true;
+ 			view_assign_ctx(view, ctx);
+ 		}
+ 		return;
+ 	}
+ 
++
+ 	// This is an activation request. If this context is internal we have ctx->seat.
+ 	if (ctx->seat) {
+ 		view_request_activate(view, ctx->seat);
+@@ -59,6 +80,17 @@
+ 
+ 	struct sway_workspace *ws = seat_get_focused_workspace(seat);
+ 	if (ws) {
++		struct sway_seat *seat = input_manager_current_seat();
++		if (seat && seat->cursor) {
++	sway_log(SWAY_ERROR, "XX startup notification setting watch");
++			seat->busy = true;
++			cursor_set_image(seat->cursor, "watch", NULL);
++		}
++		// server->wl_event_loop
++		//struct wl_event_source *timer = wl_event_loop_add_timer(loop, handle_activation_timeout, seat);
++		//if (timer) {
++		//	wl_event_source_timer_update(timer, 10000); // 10 second timeout
++		//}
+ 		launcher_ctx_create(token, &ws->node);
+ 		return;
+ 	}

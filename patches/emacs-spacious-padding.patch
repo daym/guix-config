@@ -1,0 +1,42 @@
+Only in spacious-padding-0.6.0/: OK
+Only in spacious-padding-0.6.0/: OK2
+diff -ru orig/spacious-padding-0.6.0/spacious-padding.el spacious-padding-0.6.0/spacious-padding.el
+--- orig/spacious-padding-0.6.0/spacious-padding.el	2025-01-06 23:06:49.000000000 +0100
++++ spacious-padding-0.6.0/spacious-padding.el	2025-01-26 16:42:15.003733317 +0100
+@@ -255,7 +255,7 @@
+      ((facep subtle-value) (face-foreground subtle-value nil face))
+      (t (face-foreground face nil fallback)))))
+ 
+-(defun spacious-padding-set-face-box-padding (face fallback &optional subtle-key)
++(defun spacious-padding-set-face-box-padding (face fallback &optional subtle-key style)
+   "Return face attributes for FACE with FALLBACK face background.
+ With optional SUBTLE-KEY, read its value from the
+ `spacious-padding-subtle-mode-line' and apply it to FACE as an
+@@ -264,7 +264,7 @@
+     (let* ((original-bg (face-background face nil fallback))
+            (subtle-bg (face-background 'default))
+            (subtlep (and subtle-key spacious-padding-subtle-mode-line))
+-           (bg (if subtlep subtle-bg original-bg))
++           (bg (if (or subtlep style) subtle-bg original-bg))
+            (face-width (spacious-padding--get-face-width face)))
+       `(,@(when subtlep
+             (list
+@@ -275,7 +275,7 @@
+              :box
+              `( :line-width ,face-width
+                 :color ,bg
+-                :style nil)))))))
++                :style ,style)))))))
+ 
+ (defun spacious-padding-set-window-divider (face color)
+   "Set window divider FACE to COLOR its width is greater than 1."
+@@ -316,7 +316,7 @@
+      `(tab-line-tab ((t ,@(spacious-padding-set-face-box-padding 'tab-line-tab 'tab-line))))
+      `(tab-line-tab-inactive ((t ,@(spacious-padding-set-face-box-padding 'tab-line-tab-inactive 'tab-line))))
+      `(tab-line-tab-active ((t ,@(spacious-padding-set-face-box-padding 'tab-line-tab-active 'tab-line))))
+-     `(tab-line-tab-current ((t ,@(spacious-padding-set-face-box-padding 'tab-line-tab-current 'tab-line))))
++     `(tab-line-tab-current ((t ,@(spacious-padding-set-face-box-padding 'tab-line-tab-current 'tab-line 'released-button))))
+      `(vertical-border ((t :background ,bg-main :foreground ,bg-main)))
+      `(,@(spacious-padding-set-window-divider 'window-divider bg-main))
+      `(,@(spacious-padding-set-window-divider 'window-divider-first-pixel bg-main))
+Only in spacious-padding-0.6.0/: SSS

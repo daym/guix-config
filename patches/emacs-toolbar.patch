@@ -1,0 +1,11 @@
+diff -ru orig/emacs-29.4/src/gtkutil.c emacs-29.4/src/gtkutil.c
+--- orig/emacs-29.4/src/gtkutil.c	1970-01-01 01:00:01.000000000 +0100
++++ emacs-29.4/src/gtkutil.c	2025-01-24 00:52:29.651593524 +0100
+@@ -5473,6 +5473,7 @@
+     }
+ 
+   x->toolbar_widget = gtk_toolbar_new ();
++  gtk_toolbar_set_icon_size(GTK_TOOLBAR (x->toolbar_widget), GTK_ICON_SIZE_MENU);
+ 
+   gtk_widget_set_name (x->toolbar_widget, "emacs-toolbar");
+ 

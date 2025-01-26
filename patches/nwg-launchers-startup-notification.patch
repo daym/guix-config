@@ -1,0 +1,30 @@
+diff -ru orig/nwg-launchers/common/nwg_classes.h nwg-launchers/common/nwg_classes.h
+--- orig/nwg-launchers/common/nwg_classes.h	2024-11-30 18:11:48.790534391 +0100
++++ nwg-launchers/common/nwg_classes.h	2024-11-30 18:08:25.043105131 +0100
+@@ -22,6 +22,8 @@
+ #ifdef HAVE_GTK_LAYER_SHELL
+ #include <gtk-layer-shell.h>
+ #endif
++#include <gtkmm.h>
++#include <giomm/appinfo.h>
+ 
+ #include "filesystem-compat.h"
+ 
+diff -ru orig/nwg-launchers/grid/grid_classes.cc nwg-launchers/grid/grid_classes.cc
+--- orig/nwg-launchers/grid/grid_classes.cc	2024-11-30 18:11:48.790534391 +0100
++++ nwg-launchers/grid/grid_classes.cc	2024-11-30 18:11:08.646646900 +0100
+@@ -588,7 +588,13 @@
+         Log::info("Running: \'", cmd, "\'");
+     }
+     try {
+-        Glib::spawn_command_line_async(cmd);
++        //Glib::spawn_command_line_async(cmd);
++        auto context = Gdk::Display::get_default()->get_app_launch_context();
++        auto appinfo = Gio::AppInfo::create_from_commandline(
++            cmd, "", Gio::APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION);
++        appinfo->launch(std::vector<Glib::RefPtr<Gio::File>>(), context);
++    } catch (const Glib::Error& e) {
++        std::cerr << "Error launching application: " << e.what() << std::endl;
+     } catch (const Glib::SpawnError& error) {
+         Log::error("Failed to run command: ", error.what());
+     } catch (const Glib::ShellError& error) {
