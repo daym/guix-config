@@ -113,6 +113,11 @@
                              (with-patch . ,(string-append "ungoogled-chromium="
                                                            "patches/7b0d7f4.diff")))))
 
+(define emacs-spacious-padding-patch
+  (options->transformation `((with-patch . ,(string-append "emacs-spacious-padding="
+                                                           "patches/emacs-spacious-padding.patch")))))
+
+
 (define llama-tune
   (options->transformation `((tune . "znver3")))) ; Zen 3
 
@@ -704,7 +709,7 @@ interfaces.")
             (package-with-emacs-pgtk emacs-pgtk) ; overly paranoid
             (package-with-emacs-pgtk (specification->package "emacs-paredit"))
             ;(package-with-emacs-pgtk (specification->package "emacs-indent-bars")) ; maybe overdoing it
-            (package-with-emacs-pgtk (specification->package "emacs-spacious-padding")) ; spacing between windows
+            (package-with-emacs-pgtk (emacs-spacious-padding-patch (specification->package "emacs-spacious-padding"))) ; spacing between windows
             (package-with-emacs-pgtk (specification->package "emacs-crdt"))
             (package-with-emacs-pgtk (specification->package "emacs-magit"))
             (package-with-emacs-pgtk (specification->package "emacs-git-email"))
