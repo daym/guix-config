@@ -703,6 +703,8 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-form-feed"))
             (package-with-emacs-pgtk emacs-pgtk) ; overly paranoid
             (package-with-emacs-pgtk (specification->package "emacs-paredit"))
+            ;(package-with-emacs-pgtk (specification->package "emacs-indent-bars")) ; maybe overdoing it
+            (package-with-emacs-pgtk (specification->package "emacs-spacious-padding")) ; spacing between windows
             (package-with-emacs-pgtk (specification->package "emacs-crdt"))
             (package-with-emacs-pgtk (specification->package "emacs-magit"))
             (package-with-emacs-pgtk (specification->package "emacs-git-email"))
@@ -780,8 +782,8 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-haskell-mode"))
             (package-with-emacs-pgtk (specification->package "emacs-flycheck-guile"))
             (package-with-emacs-pgtk (specification->package "emacs-geiser-guile"))
-            ;; FIXME: Add parinfer-rust-emacs.
-            (package-with-emacs-pgtk (specification->package "emacs-parinfer-mode"))
+            (package-with-emacs-pgtk (specification->package "emacs-parinfer-rust-mode"))
+            ;(package-with-emacs-pgtk (specification->package "emacs-parinfer-mode"))
             (package-with-emacs-pgtk (specification->package "emacs-web-mode"))
             (package-with-emacs-pgtk (specification->package "emacs-git-timemachine"))
             (package-with-emacs-pgtk (specification->package "emacs-markdown-mode"))
