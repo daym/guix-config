@@ -1103,7 +1103,8 @@ interfaces.")
    (service home-gpg-agent-service-type
             (home-gpg-agent-configuration
              (pinentry-program
-              (file-append (specification->package "pinentry-gnome3") "/bin/pinentry-gnome3"))))
+              (file-append (specification->package "pinentry-gnome3")
+                           "/bin/pinentry-gnome3"))))
    (service home-ssh-agent-service-type)
    (service home-channels-service-type)
    (service home-msmtp-service-type
