@@ -805,6 +805,7 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-trashed"))
             (package-with-emacs-pgtk (specification->package "emacs-qrencode"))
             (package-with-emacs-pgtk (specification->package "emacs-forge"))
+            (package-with-emacs-pgtk (specification->package "emacs-fj")) ; Forgejo
                                         ; Columns
             (package-with-emacs-pgtk (specification->package "emacs-taxy-magit-section"))
             (package-with-emacs-pgtk (specification->package "emacs-ghub"))
