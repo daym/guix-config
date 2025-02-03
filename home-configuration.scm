@@ -64,7 +64,6 @@
              (gnu packages fontutils) ; freetype
              (gnu packages python-build)
              (gnu packages python-check) ; python-mypy-extensions
-             (gnu packages python-xyz) ; python-black
              )
 
 (use-modules ((guix licenses) #:prefix license:))
@@ -235,63 +234,6 @@
     (description "This package provides an IDE.")
     (home-page "https://www.jetbrains.com/idea/")
     (license license:asl2.0)))
-
-(define-public python-black-24
-  (package
-    (inherit (specification->package "python-black"))
-    (name "python-black")
-    (version "24.8.0")
-    (source
-     (origin
-       (method url-fetch)
-       (uri (pypi-uri "black" version))
-       (sha256
-        (base32 "0gyqiilf9pgc6px07aw4y8g4grzm77q5m27fp4w4qy5n41a98015"))))
-    (build-system pyproject-build-system)
-    (arguments
-     `(#:phases
-       (modify-phases %standard-phases
-         (add-after 'unpack 'patch-packaging
-           (lambda _
-             (substitute* "pyproject.toml"
-              ;; We have over 4000 dependents on packaging 21.
-              (("packaging>=22.0") "packaging>=21.0"))))
-         (add-after 'patch-source-shebangs 'use-absolute-file-names
-           (lambda* (#:key native-inputs inputs #:allow-other-keys)
-             (let* ((inpts (or native-inputs inputs))
-                    (python3 (search-input-file inpts "/bin/python3")))
-               (substitute* (find-files "tests" "\\.py$")
-                 (("#!/usr/bin/env python3(\\.[0-9]+)?" _ minor-version)
-                  (string-append "#!" python3 (if (string? minor-version)
-                                                  minor-version
-                                                  "")))))))
-         (replace 'check
-           (lambda* (#:key tests? #:allow-other-keys)
-             ;; python-packaging-bootstrap disagrees with that--and it doesn't
-             ;; seem important anyway.
-             ;(substitute* "tests/test_black.py"
-             ; (("\\(\">3.9,[!]=invalid\", None\\),")
-             ;  "(\">3.9,!=invalid\", [TargetVersion.PY310, TargetVersion.PY311, TargetVersion.PY312, TargetVersion.PY313]),"))
-             (when tests? (invoke "pytest" "-vv" "-W" "ignore::DeprecationWarning")))))))
-    (native-inputs
-     (list python-pytest
-           python-pytest-aiohttp
-           python-hatchling
-           python-hatch-fancy-pypi-readme
-           python-hatch-vcs))
-    (propagated-inputs (list python-click
-                             python-mypy-extensions
-                             python-packaging
-                             python-pathspec
-                             python-platformdirs
-                             python-tomli
-                             python-typing-extensions))
-    (home-page "https://github.com/psf/black")
-    (synopsis "The uncompromising code formatter.")
-    (description "Black is the uncompromising Python code formatter.")
-    (license license:expat)))
-
-
 
 (define xorg-packages
   (specifications->packages '("i3-wm" "openbox" "tint2" "xbindkeys" "xterm")
@@ -834,8 +776,8 @@ interfaces.")
 
             (specification->package "python-jupyter-client") ; required by emacs-jupyter (for no reason; why not just invoke "jupyter kernel"?)
             (package-with-emacs-pgtk (specification->package "emacs-jupyter"))
-            python-black-24
-            ; TODO emacs-python-black ??
+            (specification->package "python-black")
+            ; TODO emacs-python-black ?? ; why not format-all-the-code ? The latter already works, I think.
             (package-with-emacs-pgtk (specification->package "emacs-elixir-mode"))
             ; FIXME (package-with-emacs-pgtk (specification->package "emacs-guix"))
             (package-with-emacs-pgtk (specification->package "emacs-bluetooth"))
