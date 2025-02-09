@@ -501,7 +501,7 @@ example the one implemented by python-mathics-core.")
                                         ;(specification->package "seahorse") ; keyring admin ; broken
             (specification->package "dmidecode")
             (specification->package "hdparm")
-            (specification->package "openssl")
+                                        ;(specification->package "openssl")
             (specification->package "fdupes")
             (specification->package "nautilus")
             (specification->package "net-tools")
