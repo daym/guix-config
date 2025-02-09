@@ -1040,7 +1040,7 @@ example the one implemented by python-mathics-core.")
             (specification->package "network-manager-openvpn")
             ;(ungoogled-chromium-patch )
             (specification->package "ungoogled-chromium")
-            (specification->package "icecat")
+                                        ;(specification->package "icecat")
                                         ;(specification->package "gfeeds")
             (specification->package "gource") ; commit visualization
             (specification->package "nheko")
