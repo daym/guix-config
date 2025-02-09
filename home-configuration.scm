@@ -875,6 +875,7 @@ example the one implemented by python-mathics-core.")
             (package-with-emacs-pgtk (specification->package "emacs-taxy-magit-section"))
             (package-with-emacs-pgtk (specification->package "emacs-ghub"))
             (package-with-emacs-pgtk (specification->package "emacs-github-review"))
+             (package-with-emacs-pgtk (specification->package "emacs-pr-review"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-svg-tag-mode"))
             ;; This one uses text styling and so makes the user's stuff more editable than svg-tag-mode
             ;; Replaces org-bullets and org-superstar
