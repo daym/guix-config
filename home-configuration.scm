@@ -589,7 +589,7 @@ example the one implemented by python-mathics-core.")
 
             ;; Typescript compiler.
             (specification->package "rust-swc")
-                                        ;(specification->package "vscodium")
+             (specification->package "vscodium")
             (specification->package "wireshark")
             (specification->package "kicad")
             (specification->package "meld")
