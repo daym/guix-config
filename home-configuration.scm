@@ -602,8 +602,8 @@ interfaces.")
                                         ; julia-wayland-jll
             (specification->package "jupyter")
             (specification->package "jupyter-guile-kernel")
-            (specification->package "emacs-code-cells")
-            (specification->package "emacs-password-generator")
+             (package-with-emacs-pgtk (specification->package "emacs-code-cells"))
+             (package-with-emacs-pgtk (specification->package "emacs-password-generator"))
             (specification->package "guile-ares-rs")
             ;(specification->package "diffoscope") ; requires u-boot-tools--and that doesn't build.
             (specification->package "diffstat")
