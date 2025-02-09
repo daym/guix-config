@@ -474,7 +474,7 @@ example the one implemented by python-mathics-core.")
                                         ;(specification->package "ccid") ; fingerprint reader?
                                         ;(specification->package "pcsc-lite")
 
-                  ;;; System Tools
+;;; System Tools
 
             (specification->package "xrdb") ; compat for nheko
             (specification->package "gammastep") ; redshift
