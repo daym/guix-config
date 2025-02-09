@@ -783,6 +783,7 @@ example the one implemented by python-mathics-core.")
             (patch2 (package-with-emacs-pgtk (specification->package "emacs-company-lsp")))
             (package-with-emacs-pgtk (specification->package "emacs-company-org-block")) ; snippets with "<"
             (package-with-emacs-pgtk (specification->package "emacs-capf-autosuggest"))
+             (package-with-emacs-pgtk (specification->package "ispell")) ; used by built-in emacs flyspell-mode
             (package-with-emacs-pgtk (specification->package "emacs-flycheck"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-helm"))
             (package-with-emacs-pgtk (specification->package "emacs-shackle"))
