@@ -1059,7 +1059,7 @@ example the one implemented by python-mathics-core.")
             (specification->package "qrencode")
             (specification->package "remmina")
             (specification->package "rtorrent")
-            (specification->package "telegram-desktop")
+                                        ;(specification->package "telegram-desktop")
            
                   ;;; Python
 
