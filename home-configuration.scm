@@ -552,7 +552,7 @@ example the one implemented by python-mathics-core.")
 
 ;;; Fonts
 
-;; FIXME use weird "ttf" targets etc
+             ;; FIXME use weird "ttf" targets etc
             (specification->package "font-google-noto")
             (specification->package "font-dejavu")
             (specification->package "font-google-noto-sans-cjk")
