@@ -932,6 +932,9 @@ example the one implemented by python-mathics-core.")
             (package-with-emacs-pgtk (specification->package "emacs-vundo"))
             ;; Weather info
             (package-with-emacs-pgtk (specification->package "emacs-wttrin"))
+             (specification->package "pantalaimon")
+             (package-with-emacs-pgtk (specification->package "emacs-ement"))
+             
             ;; org->HTML export
             (package-with-emacs-pgtk (specification->package "emacs-org-re-reveal"))
                                         ; unused
