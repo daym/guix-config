@@ -844,7 +844,7 @@ example the one implemented by python-mathics-core.")
             (specification->package "python-black")
             ; TODO emacs-python-black ?? ; why not format-all-the-code ? The latter already works, I think.
             (package-with-emacs-pgtk (specification->package "emacs-elixir-mode"))
-            ; FIXME (package-with-emacs-pgtk (specification->package "emacs-guix"))
+             (package-with-emacs-pgtk (specification->package "emacs-guix"))
             (package-with-emacs-pgtk (specification->package "emacs-bluetooth"))
             (package-with-emacs-pgtk (specification->package "emacs-osm"))
             (package-with-emacs-pgtk (specification->package "emacs-erc-hl-nicks")) ; IRC nick coloring
