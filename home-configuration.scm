@@ -296,7 +296,6 @@
                               "kanshi" ; auto screen config
                               ;"sway"
                               "swayidle"
-                              "swaylock"
                               "wl-clipboard"
                               "cliphist" ; or maybe wl-clip-persist ; in any case requires wl-clipboard
                               ;"nwg-launchers"
@@ -416,6 +415,10 @@ interfaces.")
                                         "xdg-desktop-portal-wlr"))
             (list xdg-desktop-portal-gtk)
             wayland-packages
+
+            ;; <https://github.com/swaywm/swaylock/issues/395>
+            (list (swaylock-patch (specification->package "swaylock")))
+
             (list (nwg-launchers-patch (specification->package "nwg-launchers")))
             (list (sway-patch (specification->package "sway")))
             (list (specification->package "wlogout"))
