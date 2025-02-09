@@ -947,6 +947,9 @@ example the one implemented by python-mathics-core.")
             (package-with-emacs-pgtk (specification->package "emacs-fortran-tags"))
                                         ; or celluloid for gtk
             (package-with-emacs-pgtk (specification->package "emacs-mpv"))
+             (specification->package "pantalaimon")
+             (package-with-emacs-pgtk (specification->package "emacs-ement"))
+             
             (package-with-emacs-pgtk (specification->package "emacs-empv")) ; ?
                                         ; emacs-ytel
             (package-with-emacs-pgtk (specification->package "emacs-nov-el")) ; for epub
