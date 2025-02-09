@@ -556,6 +556,7 @@ interfaces.")
             (specification->package "subversion")
                                         ; Reverse Engineering
             (specification->package "radare2")
+             (package-with-emacs-pgtk (emacs-window-tool-bar-patch (specification->package "emacs-window-tool-bar")))
             (package-with-emacs-pgtk (specification->package "emacs-vlf")) ; very large files
             (package-with-emacs-pgtk (specification->package "emacs-tuareg")) ; ocaml
             (package-with-emacs-pgtk (specification->package "emacs-yaml-mode"))
