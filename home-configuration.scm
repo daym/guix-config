@@ -892,6 +892,8 @@ example the one implemented by python-mathics-core.")
             (package-with-emacs-pgtk (specification->package "emacs-discover-my-major"))
             (package-with-emacs-pgtk (specification->package "emacs-which-key"))
             (package-with-emacs-pgtk (specification->package "emacs-auctex"))
+             ;; See also M-x cdlatex-command-help
+             (package-with-emacs-pgtk (specification->package "emacs-cdlatex"))
             (package-with-emacs-pgtk (specification->package "emacs-company-auctex"))
             (package-with-emacs-pgtk (specification->package "emacs-latex-extra"))
             (package-with-emacs-pgtk (specification->package "emacs-adoc-mode"))
