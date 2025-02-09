@@ -637,12 +637,12 @@ interfaces.")
                                         ; In container (specification->package "vala") ; gtk
             (specification->package "badass") ; generate fake commits on github
 
-                  ;;; Game development
+;;; Game development
                                         ; libresprite
                                         ; aseprite
             
 
-                  ;;; Emacs
+;;; Emacs
 
                                         ; TODO maybe browse-at-remote (but it REALLY uses a browser)
                                         ; TODO maybe emacs-git-link
@@ -922,14 +922,14 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-zotxt"))
             (specification->package "zotero")
 
-                  ;;; Theorem Proving
+;;; Theorem Proving
 
                                         ;(specification->package "agda")
                                         ;(specification->package "lean") ; used by Terence Tao
                                         ;(specification->package "tla2tools")
             (specification->package "tree-sitter-tlaplus")
 
-                  ;;; Learning
+;;; Learning
             
             (specification->package "anki")
             ;; One of the problems with one-way sync/extract from org-mode files to Anki database is losing out the context (imagine notes from a technical books).
@@ -957,7 +957,7 @@ interfaces.")
 
             (package-with-emacs-pgtk (specification->package "emacs-pdf-tools"))
             
-                  ;;; Network
+;;; Network
 
             (specification->package "mailutils")
             (specification->package "iptables")
@@ -1026,7 +1026,7 @@ interfaces.")
             (transform1 (specification->package "etc1tool")) ; transform copied
             (specification->package "e2fsprogs")
 
-                  ;;; Emulation/Container
+;;; Emulation/Container
 
             (specification->package "bubblewrap")
             (specification->package "libvirt")
@@ -1039,14 +1039,14 @@ interfaces.")
             (specification->package "fuse-overlayfs")
             (specification->package "podman-compose")
 
-                  ;;; Games
+;;; Games
 
             (specification->package "daikichi") ; fortune
             ;(specification->package "fortunes-jkirchartz")
             (specification->package "steam")
             (specification->package "freeciv")
 
-                  ;;; Office
+;;; Office
 
             (specification->package "gv")
                                         ;(specification->package "vim")
@@ -1057,12 +1057,12 @@ interfaces.")
             (specification->package "fbreader")
             (specification->package "sioyek")
 
-                  ;;; Database
+;;; Database
 
             (specification->package "sqlite")
             (specification->package "postgresql")
 
-                  ;;; Science
+;;; Science
 
             ;(specification->package "texlive-pgfopts") ; used by cadabra2 < 2.5.2
             ;(specification->package "texlive-ytableau") ; used by cadabra2 < 2.5.2
@@ -1082,7 +1082,7 @@ interfaces.")
             ;; Supported by texmacs
             (specification->package "scilab")
 
-                  ;;; Multimedia Toys
+;;; Multimedia Toys
 
             (specification->package "espeak-ng")
             (specification->package "mumble")
@@ -1091,7 +1091,7 @@ interfaces.")
             ;; pipewire effect control; TODO: jdsp2linux instead
             ;(specification->package "easyeffects") ; PHP (from lsp-plugins)
 
-                  ;;; Crypto
+;;; Crypto
 
             (specification->package "yubikey-personalization")
             (specification->package "python-yubikey-manager")
