@@ -1121,7 +1121,7 @@ example the one implemented by python-mathics-core.")
 
 ;;; Database
 
-            (specification->package "sqlite")
+                                        ;(specification->package "sqlite") ; conflict because of libsoup.
             (specification->package "postgresql")
 
 ;;; Science
