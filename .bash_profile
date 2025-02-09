@@ -76,6 +76,7 @@ then
 	export ELECTRON_OZONE_PLATFORM_HINT=auto
 	# or --load-extension etc
 	# TODO --ozone-hint=auto
+	# Also has other stuff
 	export CHROMIUM_FLAGS="--enable-remote-extensions --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapture --ozone-platform-hint=auto --allow-file-access-from-files"
 	# The actual ssh-agent is started by shepherd and/or autostart (see guix home)
 fi
