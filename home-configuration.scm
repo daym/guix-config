@@ -565,7 +565,7 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-julia-snail"))
             (package-with-emacs-pgtk (specification->package "emacs-inf-ruby"))
             (package-with-emacs-pgtk (specification->package "emacs-alchemist")) ; Elixir
-             (package-with-emacs-pgtk (emacs-window-tool-bar-patch (specification->package "emacs-window-tool-bar")))
+             (package-with-emacs-pgtk (specification->package "emacs-xpm"))
             
             (list (specification->package "git") "send-email")
             ;(specification->package "nasm")
