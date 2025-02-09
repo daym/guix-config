@@ -1228,13 +1228,13 @@ example the one implemented by python-mathics-core.")
                   (user "dannym")
                   (password-eval "pass Mail/dannym@tx0.org"))))))))
    (service home-mcron-service-type)
-    ;;;(service home-kodi-service-type)
-    ;;;(service home-znc-service-type) ; IRC
-    ;;;(service home-parcimonie-service-type)
-    ;;;(service home-batsignal-service-type)
-    ;;;(service home-inputrc-service-type)
-    ;;; home-symlink-manager-service-type
-    ;;; home-syncthing-service-type
+;;;(service home-kodi-service-type)
+;;;(service home-znc-service-type) ; IRC
+;;;(service home-parcimonie-service-type)
+;;;(service home-batsignal-service-type)
+;;;(service home-inputrc-service-type)
+;;; home-symlink-manager-service-type
+;;; home-syncthing-service-type
    (service home-xdg-base-directories-service-type)
    (service home-xdg-mime-applications-service-type)
                                         ; automatic (service home-fontconfig-service-type)
