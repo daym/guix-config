@@ -1193,19 +1193,6 @@ example the one implemented by python-mathics-core.")
              (accounts
               (list
                (msmtp-account
-                (name "dannym@scratchpost.org")
-                (configuration
-                 (msmtp-configuration
-                  (auth? #t)
-                  (tls? #t)
-                  (tls-starttls? #f)
-                  (log-file "/home/dannym/log/mail/dannym@scratchpost.org.log")
-                  (from "dannym@scratchpost.org")
-                  (host "smtp.scratchpost.org") ; and later pop3.scratchpost.org (imaps, pop3s)
-                  (port 587)
-                  (user "m03a8bc9")
-                  (password-eval "pass Mail/dannym@scratchpost.org"))))
-               (msmtp-account
                 (name "dannym@friendly-machines.com")
                 (configuration
                  (msmtp-configuration
