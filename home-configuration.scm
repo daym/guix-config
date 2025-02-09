@@ -426,7 +426,7 @@ interfaces.")
             backup-packages
 
             (list
-            (patch9 (specification->package "waybar"))
+             (waybar-patch (specification->package "waybar"))
                                         ;(specification->package "yambar-wayland")
             (specification->package "i3status") ; sway can use it
 
