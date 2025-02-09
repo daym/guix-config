@@ -498,7 +498,7 @@ example the one implemented by python-mathics-core.")
             (specification->package "lm-sensors")
             (specification->package "xdg-utils")
             (specification->package "ripgrep")
-            (specification->package "seahorse") ; keyring admin
+                                        ;(specification->package "seahorse") ; keyring admin ; broken
             (specification->package "dmidecode")
             (specification->package "hdparm")
             (specification->package "openssl")
