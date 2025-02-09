@@ -117,6 +117,13 @@
                                                            "patches/emacs-spacious-padding.patch")))))
 
 
+(define emacs-window-tool-bar-patch
+  (options->transformation `(  ;  (with-debug-info . "libappindicator")
+                             ; for header line.
+                             (with-patch . ,(string-append "emacs-window-tool-bar="
+                                                           "patches/emacs-window-tool-bar-click2.patch"))
+                                                           )))
+
 (define llama-tune
   (options->transformation `((tune . "znver3")))) ; Zen 3
 
@@ -557,6 +564,7 @@ interfaces.")
             (package-with-emacs-pgtk (specification->package "emacs-julia-snail"))
             (package-with-emacs-pgtk (specification->package "emacs-inf-ruby"))
             (package-with-emacs-pgtk (specification->package "emacs-alchemist")) ; Elixir
+             (package-with-emacs-pgtk (emacs-window-tool-bar-patch (specification->package "emacs-window-tool-bar")))
             
             (list (specification->package "git") "send-email")
             ;(specification->package "nasm")

@@ -1,0 +1,57 @@
+I embed window-tool-bar right into the active tab (at the top!). Only if the tab is active will it embed it. So the following can happen:
+
+1. You click on a currently-inactive tab to the right of the currently-active tab.
+2. The system redraws such that suddenly the currently-active tab needs a lot less space than before (since it's being deactivated) and the newly-active tab gets all the buttons.
+3. The system things you clicked on one of the buttons when all you wanted is to activate a different tab
+4. It does random shit.
+
+In order to prevent that, react on mouse button press (which won't come in this situation--being already in the past) instead of on mouse button release (which WILL come shortly).
+
+diff -ru orig/window-tool-bar-0.3/window-tool-bar.el window-tool-bar-0.3/window-tool-bar.el
+--- orig/window-tool-bar-0.3/window-tool-bar.el	2025-02-08 23:02:18.000000000 +0100
++++ window-tool-bar-0.3/window-tool-bar.el	2025-02-10 00:04:52.645770356 +0100
+@@ -185,21 +185,21 @@
+   "<follow-link>" 'mouse-face
+   ;; Follow link on all clicks of mouse-1 and mouse-2 since the tool
+   ;; bar is not a place the point can travel to.
+-  "<tab-line> <mouse-1>" #'window-tool-bar--call-button
+-  "<tab-line> <double-mouse-1>" #'window-tool-bar--call-button
+-  "<tab-line> <triple-mouse-1>" #'window-tool-bar--call-button
+-  "<tab-line> <mouse-2>" #'window-tool-bar--call-button
+-  "<tab-line> <double-mouse-2>" #'window-tool-bar--call-button
+-  "<tab-line> <triple-mouse-2>" #'window-tool-bar--call-button
++  "<tab-line> <down-mouse-1>" #'window-tool-bar--call-button
++  "<tab-line> <double-down-mouse-1>" #'window-tool-bar--call-button
++  "<tab-line> <triple-down-mouse-1>" #'window-tool-bar--call-button
++  "<tab-line> <down-mouse-2>" #'window-tool-bar--call-button
++  "<tab-line> <double-down-mouse-2>" #'window-tool-bar--call-button
++  "<tab-line> <triple-down-mouse-2>" #'window-tool-bar--call-button
+ 
+   ;; Mouse down events do nothing.  A binding is needed so isearch
+   ;; does not exit when the tab bar is clicked.
+-  "<tab-line> <down-mouse-1>" #'window-tool-bar--ignore
+-  "<tab-line> <double-down-mouse-1>" #'window-tool-bar--ignore
+-  "<tab-line> <triple-down-mouse-1>" #'window-tool-bar--ignore
+-  "<tab-line> <down-mouse-2>" #'window-tool-bar--ignore
+-  "<tab-line> <double-down-mouse-2>" #'window-tool-bar--ignore
+-  "<tab-line> <triple-down-mouse-2>" #'window-tool-bar--ignore)
++  "<tab-line> <mouse-1>" #'window-tool-bar--ignore
++  "<tab-line> <double-mouse-1>" #'window-tool-bar--ignore
++  "<tab-line> <triple-mouse-1>" #'window-tool-bar--ignore
++  "<tab-line> <mouse-2>" #'window-tool-bar--ignore
++  "<tab-line> <double-mouse-2>" #'window-tool-bar--ignore
++  "<tab-line> <triple-mouse-2>" #'window-tool-bar--ignore)
+ (fset 'window-tool-bar--button-keymap window-tool-bar--button-keymap) ; So it can be a keymap property
+ 
+ ;; Register bindings that stay in isearch.  Technically, these
+@@ -325,6 +325,10 @@
+                       image-end (1+ len)
+                       len (1+ len)))))
+ 
++           (put-text-property 0 len
++                                'follow-link
++                                'ignore
++                                str)
+            (cond
+             ((and enabled button-selected)
+              (add-text-properties 0 len
