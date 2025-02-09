@@ -1061,7 +1061,7 @@ example the one implemented by python-mathics-core.")
             (specification->package "rtorrent")
                                         ;(specification->package "telegram-desktop")
            
-                  ;;; Python
+;;; Python
 
             (specification->package "pypy")
             (specification->package "python-lxml")
