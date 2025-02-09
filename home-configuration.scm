@@ -82,17 +82,18 @@
   (options->transformation `((with-patch . ,(string-append "emacs-lsp-mode="
                                                            "patches/lsp-mode.patch")))))
 
-;(define patch5
-;  (options->transformation `((with-debug-info . "mogan")
-;                             (with-patch . ,(string-append "mogan="
-;                                                          "patches/mogan-wayland.patch")))))
+                                        ;(define patch5
+                                        ;  (options->transformation `((with-debug-info . "mogan")
+                                        ;                             (with-patch . ,(string-append "mogan="
+                                        ;                                                          "patches/mogan-wayland.patch")))))
 
-;(define texmacs-patch
-;  (options->transformation `( ;(with-debug-info . "qtbase")
-;                             (with-debug-info . "texmacs-guile3")
-;                             (with-patch . ,(string-append "texmacs-guile3="
-;                                                           "patches/texmacs-wayland.patch")))))
+                                        ;(define texmacs-patch
+                                        ;  (options->transformation `( ;(with-debug-info . "qtbase")
+                                        ;                             (with-debug-info . "texmacs-guile3")
+                                        ;                             (with-patch . ,(string-append "texmacs-guile3="
+                                        ;                                                           "patches/texmacs-wayland.patch")))))
 
+;; Avoid etc/images/diropen.xpm and diropen.xbm
 (define emacs-patch
   (options->transformation `((with-patch . ,(string-append "emacs-pgtk="
                                                            "patches/emacs-tab-stops.patch")))))
