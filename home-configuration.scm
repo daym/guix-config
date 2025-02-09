@@ -1158,7 +1158,11 @@ example the one implemented by python-mathics-core.")
             (specification->package "yubikey-personalization")
             (specification->package "python-yubikey-manager")
 
-            ;;; Network Admin
+             ;;; Guix development
+             (specification->package "codeberg-cli")
+             (specification->package "forgejo-cli")
+
+;;; Network Admin
 
             ; FIXME (specification->package "k9s")
             ; FIXME (specification->package "kubectl")
