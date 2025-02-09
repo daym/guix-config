@@ -7,6 +7,7 @@
 (use-modules (gnu home)
              (gnu packages) ;; To extend %load-path with channels
              (gnu services)
+             (gnu services shepherd)
              (guix transformations)
              (guix gexp)
              (guix utils)
@@ -42,6 +43,7 @@
                                         ;(gnu home services syncthing)
              (gnu home services xdg)
              (gnu packages linux) ; e2fsprogs
+             (gnu packages emacs-xyz)
              (guix build-system glib-or-gtk)
              (gnu packages gnome) ; libsecret
              (gnu packages java) ; jbr
