@@ -1024,8 +1024,8 @@ example the one implemented by python-mathics-core.")
             (specification->package "iptables")
             (specification->package "nftables")
                                         ;(specification->package "mpop") ; TODO: guix home service
-            (specification->package "freerdp")
              (offlineimap-patch (specification->package "offlineimap3"))
+                                        ; FIXME (specification->package "freerdp") ; TODO: split off include/crypto.h since it uses openssl and that's why we need to propagate openssl
             ;; Namespace "Gst" is not available
             ;; xpra needs to be installed on the remote host as well!
             (specification->package "openvpn")
