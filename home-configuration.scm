@@ -132,10 +132,10 @@
 
 (define emacs-window-tool-bar-patch
   (options->transformation `(  ;  (with-debug-info . "libappindicator")
-                             ; for header line.
+                                        ; for header line.
                              (with-patch . ,(string-append "emacs-window-tool-bar="
                                                            "patches/emacs-window-tool-bar-click2.patch"))
-                                                           )))
+                             )))
 
 (define llama-tune
   (options->transformation `( ; "invalid Git URL replacement specification" (with-git-url . "https://github.com/unslothai/llama.cpp.git") ; dynamic quantization
@@ -732,7 +732,6 @@ example the one implemented by python-mathics-core.")
 
             ;(package-with-emacs-pgtk (specification->package "emacs-org-texlive-collection"))
             (package-with-emacs-pgtk (specification->package "emacs-org-edna"))
-            ; TODO: package: (package-with-emacs-pgtk (specification->package "emacs-org-notify"))
             (package-with-emacs-pgtk (specification->package "emacs-org-node"))
              
              (package-with-emacs-pgtk (specification->package "emacs-org-noter")) ; PDF notes
