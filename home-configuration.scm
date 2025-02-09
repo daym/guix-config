@@ -1043,7 +1043,7 @@ example the one implemented by python-mathics-core.")
                                         ;(specification->package "icecat")
                                         ;(specification->package "gfeeds")
             (specification->package "gource") ; commit visualization
-            (specification->package "nheko")
+                                        ;(specification->package "nheko")
                                         ;(specification->package "rtorrent")
             (specification->package "sshfs")
             (specification->package "rsync")
