@@ -1169,14 +1169,18 @@ example the one implemented by python-mathics-core.")
             )))
  (services
   (list
-    ;;;(service home-pulseaudio-rtp-sink-service-type)
+;;;(service home-pulseaudio-rtp-sink-service-type)
    (service home-fish-service-type)
    (service home-pipewire-service-type)
    (service home-shepherd-service-type)
+                                        ; (home-shepherd-configuration
+                                        ;   (services (list (@ (shepherd service repl) repl-service))))
+                                        ;(simple-service 'battery-threshold shepherd-root-service-type
+                                        ;                  (list (@ (shepherd service repl) repl-service)))
    (service home-dbus-service-type)
-    ;;;(service home-dicod-service-type)
-    ;;;(service home-dotfiles-service-type)
-    ;;;(service home-fontutils-service-type)
+;;;(service home-dicod-service-type)
+;;;(service home-dotfiles-service-type)
+;;;(service home-fontutils-service-type)
    (service home-gpg-agent-service-type
             (home-gpg-agent-configuration
              (pinentry-program
