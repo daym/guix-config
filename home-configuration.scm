@@ -98,6 +98,10 @@
   (options->transformation `((with-patch . ,(string-append "emacs-pgtk="
                                                            "patches/emacs-tab-stops.patch")))))
 
+(define offlineimap-patch
+  (options->transformation `((with-patch . ,(string-append "python-imaplib2="
+                                                           "patches/imaplib2-python3.patch")))))
+
 (define nwg-launchers-patch
   (options->transformation `((with-patch . ,(string-append "nwg-launchers="
                                                            "patches/nwg-launchers-startup-notification.patch")))))
