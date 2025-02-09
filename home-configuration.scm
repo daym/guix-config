@@ -124,6 +124,12 @@
                                                            "patches/emacs-spacious-padding.patch")))))
 
 
+(define network-manager-applet-patch
+  (options->transformation `(  ;  (with-debug-info . "libappindicator")
+                                        ;(with-debug-info . "gtk+")
+                             (with-patch . ,(string-append "network-manager-applet="
+                                                           "patches/network-manager-applet.patch")))))
+
 (define emacs-window-tool-bar-patch
   (options->transformation `(  ;  (with-debug-info . "libappindicator")
                              ; for header line.
@@ -981,6 +987,7 @@ interfaces.")
             (specification->package "transmission")
             (specification->package "openconnect")
             (specification->package "blueman")
+             (network-manager-applet-patch (specification->package "network-manager-applet")) ; our system profile also has it... silly enough.
             (specification->package "network-manager-openconnect")
             (specification->package "network-manager-openvpn")
             ;(ungoogled-chromium-patch )
