@@ -1,0 +1,14 @@
+Scale factor is mostly unused in indicator mode anyway.
+
+diff -ru orig/network-manager-applet-1.36.0/src/applet.c network-manager-applet-1.36.0/src/applet.c
+--- orig/network-manager-applet-1.36.0/src/applet.c	2024-01-02 14:29:22.000000000 +0100
++++ network-manager-applet-1.36.0/src/applet.c	2025-02-04 00:21:16.625192907 +0100
+@@ -2972,7 +2972,7 @@
+ 	if (g_hash_table_lookup_extended (applet->icon_cache, name, NULL, (gpointer) &icon))
+ 		return icon;
+ 
+-	scale = gdk_window_get_scale_factor (gdk_get_default_root_window ());
++	scale = 2;
+ 
+ 	/* Try to load the icon; if the load fails, log the problem, and set
+ 	 * the icon to the fallback icon if requested.

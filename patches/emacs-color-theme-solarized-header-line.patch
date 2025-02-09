@@ -1,0 +1,14 @@
+Only in orig/8f49im552pcp1jg7nk4macywnznchdcr-emacs-color-theme-solarized-0-0.f3ca890-checkout/: color-theme-solarized.el
+Only in orig/8f49im552pcp1jg7nk4macywnznchdcr-emacs-color-theme-solarized-0-0.f3ca890-checkout/: color-theme-solarized-pkg.el
+diff -ru orig/8f49im552pcp1jg7nk4macywnznchdcr-emacs-color-theme-solarized-0-0.f3ca890-checkout/solarized-definitions.el color-theme-solarized/solarized-definitions.el
+--- orig/8f49im552pcp1jg7nk4macywnznchdcr-emacs-color-theme-solarized-0-0.f3ca890-checkout/solarized-definitions.el	2025-02-09 20:03:46.844313634 +0100
++++ color-theme-solarized/solarized-definitions.el	2025-02-09 19:59:35.111775758 +0100
+@@ -240,7 +240,7 @@
+                 (escape-glyph-face (,@fg-red))
+                 (fringe (,@fg-base01 ,@bg-base02))
+                 (linum (,@fg-base01 ,@bg-base02))
+-                (header-line (,@fg-base0 ,@bg-base02 ,@fmt-revbb)) ; Pmenu
++                (header-line (,@fg-base0 ,@bg-base02)) ; Pmenu
+                 (highlight (,@bg-base02))
+                 (hl-line (:underline ,opt-under ,@bg-base02)) ; CursorLine
+                 (isearch (,@fmt-stnd ,@fg-orange ,@bg-back)) ; IncSearch

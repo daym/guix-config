@@ -1,0 +1,14 @@
+diff -ru orig/window-tool-bar-0.3/window-tool-bar.el window-tool-bar-0.3/window-tool-bar.el
+--- orig/window-tool-bar-0.3/window-tool-bar.el	2025-02-08 23:02:18.000000000 +0100
++++ window-tool-bar-0.3/window-tool-bar.el	2025-02-09 21:13:49.229275021 +0100
+@@ -325,6 +325,10 @@
+                       image-end (1+ len)
+                       len (1+ len)))))
+ 
++           (put-text-property 0 len
++                                'follow-link
++                                'ignore
++                                str)
+            (cond
+             ((and enabled button-selected)
+              (add-text-properties 0 len
