@@ -437,7 +437,7 @@ interfaces.")
             (specification->package "dunst")
             (specification->package "bluez")
 
-                  ;;; System/Laptop
+;;; System/Laptop
             
             (specification->package "tlp") ; power management
             (specification->package "openrgb")
@@ -517,11 +517,11 @@ interfaces.")
             ;; For secret-tool, a frontend for gnome-keyring-daemon.
             (specification->package "libsecret")
             
-                  ;;; Experimental System Tools
+;;; Experimental System Tools
 
             (specification->package "bat")
 
-                  ;;; Fonts
+;;; Fonts
 
 ;; FIXME use weird "ttf" targets etc
             (specification->package "font-google-noto")
@@ -531,7 +531,7 @@ interfaces.")
             (specification->package "font-wqy-zenhei")
             (specification->package "font-jetbrains-mono")
 
-                  ;;; Multimedia
+;;; Multimedia
 
             (specification->package "yt-dlp")
             (specification->package "pavucontrol")
@@ -554,7 +554,7 @@ interfaces.")
                                         ;(specification->package "cdparanoia")
             (specification->package "geeqie")
 
-                  ;;; Programming
+;;; Programming
 
             idea
 
@@ -1030,12 +1030,12 @@ interfaces.")
             (specification->package "python-sentencepiece")
             (specification->package "python-debugpy") ; DAP ; requires pydevd
 
-            ;;; AI
+;;; AI
 
             (llama-tune (specification->package "llama-cpp")) ; can be tuned
             (package-with-emacs-pgtk (specification->package "emacs-gptel"))
 
-                  ;;; Android
+;;; Android
             
             (specification->package "aapt")
             (transform1 (specification->package "aapt2")) ; /tmp/guix-build-clang-runtime-12.0.1.drv-0/compiler-rt-12.0.1.src/lib/sanitizer_common/sanitizer_platform_limits_posix.cpp:154: crypt.h: No such file or directory
