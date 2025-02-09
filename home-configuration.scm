@@ -651,6 +651,8 @@ example the one implemented by python-mathics-core.")
                                         ; julia-wayland-jll
             (specification->package "jupyter")
             (specification->package "jupyter-guile-kernel")
+             (package-with-emacs-pgtk (specification->package "emacs-ctrlf")) ; you've got to be kidding me. Why is this not builtin? ; alternatives: occur[!], swiper, consult-line[terrible]
+             (package-with-emacs-pgtk (specification->package "emacs-swiper")) ; regexp search and group
              (package-with-emacs-pgtk (specification->package "emacs-code-cells"))
              (package-with-emacs-pgtk (specification->package "emacs-password-generator"))
             (specification->package "guile-ares-rs")
