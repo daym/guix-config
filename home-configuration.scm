@@ -706,6 +706,12 @@ example the one implemented by python-mathics-core.")
              (specification->package "texlive-digestif")
              ;; For xenops
              (package-with-emacs-pgtk (specification->package "emacs-aio"))
+             ;; For xenops
+             (specification->package "texlive-scheme-basic")
+             ;; For xenops
+             (specification->package "texlive-dvipng")
+             ;; Content-oriented latex.  Examples: \D{f}{x}, \D[n]{f}{x}, \D{f}{x,y,z}, \D[2,n,3]{f}{x,y,z}, \pderiv{f}{x}, ..., \Integrate{f}{x}, \Int{f(x)}{x}, \Int{f}{S,C}, \Int{f(x)}{x,a,b}, \Sum{a(k)}{k}, \Sum{a(k)}{k,1,n}, \Prod{a(k)}{k}, \IdentityMatrix\Style{IdentityMatrixParen=p}, \IdentityMatrix[2], ...
+             (specification->package "texlive-cool")
              (package-with-emacs-pgtk (specification->package "emacs-lsp-booster"))
              (package-with-emacs-pgtk (specification->package "emacs-undo-tree"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-page-break-lines"))
