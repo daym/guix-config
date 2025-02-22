@@ -296,7 +296,7 @@
                               "kanshi" ; screen config profiles
                               "wf-recorder" ; screen recorder (for wlroots only)
                               "wlr-randr"
-                              "wob" ; audio volume bar popup etc
+                              "wob" ; user-custom pipeable bar
                                         ;"sway"
                               "swayidle"
                               "wl-clipboard"
