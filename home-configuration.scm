@@ -967,6 +967,7 @@ example the one implemented by python-mathics-core.")
 
              (specification->package "pantalaimon")
              (package-with-emacs-pgtk (specification->package "emacs-ement"))
+             (package-with-emacs-pgtk (specification->package "emacs-slack"))
              
              ;; Guile IDE
              (package-with-emacs-pgtk (specification->package "emacs-arei"))
