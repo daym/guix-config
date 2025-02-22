@@ -594,6 +594,8 @@ example the one implemented by python-mathics-core.")
 
              idea
 
+             (specification->package "gnu-standards") ; info manuals
+
              ;; Typescript compiler.
              (specification->package "rust-swc")
              (specification->package "vscodium")
