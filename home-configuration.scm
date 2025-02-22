@@ -293,7 +293,10 @@
 
 (define wayland-packages
   (specifications->packages '("wdisplays"
-                              "kanshi" ; auto screen config
+                              "kanshi" ; screen config profiles
+                              "wf-recorder" ; screen recorder (for wlroots only)
+                              "wlr-randr"
+                              "wob" ; audio volume bar popup etc
                                         ;"sway"
                               "swayidle"
                               "wl-clipboard"
