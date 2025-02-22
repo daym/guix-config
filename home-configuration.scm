@@ -1030,6 +1030,7 @@ example the one implemented by python-mathics-core.")
              (package-with-emacs-pgtk (specification->package "emacs-howm")) ; minor mode for wiki
 
              (package-with-emacs-pgtk (specification->package "emacs-pdf-tools"))
+             (package-with-emacs-pgtk (specification->package "emacs-saveplace-pdf-view"))
              (package-with-emacs-pgtk emacs-xah-wolfram-mode)
              
 ;;; Network
