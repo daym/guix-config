@@ -757,7 +757,9 @@ example the one implemented by python-mathics-core.")
              (package-with-emacs-pgtk (specification->package "emacs-org-msg"))
              (package-with-emacs-pgtk (specification->package "emacs-org-contrib")) ; not that well-maintained
              (package-with-emacs-pgtk (specification->package "emacs-emms"))
-             (package-with-emacs-pgtk (specification->package "emacs-comment-tags"))              
+             (package-with-emacs-pgtk (specification->package "emacs-comment-tags"))
+             (package-with-emacs-pgtk (specification->package "emacs-csv-mode"))
+
              (package-with-emacs-pgtk (specification->package "emacs-embark"))
              (package-with-emacs-pgtk (specification->package "emacs-outline-indent")) ; code folding and outlining
              (package-with-emacs-pgtk (specification->package "emacs-rmsbolt")) ; godbolt
