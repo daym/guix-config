@@ -569,6 +569,8 @@ example the one implemented by python-mathics-core.")
              (specification->package "showmethekey")
              (specification->package "yt-dlp")
              (specification->package "pavucontrol")
+             ;; Note: There's another "anything bar" wayland thing: wob.
+             (specification->package "pa-notify") ; OSD if volume changes!
                                         ;(specification->package "ffmpeg") ; conflict with mpv
              (specification->package "obs")
              (specification->package "mplayer")
