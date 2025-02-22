@@ -657,6 +657,9 @@ example the one implemented by python-mathics-core.")
              (specification->package "jupyter-guile-kernel")
              (package-with-emacs-pgtk (specification->package "emacs-ctrlf")) ; you've got to be kidding me. Why is this not builtin? ; alternatives: occur[!], swiper, consult-line[terrible]
              (package-with-emacs-pgtk (specification->package "emacs-swiper")) ; regexp search and group
+             (specification->package "python-jupytext") ;; required by code-cells
+             ;; Result cells of ipynb files are not retained in the conversion to script format. This means that opening and then saving an ipynb file clears all cell outputs.
+             ;; code-cells-write-ipynb to export to ipynb.
              (package-with-emacs-pgtk (specification->package "emacs-code-cells"))
              (package-with-emacs-pgtk (specification->package "emacs-password-generator"))
              (specification->package "guile-ares-rs")
