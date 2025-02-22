@@ -745,6 +745,7 @@ example the one implemented by python-mathics-core.")
              (package-with-emacs-pgtk (specification->package "emacs-org-noter")) ; PDF notes
              (package-with-emacs-pgtk (specification->package "emacs-org-pdftools")) ; PDF notes and links
              (package-with-emacs-pgtk (specification->package "emacs-org-super-links"))
+             (package-with-emacs-pgtk (specification->package "emacs-orgit")) ; make org links to magit buffers
                                         ;(package-with-emacs-pgtk (specification->package "emacs-org-roam"))
              (package-with-emacs-pgtk (specification->package "emacs-org-ref"))
              (package-with-emacs-pgtk (specification->package "emacs-org-super-agenda"))
