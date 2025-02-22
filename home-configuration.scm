@@ -617,6 +617,8 @@ example the one implemented by python-mathics-core.")
              (package-with-emacs-pgtk (specification->package "emacs-inf-ruby"))
              (package-with-emacs-pgtk (specification->package "emacs-alchemist")) ; Elixir
              (package-with-emacs-pgtk (specification->package "emacs-xpm"))
+             (package-with-emacs-pgtk (specification->package "emacs-tco-el")) ; macro "defun-tco" for tail class optimized procedures
+             (package-with-emacs-pgtk (specification->package "emacs-stream"))
              
              (list (specification->package "git") "send-email")
                                         ;(specification->package "nasm")
