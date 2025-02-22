@@ -563,6 +563,7 @@ example the one implemented by python-mathics-core.")
 
 ;;; Multimedia
 
+             (specification->package "showmethekey")
              (specification->package "yt-dlp")
              (specification->package "pavucontrol")
                                         ;(specification->package "ffmpeg") ; conflict with mpv
