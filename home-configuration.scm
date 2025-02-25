@@ -1174,6 +1174,7 @@ example the one implemented by python-mathics-core.")
                                         ;(specification->package "texlive-pgfopts") ; used by cadabra2 < 2.5.2
                                         ;(specification->package "texlive-ytableau") ; used by cadabra2 < 2.5.2
                                         ;(specification->package "texlive-setspace") ; used by cadabra2 < 2.5.2
+             (specification->package "sage")
              ;; Supported by texmacs
              cadabra2
              ;; Supported by texmacs
