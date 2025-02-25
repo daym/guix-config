@@ -697,6 +697,7 @@ example the one implemented by python-mathics-core.")
              (specification->package "godot")
                                         ;(specification->package "glade")
                                         ; hell no (specification->package "node")
+             (specification->package "git-issue") ; decentralized issue tracker
              (specification->package "git-lfs")
                                         ;(specification->package "sbcl")
                                         ;(specification->package "sbcl-binpack") ; for textures
