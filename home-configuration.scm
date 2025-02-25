@@ -481,6 +481,9 @@ example the one implemented by python-mathics-core.")
 ;;; System Tools
 
              (package-with-emacs-pgtk (specification->package "emacs-enwc")) ; network manager
+             (package-with-emacs-pgtk (specification->package "emacs-age")) ; encryption
+             (specification->package "pass-age")
+             (package-with-emacs-pgtk (specification->package "emacs-passage")) ; password mgr
              (specification->package "xrdb")      ; compat for nheko
              (specification->package "gammastep") ; redshift
              (specification->package "dex") ; generate and execute desktop files
