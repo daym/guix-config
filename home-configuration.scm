@@ -455,6 +455,8 @@ example the one implemented by python-mathics-core.")
             (list (nwg-launchers-patch (specification->package "nwg-launchers")))
             (list (sway-patch (specification->package "sway")))
 
+            (list (specification->package "clamav"))
+
             backup-packages
 
             (list
