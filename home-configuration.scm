@@ -727,6 +727,16 @@ example the one implemented by python-mathics-core.")
              (package-with-emacs-pgtk (specification->package "emacs-aio"))
              ;; For xenops
              (specification->package "texlive-scheme-basic")
+             ;; For me (and org)
+             (specification->package "texlive-esint") ; \oiint
+             ;; For me (and org)
+             (specification->package "texlive-units")
+             ;; For me (and org)
+             (specification->package "texlive-siunitx") ; \si
+             ;; For me (and org)
+             (specification->package "texlive-braket") ; \ket
+             ;; For me (and org)
+             (specification->package "texlive-mathtools") ; \ket, :=
              ;; For xenops
              (specification->package "texlive-dvipng")
              ;; Content-oriented latex.  Examples: \D{f}{x}, \D[n]{f}{x}, \D{f}{x,y,z}, \D[2,n,3]{f}{x,y,z}, \pderiv{f}{x}, ..., \Integrate{f}{x}, \Int{f(x)}{x}, \Int{f}{S,C}, \Int{f(x)}{x,a,b}, \Sum{a(k)}{k}, \Sum{a(k)}{k,1,n}, \Prod{a(k)}{k}, \IdentityMatrix\Style{IdentityMatrixParen=p}, \IdentityMatrix[2], ...
