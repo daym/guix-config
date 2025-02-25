@@ -471,7 +471,8 @@ example the one implemented by python-mathics-core.")
 
 ;;; System/Laptop
              
-             (specification->package "tlp") ; power management
+             ;(specification->package "tlp") ; service
+             (specification->package "tlpui") ; power management
              (specification->package "openrgb")
 
                                         ;(specification->package "ccid") ; fingerprint reader?
