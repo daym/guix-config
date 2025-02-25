@@ -293,6 +293,7 @@
 
 (define wayland-packages
   (specifications->packages '("wdisplays"
+                              "wlogout"
                               "kanshi" ; screen config profiles
                               "wf-recorder" ; screen recorder (for wlroots only)
                               "wlr-randr"
@@ -453,7 +454,6 @@ example the one implemented by python-mathics-core.")
 
             (list (nwg-launchers-patch (specification->package "nwg-launchers")))
             (list (sway-patch (specification->package "sway")))
-            (list (specification->package "wlogout"))
 
             backup-packages
 
