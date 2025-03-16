@@ -809,7 +809,8 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-eldoc"))
              (package-with-emacs-pgtk (specification->package "emacs-xref")) ; TODO: emacs-xref-union
              (package-with-emacs-pgtk (specification->package "emacs-sesman"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-org")) ; org 9.7.11 is included in emacs
+             (package-with-emacs-pgtk (specification->package "emacs-outshine")) ; org-like stuff outside org
+             (package-with-emacs-pgtk (specification->package "emacs-org")) ; org 9.7.11 is included in emacs
              (package-with-emacs-pgtk (specification->package "emacs-org-notify"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-org-element")) ; tree
 
