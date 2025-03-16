@@ -882,8 +882,8 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-buffer-env"))
              (package-with-emacs-pgtk (specification->package "emacs-clojure-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-haskell-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-flycheck-guile"))
-             (package-with-emacs-pgtk (specification->package "emacs-geiser-guile"))
+             ;(package-with-emacs-pgtk (specification->package "emacs-flycheck-guile")) ; would use geiser
+             ;(package-with-emacs-pgtk (specification->package "emacs-geiser-guile")) ; geiser is worse than arei
              (package-with-emacs-pgtk (specification->package "emacs-parinfer-rust-mode"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-parinfer-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-web-mode"))
