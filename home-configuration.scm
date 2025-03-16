@@ -1040,6 +1040,7 @@ file prettification."))))
                                         ; or celluloid for gtk
              (package-with-emacs-pgtk (specification->package "emacs-mpv"))
              (package-with-emacs-pgtk (specification->package "emacs-empv")) ; ?
+             (package-with-emacs-pgtk (specification->package "fd")) ; used by empv
                                         ; emacs-ytel
              (package-with-emacs-pgtk (specification->package "emacs-nov-el")) ; for epub
              (package-with-emacs-pgtk (specification->package "dvisvgm")) ; for epub
