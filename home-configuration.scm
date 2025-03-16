@@ -1270,7 +1270,7 @@ file prettification."))))
                                         ; FIXME (specification->package "kubectl")
              )))
  (services
-  (list
+  (cons*
 ;;;(service home-pulseaudio-rtp-sink-service-type)
    (service home-fish-service-type)
    (service home-pipewire-service-type)
@@ -1384,4 +1384,5 @@ file prettification."))))
                             "bashrc")))
              (bash-profile (list (local-file
                                   ".bash_profile"
-                                  "bash_profile"))))))))
+                                  "bash_profile")))))
+   %base-home-services)))
