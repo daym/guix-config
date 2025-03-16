@@ -526,6 +526,8 @@ file prettification."))))
              (specification->package "dex") ; generate and execute desktop files
              ;; Used by qemu, apparently:
              ;(specification->package "samba")
+             
+             ;(specification->package "putty")
              (specification->package "gnome-boxes") ; qemu frontend
              (specification->package "udiskie")
              (specification->package "efibootmgr")
