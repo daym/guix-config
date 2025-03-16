@@ -1260,6 +1260,7 @@ file prettification."))))
              (specification->package "python-yubikey-manager")
 
              ;;; Guix development
+             (specification->package "mumi")
              (specification->package "codeberg-cli")
              (specification->package "forgejo-cli")
 
