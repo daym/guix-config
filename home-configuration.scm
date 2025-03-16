@@ -1032,8 +1032,9 @@ file prettification."))))
                                         ; doesn't native compile: (package-with-emacs-pgtk (specification->package "emacs-mastodon"))
 
              (package-with-emacs-pgtk (specification->package "emacs-elfeed")) ; RSS/Atom
+             (package-with-emacs-pgtk (specification->package "emacs-elfeed-tube")) ; RSS/Atom Youtube
              (package-with-emacs-pgtk (specification->package "emacs-elfeed-score"))
-             (package-with-emacs-pgtk (specification->package "emacs-elfeed-org")) ; subscriptions in org mode
+             (package-with-emacs-pgtk (specification->package "emacs-elfeed-org")) ; manage elfeed subscriptions in org mode
              (package-with-emacs-pgtk (specification->package "emacs-fortran-tags"))
                                         ; or celluloid for gtk
              (package-with-emacs-pgtk (specification->package "emacs-mpv"))
