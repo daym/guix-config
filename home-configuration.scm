@@ -437,6 +437,41 @@ example the one implemented by python-mathics-core.")
     (home-page "http://xahlee.info/emacs/misc/xah-wolfram-mode.html")
     (license license:expat)))
 
+              (chdir "elisp")
+              (let* ((all (call-with-input-file "guix-utils.el"
+                            get-string-all))
+                     (match-str
+                      (lambda (from to base)
+                        (let ((res (string-match
+                                    (string-append "(" from ".*)" to)
+                                    base)))
+                          (values (and res (match:substring res 1))
+                                  (match:suffix res)))))
+                     (pprint rest (match-str
+                                   "\\(cl-defun guix-pretty-print-buffer"
+                                   "\\(defun guix-pretty-print-file"
+                                   all))
+                     (search rest (match-str
+                                  "\\(defmacro guix-while-search"
+                                   "\\(defmacro guix-while-null"
+                                   rest)))
+                (substitute* "guix-build-log.el"
+                 (("guix-find-file-or-url") "find-file-existing"))
+                (substitute* "guix-derivation.el"
+                  (("guix-find-file") "find-file-existing"))
+                (call-with-output-file "guix-utils.el"
+                  (lambda (port)
+                    (display "(require 'cl-lib)\n\n" port)
+                    (for-each
+                     (cut display <> port)
+                     (list pprint search
+                           (match-str ";;; Fontification" ";;; Diff" rest)))
+                    (display "(provide 'guix-utils)" port)))))))))
+    (description
+     (string-append (package-description emacs-guix) "
+
+Note: This is a minimalist variant of emacs-guix, with simply
+file prettification."))))
 (home-environment
  (packages (append ;;; System
 
