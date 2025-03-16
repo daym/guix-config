@@ -889,7 +889,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-web-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-git-timemachine"))
              (package-with-emacs-pgtk (specification->package "emacs-markdown-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-geiser"))
+             ;(package-with-emacs-pgtk (specification->package "emacs-geiser")) ; geiser is worse than arei
              (package-with-emacs-pgtk (specification->package "emacs-go-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-typescript-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-pkg-info"))
