@@ -1214,6 +1214,7 @@ file prettification."))))
              (specification->package "gedit")
              (specification->package "fbreader")
              (specification->package "sioyek")
+             (specification->package "xournalpp")
              (specification->package "blender")
 
 ;;; Database
