@@ -633,6 +633,12 @@ file prettification."))))
                                         ;(specification->package "cdparanoia")
              (specification->package "geeqie")
 
+;;; Hardware programming
+
+             (package-with-emacs-pgtk (specification->package "emacs-vhdl-ts-mode"))
+             ;(package-with-emacs-pgtk (specification->package "emacs-vhdl-ext"))
+             (package-with-emacs-pgtk (specification->package "emacs-fpga"))
+
 ;;; Programming
 
              idea
