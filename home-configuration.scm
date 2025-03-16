@@ -14,7 +14,7 @@
              (guix describe)
              (guix git-download)
              (guix download)
-	     (guix packages)
+             (guix packages)
              (guix build-system)
              (guix build-system cmake)
              (guix build-system emacs)
