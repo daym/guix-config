@@ -39,4 +39,16 @@ diff -ru orig/spacious-padding-0.6.0/spacious-padding.el spacious-padding-0.6.0/
       `(vertical-border ((t :background ,bg-main :foreground ,bg-main)))
       `(,@(spacious-padding-set-window-divider 'window-divider bg-main))
       `(,@(spacious-padding-set-window-divider 'window-divider-first-pixel bg-main))
-Only in spacious-padding-0.6.0/: SSS
+diff -ru orig/spacious-padding-0.6.0/spacious-padding.el spacious-padding-0.6.0/spacious-padding.el
+--- orig/spacious-padding-0.6.0/spacious-padding.el	2025-01-06 23:06:49.000000000 +0100
++++ spacious-padding-0.6.0/spacious-padding.el	2025-03-15 17:10:38.120996866 +0100
+@@ -302,7 +302,7 @@
+     (custom-theme-set-faces
+      'spacious-padding
+      `(fringe ((t :background ,bg-main)))
+-     `(line-number ((t :background ,bg-main)))
++     `(line-number ((t :background ,bg-main :inherit default)))
+      `(header-line ((t ,@(spacious-padding-set-face-box-padding 'header-line 'default))))
+      `(header-line-highlight ((t :box (:color ,fg-main))))
+      `(keycast-key ((t ,@(spacious-padding-set-face-box-padding 'keycast-key 'default))))
+Only in spacious-padding-0.6.0: SSS
