@@ -675,7 +675,10 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-xpm"))
              (package-with-emacs-pgtk (specification->package "emacs-tco-el")) ; macro "defun-tco" for tail class optimized procedures
              (package-with-emacs-pgtk (specification->package "emacs-stream"))
-             
+             ;; We in org mode
+             (specification->package "plantuml")
+             (package-with-emacs-pgtk (specification->package "emacs-plantuml-mode"))
+
              (list (specification->package "git") "send-email")
                                         ;(specification->package "nasm")
              ;; (specification->package "julia")
