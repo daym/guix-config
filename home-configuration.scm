@@ -822,6 +822,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-org-pdftools")) ; PDF notes and links ; for org-noter-pdftools; "lightly maintained" (terrible quality)
              (package-with-emacs-pgtk (specification->package "emacs-org-super-links"))
              (package-with-emacs-pgtk (specification->package "emacs-orgit")) ; make org links to magit buffers
+             (package-with-emacs-pgtk (specification->package "emacs-orgit-forge")) ; make org links to forge topic buffers
                                         ;(package-with-emacs-pgtk (specification->package "emacs-org-roam"))
              (package-with-emacs-pgtk (specification->package "emacs-org-ref"))
              (package-with-emacs-pgtk (specification->package "emacs-org-super-agenda"))
