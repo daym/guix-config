@@ -832,6 +832,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-org-emms"))
              (package-with-emacs-pgtk (specification->package "emacs-mu4e-dashboard")) ; live query mu4e from org
              (package-with-emacs-pgtk (specification->package "emacs-mu4e-alert"))
+             ;(package-with-emacs-pgtk (specification->package "emacs-consult-mu")) ; search mails from consult
              (package-with-emacs-pgtk (specification->package "emacs-org-msg"))
              (package-with-emacs-pgtk (specification->package "emacs-org-contrib")) ; not that well-maintained
              (package-with-emacs-pgtk (specification->package "emacs-emms"))
