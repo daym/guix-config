@@ -524,8 +524,8 @@ file prettification."))))
              (specification->package "xrdb")      ; compat for nheko
              (specification->package "gammastep") ; redshift
              (specification->package "dex") ; generate and execute desktop files
-                                        ; Used by qemu, apparently
-             (specification->package "samba")
+             ;; Used by qemu, apparently:
+             ;(specification->package "samba")
              (specification->package "gnome-boxes") ; qemu frontend
              (specification->package "udiskie")
              (specification->package "efibootmgr")
