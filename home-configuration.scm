@@ -1213,7 +1213,7 @@ file prettification."))))
              (specification->package "evince")
              (specification->package "gedit")
              (specification->package "fbreader")
-             (specification->package "sioyek")
+             ;(specification->package "sioyek")
              (specification->package "xournalpp")
              (specification->package "blender")
 
