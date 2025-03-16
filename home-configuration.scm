@@ -797,6 +797,7 @@ file prettification."))))
              (package-with-emacs-pgtk (emacs-spacious-padding-patch (specification->package "emacs-spacious-padding"))) ; spacing between windows
              (package-with-emacs-pgtk (specification->package "emacs-crdt"))
              (package-with-emacs-pgtk (specification->package "emacs-magit"))
+             (package-with-emacs-pgtk (specification->package "emacs-magit-org-todos-el"))
              (package-with-emacs-pgtk (specification->package "emacs-git-email"))
              (package-with-emacs-pgtk (specification->package "emacs-diff-hl")) ; VC diff in the fringe
              (package-with-emacs-pgtk (specification->package "emacs-color-theme-solarized"))
