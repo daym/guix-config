@@ -367,7 +367,7 @@
        ("gnome-desktop" ,gnome-desktop)
        ("gsettings-desktop-schemas" ,gsettings-desktop-schemas)))
     (propagated-inputs
-     (list xdg-desktop-portal-next))
+     (list xdg-desktop-portal))
     (home-page "https://github.com/flatpak/xdg-desktop-portal-gtk")
     (synopsis "GTK implementation of xdg-desktop-portal")
     (description
