@@ -583,6 +583,7 @@ notebooks in GNU Emacs.")
 
 Note: This is a minimalist variant of emacs-guix, with simply
 file prettification."))))
+
 (home-environment
  (packages (append ;;; System
 
