@@ -292,6 +292,25 @@
     (home-page "https://www.jetbrains.com/idea/")
     (license license:asl2.0)))
 
+(define emacs-xenops
+  (package
+    (name "emacs-xenops")
+    (version "0.0.1")
+    (source (origin
+              (method git-fetch)
+              (uri (git-reference
+                     (url "https://github.com/dandavison/xenops.git")
+                     (commit (string-append "v" version))))
+              (file-name (git-file-name name version))
+              (sha256
+               (base32
+                "1vsrc1s62kv1i84skm6k5zy868gayjck268qwj38rpspc8c5qgih"))))
+    (build-system emacs-build-system)
+    (synopsis "xenops")
+    (description "FIXME")
+    (home-page "FIXME")
+    (license license:expat)))
+
 (define xorg-packages
   (specifications->packages '("i3-wm" "openbox" "tint2" "xbindkeys" "xterm")
                                         ;"shod"
@@ -766,6 +785,7 @@ file prettification."))))
                                         ;(specification->package "esbuild")
                                         ;(specification->package "ocaml")
              (specification->package "ocaml-merlin") ; LSP for ocaml
+             (package-with-emacs-pgtk (specification->package "emacs-kotlin-mode"))
                                         ;(specification->package "gforth") ; also has emacs support
                                         ;(specification->package "clojure")
                                         ;(specification->package "clojure-tools")
