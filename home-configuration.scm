@@ -593,6 +593,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-enwc")) ; network manager
              (package-with-emacs-pgtk (specification->package "emacs-age")) ; encryption
              (specification->package "pass-age")
+             (package-with-emacs-pgtk (specification->package "emacs-password-store")) ; "pass" integration
              (package-with-emacs-pgtk (specification->package "emacs-passage")) ; password mgr
              (specification->package "xrdb")      ; compat for nheko
              (specification->package "gammastep") ; redshift
