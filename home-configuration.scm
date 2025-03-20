@@ -174,9 +174,6 @@
   (options->transformation `( ; "invalid Git URL replacement specification" (with-git-url . "https://github.com/unslothai/llama.cpp.git") ; dynamic quantization
                              (tune . "znver3")))) ; Zen 3
 
-(define swaylock-patch
-  (options->transformation `((with-git-url . "swaylock=https://github.com/swaywm/swaylock.git"))))
-
 (define waybar-patch
   (lambda (p)
     (package
