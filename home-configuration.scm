@@ -1262,6 +1262,7 @@ file prettification."))))
              (specification->package "python-androguard") ; XML binary
              (transform1 (specification->package "etc1tool")) ; transform copied
              (specification->package "e2fsprogs")
+             (specification->package "android-file-transfer") ; qt
 
 ;;; Emulation/Container
 
