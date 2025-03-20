@@ -870,7 +870,7 @@ file prettification."))))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-page-break-lines"))
              (package-with-emacs-pgtk (specification->package "emacs-form-feed"))
              (package-with-emacs-pgtk emacs-pgtk) ; overly paranoid
-             (package-with-emacs-pgtk (specification->package "emacs-paredit"))
+             (package-with-emacs-pgtk (specification->package "emacs-smartparens"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-indent-bars")) ; maybe overdoing it
              (package-with-emacs-pgtk (emacs-spacious-padding-patch (specification->package "emacs-spacious-padding"))) ; spacing between windows
              (package-with-emacs-pgtk (specification->package "emacs-crdt"))
