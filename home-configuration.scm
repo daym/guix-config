@@ -489,6 +489,30 @@ example the one implemented by python-mathics-core.")
     (home-page "http://xahlee.info/emacs/misc/xah-wolfram-mode.html")
     (license license:expat)))
 
+(define emacs-guix
+  (specification->package "emacs-guix"))
+
+(define-public emacs-guix-minimal
+  (package
+    (inherit emacs-guix)
+    (build-system emacs-build-system)
+    (native-inputs '())
+    (inputs '())
+    (propagated-inputs '())
+    (arguments
+     (list
+      #:include ''("\
+^guix-(auto-mode|build-log|derivation|env-var|prettify|scheme|utils)\\.el")
+      #:modules '((guix build emacs-build-system)
+                  (guix build utils)
+                  (srfi srfi-26)
+                  (srfi srfi-71)
+                  (ice-9 regex)
+                  (ice-9 textual-ports))
+      #:phases
+      #~(modify-phases %standard-phases
+          (add-after 'unpack 'patch-source
+            (lambda _
               (chdir "elisp")
               (let* ((all (call-with-input-file "guix-utils.el"
                             get-string-all))
