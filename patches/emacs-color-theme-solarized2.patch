@@ -1,0 +1,14 @@
+diff -ru orig/8f49im552pcp1jg7nk4macywnznchdcr-emacs-color-theme-solarized-0-0.f3ca890-checkout/solarized-definitions.el 8f49im552pcp1jg7nk4macywnznchdcr-emacs-color-theme-solarized-0-0.f3ca890-checkout/solarized-definitions.el
+--- orig/8f49im552pcp1jg7nk4macywnznchdcr-emacs-color-theme-solarized-0-0.f3ca890-checkout/solarized-definitions.el	2025-03-16 20:14:08.848309256 +0100
++++ 8f49im552pcp1jg7nk4macywnznchdcr-emacs-color-theme-solarized-0-0.f3ca890-checkout/solarized-definitions.el	2025-03-16 20:13:52.655507971 +0100
+@@ -240,6 +240,10 @@
+                 (escape-glyph-face (,@fg-red))
+                 (fringe (,@fg-base01 ,@bg-base02))
+                 (linum (,@fg-base01 ,@bg-base02))
++                (line-number (,@fg-base01 ,@bg-base02 :inherit default))
++                (line-number-current-line (:inherit line-number))
++                (line-number-major-tick (:inherit line-number))
++                (line-number-minor-tick (:inherit line-number))
+                 (header-line (,@fg-base0 ,@bg-base02 ,@fmt-revbb)) ; Pmenu
+                 (highlight (,@bg-base02))
+                 (hl-line (:underline ,opt-under ,@bg-base02)) ; CursorLine

@@ -121,8 +121,11 @@
 
 (define emacs-spacious-padding-patch
   (options->transformation `((with-patch . ,(string-append "emacs-spacious-padding="
-                                                           "patches/emacs-spacious-padding.patch")))))
+                                                           "patches/emacs-spacious-padding2.patch")))))
 
+(define emacs-color-theme-solarized-patch
+  (options->transformation `((with-patch . ,(string-append "emacs-color-theme-solarized="
+                                                           "patches/emacs-color-theme-solarized2.patch")))))
 
 (define network-manager-applet-patch
   (options->transformation `(  ;  (with-debug-info . "libappindicator")
@@ -130,12 +133,42 @@
                              (with-patch . ,(string-append "network-manager-applet="
                                                            "patches/network-manager-applet.patch")))))
 
+;; Nope.
+(define issue-30-emacs-window-tool-bar-patch
+  (lambda (p)
+    (package
+      (inherit p)
+      ;(name "emacs-window-tool-bar-patch")
+      
+      (source
+       (origin
+              (method git-fetch)
+              (uri (git-reference
+                    (url "git@github.com:daym/window-tool-bar.git")
+                    (commit "fix-integration-with-tab-line")))
+              ;(file-name (git-file-name name version))
+              (sha256
+               (base32
+                "3khywgals4j751sdp70widkvcsfrfl17y92sg0yyg6n4m5plw791"))))))) ; I need that
+
 (define emacs-window-tool-bar-patch
   (options->transformation `(  ;  (with-debug-info . "libappindicator")
                                         ; for header line.
                              (with-patch . ,(string-append "emacs-window-tool-bar="
-                                                           "patches/emacs-window-tool-bar-click2.patch"))
+                                                           ;"patches/window-tool-bar-header.patch" ; ok but useless
+                                                           "patches/emacs-window-tool-bar-click2.patch" ; I need that
+                                                           ;"patches/32.patch"
+                                                           ))
                              )))
+
+
+(define vorta-patch
+  (options->transformation `(  ;  (with-debug-info . "vorta")
+                             (with-patch . ,(string-append "vorta="
+                                                           "patches/vorta-2205.patch"
+                                                           ))
+                             )))
+
 
 (define llama-tune
   (options->transformation `( ; "invalid Git URL replacement specification" (with-git-url . "https://github.com/unslothai/llama.cpp.git") ; dynamic quantization
