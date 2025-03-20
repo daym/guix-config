@@ -558,7 +558,7 @@ file prettification."))))
             wayland-packages
 
             ;; <https://github.com/swaywm/swaylock/issues/395>
-            (list (swaylock-patch (specification->package "swaylock")))
+            (list (specification->package "swaylock"))
 
             (list (nwg-launchers-patch (specification->package "nwg-launchers")))
             (list (sway-patch (specification->package "sway")))
