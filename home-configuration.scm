@@ -598,6 +598,7 @@ file prettification."))))
              (specification->package "xrdb")      ; compat for nheko
              (specification->package "gammastep") ; redshift
              ;(specification->package "btop")
+             (specification->package "px") ; ps, pstree and top for humans.
              (specification->package "dex") ; generate and execute desktop files
              ;; Used by qemu, apparently:
              ;(specification->package "samba")
