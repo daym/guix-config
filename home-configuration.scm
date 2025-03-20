@@ -1029,7 +1029,7 @@ file prettification."))))
                                         ;I moved from wanderlust to mew because I find mew has better support for encryption, particularly S/MIME.
                                         ;(package-with-emacs-pgtk (specification->package "emacs-mew"))
              (specification->package "mu") ; maildir indexer, mu4e
-             (package-with-emacs-pgtk emacs-vertico-next)
+             (package-with-emacs-pgtk (specification->package "emacs-vertico"))
              ;(package-with-emacs-pgtk (specification->package "emacs-consult"))
              ;(patch2 (package-with-emacs-pgtk (specification->package "emacs-consult-lsp"))) ; gcc 4.9 build failure
              ;(package-with-emacs-pgtk (specification->package "emacs-consult-xdg-recent-files"))
