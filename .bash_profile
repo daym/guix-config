@@ -66,9 +66,17 @@ fi
 
 if [ "${XDG_SESSION_TYPE}" = "wayland" ]
 then
+	# sway:
 	# export _JAVA_AWT_WM_NONREPARENTING=1
-	export QT_QPA_PLATFORM=wayland
+	# FIXME: All the others except xcb; This is mostly to avoid X11 on HiDPI displays
+	# FIXME: vkkhrdisplay doesn't do tray icon in sway (try with vorta--which uses pyqt6)
+	# FIXME: Qt 5 doesn't have vkkhrdisplay; also, *egl* don't work either.
+	# ./src/vorta/utils.py:def is_system_tray_available():
+	# vorta:         elif SettingsModel.get(key='foreground').value:
+	# QSG_RHI_BACKEND=vulkan for vkkhrdisplay; otherwise it's not very usable.  See <https://doc.qt.io/qt-6/embedded-linux.html>; also, vkkhrdisplay has no mouse cursor
+	export QT_QPA_PLATFORM="wayland;vkkhrdisplay;vnc"
 	export GDK_BACKEND=wayland # possible: wayland,x11
+	# sway:
 	export XDG_CURRENT_DESKTOP=sway
 	#export WAYLAND_DISPLAY=wayland-1
 	#XDG_SESSION_TYPE=wayland
