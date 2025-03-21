@@ -1344,6 +1344,7 @@ file prettification."))))
 ;;; Science
 
              (package-with-emacs-pgtk (specification->package "emacs-gnuplot"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-books"))
              (package-with-emacs-pgtk (specification->package "emacs-biblio"))
              (package-with-emacs-pgtk (specification->package "emacs-persid")) ; isbn, doi, ...; (persid-insert-bibtex "arxiv:2008.06030")
                                         ;(specification->package "texlive-pgfopts") ; used by cadabra2 < 2.5.2
