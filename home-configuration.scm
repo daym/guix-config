@@ -1016,6 +1016,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-rust-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-docker"))
              (package-with-emacs-pgtk (specification->package "emacs-dired-launch"))
+             (specification->package "ditaa") ; ASCII art -> bitmap
                                         ;(specification->package "dvisvgm") ; TODO: Move that to manifest.scm of your project
                                         ; obsolete in favor of integrated tramp-container
                                         ;(package-with-emacs-pgtk (specification->package "emacs-docker-tramp"))
