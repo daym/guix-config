@@ -1,0 +1,25 @@
+From da5be282e3a1fb24728f4dea7e53d4b84ff52e5a Mon Sep 17 00:00:00 2001
+From: Danny Milosavljevic <dannym@friendly-machines.com>
+Date: Sat, 15 Feb 2025 16:26:33 +0100
+Subject: [PATCH] If there's no system tray, at least show a window.
+
+* src/vorta/application.py: Check whether system tray is available.
+
+Fixes <https://github.com/borgbase/vorta/issues/2204>.
+---
+ src/vorta/application.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/vorta/application.py b/src/vorta/application.py
+index d87830d91..21b41c662 100644
+--- a/src/vorta/application.py
++++ b/src/vorta/application.py
+@@ -76,7 +76,7 @@ def __init__(self, args_raw, single_app=False):
+ 
+         if getattr(args, 'daemonize', False):
+             pass
+-        elif SettingsModel.get(key='foreground').value:
++        elif SettingsModel.get(key='foreground').value or not self.tray.isSystemTrayAvailable():
+             self.open_main_window_action()
+ 
+         self.backup_started_event.connect(self.backup_started_event_response)
