@@ -66,8 +66,8 @@ fi
 
 if [ "${XDG_SESSION_TYPE}" = "wayland" ]
 then
-	# sway:
-	# export _JAVA_AWT_WM_NONREPARENTING=1
+	# sway and mpe:
+	export _JAVA_AWT_WM_NONREPARENTING=1
 	# FIXME: All the others except xcb; This is mostly to avoid X11 on HiDPI displays
 	# FIXME: vkkhrdisplay doesn't do tray icon in sway (try with vorta--which uses pyqt6)
 	# FIXME: Qt 5 doesn't have vkkhrdisplay; also, *egl* don't work either.
@@ -87,6 +87,9 @@ then
 	# Also has other stuff
 	export CHROMIUM_FLAGS="--enable-remote-extensions --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapture --ozone-platform-hint=auto --allow-file-access-from-files"
 	# The actual ssh-agent is started by shepherd and/or autostart (see guix home)
+
+	# Hinting; User has to use DejaVu Sans and DejaVu Sans Mono that has good hinting support
+	export FREETYPE_PROPERTIES="truetype:interpreter-version=35"
 fi
 export SSH_AUTH_SOCK=/run/user/`id -u`/ssh-agent/socket
 
@@ -97,3 +100,13 @@ export GPG_TTY=$(tty)
 export PIP_REQUIRE_VIRTUALENV=1
 # For emacs-lsp-booster
 export LSP_USE_PLISTS=true
+
+# Debug swaylock
+ulimit -c unlimited
+
+# Debug wireplumber hang
+export PIPEWIRE_DEBUG=3
+export WIREPLUMBER_DEBUG=3
+
+# catch swaylock, maybe
+ulimit -c unlimited
