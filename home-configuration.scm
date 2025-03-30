@@ -133,6 +133,10 @@
                              (with-patch . ,(string-append "network-manager-applet="
                                                            "patches/network-manager-applet.patch")))))
 
+(define emacs-debbugs-patch
+  (options->transformation `((with-patch . ,(string-append "emacs-debbugs="
+                                                           "patches/emacs-debbugs-mu4e.patch")))))
+
 ;; Nope.
 (define issue-30-emacs-window-tool-bar-patch
   (lambda (p)
@@ -779,6 +783,7 @@ file prettification."))))
                                         ; Reverse Engineering
              (specification->package "radare2")
              (package-with-emacs-pgtk (emacs-window-tool-bar-patch (specification->package "emacs-window-tool-bar")))
+             (package-with-emacs-pgtk (specification->package "emacs-wgrep"))
              (package-with-emacs-pgtk (specification->package "emacs-ws-butler")) ; auto trim whitespace from end of MODIFIED lines
              (package-with-emacs-pgtk (specification->package "emacs-vlf")) ; very large files
              (package-with-emacs-pgtk (specification->package "emacs-tuareg")) ; ocaml
@@ -791,6 +796,8 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-xpm"))
              (package-with-emacs-pgtk (specification->package "emacs-tco-el")) ; macro "defun-tco" for tail class optimized procedures
              (package-with-emacs-pgtk (specification->package "emacs-stream"))
+             (package-with-emacs-pgtk (specification->package "emacs-flymake"))
+             (package-with-emacs-pgtk (patch2 (specification->package "emacs-lean4-mode")))
              ;; We in org mode
              (specification->package "plantuml")
              (package-with-emacs-pgtk (specification->package "emacs-plantuml-mode"))
@@ -915,6 +922,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-crdt"))
              (package-with-emacs-pgtk (specification->package "emacs-magit"))
              (package-with-emacs-pgtk (specification->package "emacs-magit-org-todos-el"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-jira"))
              (package-with-emacs-pgtk (specification->package "emacs-git-email"))
              (package-with-emacs-pgtk (specification->package "emacs-diff-hl")) ; VC diff in the fringe
              (package-with-emacs-pgtk (emacs-color-theme-solarized-patch (specification->package "emacs-color-theme-solarized")))
@@ -950,7 +958,10 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-org-emms"))
              (package-with-emacs-pgtk (specification->package "emacs-mu4e-dashboard")) ; live query mu4e from org
              (package-with-emacs-pgtk (specification->package "emacs-mu4e-alert"))
-             ;(package-with-emacs-pgtk (specification->package "emacs-consult-mu")) ; search mails from consult
+             (package-with-emacs-pgtk (specification->package "emacs-bbdb")) ; contact management
+             (package-with-emacs-pgtk (specification->package "emacs-bbdb-vcard"))
+
+             (package-with-emacs-pgtk (specification->package "emacs-consult-mu")) ; search mails from consult
              (package-with-emacs-pgtk (specification->package "emacs-org-msg"))
              (package-with-emacs-pgtk (specification->package "emacs-org-contrib")) ; not that well-maintained
              (package-with-emacs-pgtk (specification->package "emacs-emms"))
@@ -971,6 +982,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-bar-cursor"))
              (package-with-emacs-pgtk (specification->package "emacs-wakib-keys"))
              (package-with-emacs-pgtk (specification->package "emacs-treemacs-nerd-icons"))
+             (package-with-emacs-pgtk (specification->package "emacs-elastic-modes"))
              ;; Alternative: emacs-dape
              (patch2 (package-with-emacs-pgtk (specification->package "emacs-dap-mode")))
              (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-mode")))
@@ -1059,11 +1071,11 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-bluetooth"))
              (package-with-emacs-pgtk (specification->package "emacs-osm"))
              (package-with-emacs-pgtk (specification->package "emacs-erc-hl-nicks")) ; IRC nick coloring
-             (package-with-emacs-pgtk (specification->package "emacs-counsel"))
-             (package-with-emacs-pgtk (specification->package "emacs-counsel-tramp"))
-             (package-with-emacs-pgtk (specification->package "emacs-counsel-projectile"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-counsel-jq"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-helm-projectile"))
+             ;old (package-with-emacs-pgtk (specification->package "emacs-counsel")) ; replaced by consult stuff
+             ;old (package-with-emacs-pgtk (specification->package "emacs-counsel-tramp"))
+             ;old (package-with-emacs-pgtk (specification->package "emacs-counsel-projectile"))
+                                        ;old (package-with-emacs-pgtk (specification->package "emacs-counsel-jq"))
+                                        ;old (package-with-emacs-pgtk (specification->package "emacs-helm-projectile"))
              (package-with-emacs-pgtk (specification->package "emacs-company-jedi")) ; Python completion
              (package-with-emacs-pgtk (specification->package "emacs-back-button"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-wanderlust")) ; email (POP3, IMAP and Maildir)
@@ -1071,11 +1083,11 @@ file prettification."))))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-mew"))
              (specification->package "mu") ; maildir indexer, mu4e
              (package-with-emacs-pgtk (specification->package "emacs-vertico"))
-             ;(package-with-emacs-pgtk (specification->package "emacs-consult"))
-             ;(patch2 (package-with-emacs-pgtk (specification->package "emacs-consult-lsp"))) ; gcc 4.9 build failure
-             ;(package-with-emacs-pgtk (specification->package "emacs-consult-xdg-recent-files"))
+             (package-with-emacs-pgtk (specification->package "emacs-consult"))
+             (patch2 (package-with-emacs-pgtk (specification->package "emacs-consult-lsp"))) ; gcc 4.9 build failure
+             (package-with-emacs-pgtk (specification->package "emacs-consult-xdg-recent-files"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-consult-org-roam"))
-             ;(package-with-emacs-pgtk (specification->package "emacs-consult-flycheck"))
+             (package-with-emacs-pgtk (specification->package "emacs-consult-flycheck"))
              (package-with-emacs-pgtk (specification->package "emacs-marginalia"))
              (package-with-emacs-pgtk (specification->package "emacs-orderless"))
              (package-with-emacs-pgtk (specification->package "emacs-trashed"))
@@ -1109,7 +1121,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-latex-extra"))
              (package-with-emacs-pgtk (specification->package "emacs-adoc-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-tempel"))
-             (package-with-emacs-pgtk (specification->package "emacs-debbugs"))
+             (package-with-emacs-pgtk (emacs-debbugs-patch (specification->package "emacs-debbugs")))
              (package-with-emacs-pgtk (specification->package "emacs-inheritenv"))
              ;; Alternative: emacs-reformatter
                                         ;(specification->package "emacs-format-all-the-code") ; can't because inheritenv.
@@ -1345,6 +1357,7 @@ file prettification."))))
 
 ;;; Science
 
+             (package-with-emacs-pgtk (specification->package "emacs-sage-shell-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-gnuplot"))
              (package-with-emacs-pgtk (specification->package "emacs-org-books"))
              (package-with-emacs-pgtk (specification->package "emacs-biblio"))
