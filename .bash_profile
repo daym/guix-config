@@ -102,11 +102,8 @@ export PIP_REQUIRE_VIRTUALENV=1
 export LSP_USE_PLISTS=true
 
 # Debug swaylock
-ulimit -c unlimited
+#ulimit -c unlimited
 
 # Debug wireplumber hang
-export PIPEWIRE_DEBUG=3
-export WIREPLUMBER_DEBUG=3
-
-# catch swaylock, maybe
-ulimit -c unlimited
+#export PIPEWIRE_DEBUG=3
+#export WIREPLUMBER_DEBUG=3
