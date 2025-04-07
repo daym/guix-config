@@ -166,6 +166,11 @@
                              )))
 
 
+(define mu-patch
+  (options->transformation `((with-patch . ,(string-append "mu="
+                                                           "patches/mu-shift-selection.patch")))))
+
+
 (define vorta-patch
   (options->transformation `(  ;  (with-debug-info . "vorta")
                              (with-patch . ,(string-append "vorta="
@@ -961,12 +966,12 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-org-remark")) ; add notes to epub and websites
              (package-with-emacs-pgtk (specification->package "emacs-org-pomodoro"))
              (package-with-emacs-pgtk (specification->package "emacs-org-emms"))
-             (package-with-emacs-pgtk (specification->package "emacs-mu4e-dashboard")) ; live query mu4e from org
-             (package-with-emacs-pgtk (specification->package "emacs-mu4e-alert"))
+             (package-with-emacs-pgtk (mu-patch (specification->package "emacs-mu4e-dashboard"))) ; live query mu4e from org
+             (package-with-emacs-pgtk (mu-patch (specification->package "emacs-mu4e-alert")))
              (package-with-emacs-pgtk (specification->package "emacs-bbdb")) ; contact management
              (package-with-emacs-pgtk (specification->package "emacs-bbdb-vcard"))
 
-             (package-with-emacs-pgtk (specification->package "emacs-consult-mu")) ; search mails from consult
+             (package-with-emacs-pgtk (mu-patch (specification->package "emacs-consult-mu"))) ; search mails from consult
              (package-with-emacs-pgtk (specification->package "emacs-org-msg"))
              (package-with-emacs-pgtk (specification->package "emacs-org-contrib")) ; not that well-maintained
              (package-with-emacs-pgtk (specification->package "emacs-emms"))
@@ -1000,7 +1005,7 @@ file prettification."))))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-tramp")) ; I think that's part of emacs now
              (package-with-emacs-pgtk (specification->package "emacs-agda2-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-treemacs"))
-             (package-with-emacs-pgtk (specification->package "emacs-treemacs-extra")) ; magit, projectile, tab-bar; but also all-the-icons, memoize, evil, persp-mode, perspective
+             (package-with-emacs-pgtk (mu-patch (specification->package "emacs-treemacs-extra"))) ; magit, projectile, tab-bar; but also all-the-icons, memoize, evil, persp-mode, perspective; mu!!!
              (package-with-emacs-pgtk (specification->package "emacs-magit-gerrit"))
              (package-with-emacs-pgtk (specification->package "emacs-magit-svn"))
              (patch2 (package-with-emacs-pgtk (specification->package "emacs-rustic")))
@@ -1086,7 +1091,7 @@ file prettification."))))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-wanderlust")) ; email (POP3, IMAP and Maildir)
                                         ;I moved from wanderlust to mew because I find mew has better support for encryption, particularly S/MIME.
                                         ;(package-with-emacs-pgtk (specification->package "emacs-mew"))
-             (specification->package "mu") ; maildir indexer, mu4e
+             (mu-patch (specification->package "mu")) ; maildir indexer, mu4e
              (package-with-emacs-pgtk (specification->package "emacs-vertico"))
              (package-with-emacs-pgtk (specification->package "emacs-consult"))
              (patch2 (package-with-emacs-pgtk (specification->package "emacs-consult-lsp"))) ; gcc 4.9 build failure
