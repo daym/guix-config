@@ -752,6 +752,8 @@ file prettification."))))
                                         ;(specification->package "lame")
                                         ;(specification->package "cdparanoia")
              (specification->package "geeqie")
+             (specification->package "mediainfo")
+             (package-with-emacs-pgtk (specification->package "emacs-mediainfo-mode"))
 
 ;;; Hardware programming
 
