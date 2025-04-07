@@ -842,6 +842,8 @@ file prettification."))))
              (specification->package "jupyter-guile-kernel")
              (package-with-emacs-pgtk (specification->package "emacs-ctrlf")) ; you've got to be kidding me. Why is this not builtin? ; alternatives: occur[!], swiper, consult-line[terrible]
              (package-with-emacs-pgtk (specification->package "emacs-swiper")) ; regexp search and group
+             ;; You need to use "| ezf" in eshell for this to be any good.
+             (package-with-emacs-pgtk (specification->package "emacs-ezf"))
              (specification->package "python-jupytext") ;; required by code-cells
              ;; Result cells of ipynb files are not retained in the conversion to script format. This means that opening and then saving an ipynb file clears all cell outputs.
              ;; code-cells-write-ipynb to export to ipynb.
