@@ -639,6 +639,7 @@ file prettification."))))
 
 ;;; System Tools
 
+             (package-with-emacs-pgtk (specification->package "emacs-pinentry"))
              (package-with-emacs-pgtk (specification->package "emacs-enwc")) ; network manager
              (package-with-emacs-pgtk (specification->package "emacs-age")) ; encryption
              (specification->package "pass-age")
