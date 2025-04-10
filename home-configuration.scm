@@ -722,6 +722,8 @@ file prettification."))))
 ;;; Experimental System Tools
 
              (specification->package "bat")
+             (specification->package "fscrypt")
+             (specification->package "fscryptctl")
 
 ;;; Fonts
 
