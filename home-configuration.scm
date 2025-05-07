@@ -1282,6 +1282,7 @@ file prettification."))))
              
 ;;; Network
 
+             (specification->package "wireguard-tools")
              (specification->package "mailutils")
              (specification->package "iptables")
              (specification->package "nftables")
