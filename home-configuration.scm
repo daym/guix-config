@@ -1044,6 +1044,12 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-buffer-env"))
              (package-with-emacs-pgtk (specification->package "emacs-clojure-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-clojure-snippets"))
+
+             ;(package-with-emacs-pgtk (specification->package "emacs-helm-cider"))
+             ;; For Clojure. Supports light table via M-x cider-enlighten-mode
+             (package-with-emacs-pgtk (specification->package "emacs-cider"))
+             (package-with-emacs-pgtk (specification->package "emacs-clj-refactor"))
+             (package-with-emacs-pgtk (specification->package "emacs-eval-in-repl-cider"))
              (package-with-emacs-pgtk (specification->package "emacs-haskell-mode"))
              ;(package-with-emacs-pgtk (specification->package "emacs-flycheck-guile")) ; would use geiser
              ;(package-with-emacs-pgtk (specification->package "emacs-geiser-guile")) ; geiser is worse than arei
