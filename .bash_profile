@@ -23,7 +23,9 @@ export PYTHONIOENCODING=utf-8
 #export QT_PLUGIN_PATH="${HOME}/.guix-home/profile/lib/qt5/plugins"
 if [ "${TERM}" = "dumb" ]
 then
-    export PAGER="cat"
+	# Less ideal would be: git config --global core.pager "cat"
+	# Less ideal: git --no-pager ...
+    export PAGER=""
 else
     export PAGER="less -F"
 fi
