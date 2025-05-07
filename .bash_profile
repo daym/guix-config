@@ -92,6 +92,9 @@ then
 
 	# Hinting; User has to use DejaVu Sans and DejaVu Sans Mono that has good hinting support
 	export FREETYPE_PROPERTIES="truetype:interpreter-version=35"
+
+    # For sway ICC color profiles, see <https://github.com/swaywm/sway/issues/1486>
+	export WLR_RENDERER=vulkan
 fi
 export SSH_AUTH_SOCK=/run/user/`id -u`/ssh-agent/socket
 
