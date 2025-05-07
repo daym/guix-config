@@ -655,6 +655,7 @@ file prettification."))))
              
              ;(specification->package "putty")
              (specification->package "gnome-boxes") ; qemu frontend
+             (specification->package "perf")
              (specification->package "udiskie")
              (specification->package "efibootmgr")
              ;;(specification->package "roxterm")
