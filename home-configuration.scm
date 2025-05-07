@@ -1162,7 +1162,6 @@ file prettification."))))
              (package-with-emacs-pgtk (emacs-debbugs-patch (specification->package "emacs-debbugs")))
              (package-with-emacs-pgtk (specification->package "emacs-inheritenv"))
              ;; Alternative: emacs-reformatter
-                                        ;(specification->package "emacs-format-all-the-code") ; can't because inheritenv.
              (package-with-emacs-pgtk (specification->package "emacs-format-all-the-code"))
 
              ;; For swank-js to use.  But it doesn't work with multiple major modes yet. TODO: css-mode;
@@ -1174,15 +1173,12 @@ file prettification."))))
                                         ; shipped by default (package-with-emacs-pgtk (specification->package "emacs-js-mode"))
              ;; Allows multiple major modes to coexist in one buffer
              (package-with-emacs-pgtk (specification->package "emacs-mmm-mode"))
-             ;; For Clojure. Supports light table via M-x cider-enlighten-mode
-             (package-with-emacs-pgtk (specification->package "emacs-cider"))
              (package-with-emacs-pgtk (specification->package "emacs-vala-mode"))
              ;; Shows number of search results in status bar
              (package-with-emacs-pgtk (specification->package "emacs-anzu"))
              (package-with-emacs-pgtk (specification->package "emacs-dired-rsync"))
              (package-with-emacs-pgtk (specification->package "emacs-dockerfile-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-emacsql"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-helm-cider"))
                                         ; TODO (package-with-emacs-pgtk (specification->package "emacs-graphviz-dot-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-jinja2-mode"))
              ;; Spaced repetition in org mode.
@@ -1304,7 +1300,7 @@ file prettification."))))
              (network-manager-applet-patch (specification->package "network-manager-applet")) ; our system profile also has it... silly enough.
              (specification->package "network-manager-openconnect")
              (specification->package "network-manager-openvpn")
-                                        ;(ungoogled-chromium-patch )
+             ;(ungoogled-chromium-patch )
              (specification->package "ungoogled-chromium")
                                         ;(specification->package "icecat")
                                         ;(specification->package "gfeeds")
@@ -1331,7 +1327,7 @@ file prettification."))))
 
              (specification->package "pypy")
              (specification->package "python-lxml")
-             (specification->package "python")
+             (specification->package "python") ; 3.11
              (specification->package "python-lsp-server")
              (specification->package "python-sympy")
              (specification->package "python-sentencepiece")
