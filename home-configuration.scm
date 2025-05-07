@@ -715,7 +715,7 @@ file prettification."))))
                                         ;(specification->package "qmk") ; req python-halo, python-twine, python-httpcore, python-uvicorn 
              (specification->package "dfu-util") ; to flash keyboard firmware
 
-             (specification->package "d-feet") ; to look at dbus
+             (specification->package "d-spy") ; to look at dbus
 
              ;; For secret-tool, a frontend for gnome-keyring-daemon.
              (specification->package "libsecret")
