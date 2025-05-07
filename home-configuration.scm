@@ -765,6 +765,7 @@ file prettification."))))
              (specification->package "mediainfo")
              (package-with-emacs-pgtk (specification->package "emacs-scad-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-mediainfo-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-iedit")) ; edit all matching text at once
 
 ;;; Hardware programming
 
