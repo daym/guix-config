@@ -910,6 +910,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-casual-calc"))
              (package-with-emacs-pgtk (specification->package "emacs-casual-info"))
              (package-with-emacs-pgtk (specification->package "emacs-casual-dired"))
+             (package-with-emacs-pgtk (specification->package "emacs-show-font"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-casual-avy"))
              (specification->package "texlive-digestif")
              ;; For xenops
