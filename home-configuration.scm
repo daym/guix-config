@@ -913,6 +913,14 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-show-font"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-casual-avy"))
              (specification->package "texlive-digestif")
+             ;; For xenops (or for me)
+             (package-with-emacs-pgtk (specification->package "texlive-listings"))
+             ;; For xenops (or for me)
+             (package-with-emacs-pgtk (specification->package "texlive-tikz-feynman"))
+             ;; For xenops (or for me)
+             (package-with-emacs-pgtk (specification->package "texlive-tikz-feynhand")) ; without lua
+             ;; For xenops (or for me); also Feynman
+             (package-with-emacs-pgtk (specification->package "texlive-axodraw2")) ; without lua ?
              ;; For xenops
              (package-with-emacs-pgtk (specification->package "emacs-aio"))
              ;; For xenops
