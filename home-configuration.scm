@@ -1043,6 +1043,7 @@ file prettification."))))
              ;; Understands guix.scm and manifest.scm natively
              (package-with-emacs-pgtk (specification->package "emacs-buffer-env"))
              (package-with-emacs-pgtk (specification->package "emacs-clojure-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-clojure-snippets"))
              (package-with-emacs-pgtk (specification->package "emacs-haskell-mode"))
              ;(package-with-emacs-pgtk (specification->package "emacs-flycheck-guile")) ; would use geiser
              ;(package-with-emacs-pgtk (specification->package "emacs-geiser-guile")) ; geiser is worse than arei
