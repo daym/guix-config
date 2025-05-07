@@ -988,8 +988,9 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-org-emms"))
              (package-with-emacs-pgtk (mu-patch (specification->package "emacs-mu4e-dashboard"))) ; live query mu4e from org
              (package-with-emacs-pgtk (mu-patch (specification->package "emacs-mu4e-alert")))
-             (package-with-emacs-pgtk (specification->package "emacs-bbdb")) ; contact management
-             (package-with-emacs-pgtk (specification->package "emacs-bbdb-vcard"))
+             ;;(package-with-emacs-pgtk (specification->package "emacs-bbdb")) ; contact management (old)
+             (package-with-emacs-pgtk (specification->package "emacs-ebdb")) ; contact management
+             ;; old (package-with-emacs-pgtk (specification->package "emacs-bbdb-vcard"))
 
              (package-with-emacs-pgtk (mu-patch (specification->package "emacs-consult-mu"))) ; search mails from consult
              (package-with-emacs-pgtk (specification->package "emacs-org-msg"))
