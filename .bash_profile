@@ -68,7 +68,7 @@ fi
 
 if [ "${XDG_SESSION_TYPE}" = "wayland" ]
 then
-	# sway and mpe:
+	# sway and mpe and turbovnc:
 	export _JAVA_AWT_WM_NONREPARENTING=1
 	# FIXME: All the others except xcb; This is mostly to avoid X11 on HiDPI displays
 	# FIXME: vkkhrdisplay doesn't do tray icon in sway (try with vorta--which uses pyqt6)
