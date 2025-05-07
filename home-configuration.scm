@@ -1011,6 +1011,11 @@ file prettification."))))
 
              (package-with-emacs-pgtk (specification->package "emacs-beacon"))
              (package-with-emacs-pgtk (specification->package "emacs-bar-cursor"))
+             (package-with-emacs-pgtk (specification->package "emacs-jinx")) ; spell checker
+             (specification->package "aspell-dict-en")
+             ;(specification->package "aspell-dict-de")
+             (specification->package "hunspell-dict-de-at")
+             (specification->package "hunspell-dict-de")
              (package-with-emacs-pgtk (specification->package "emacs-wakib-keys"))
              (package-with-emacs-pgtk (specification->package "emacs-treemacs-nerd-icons"))
              (package-with-emacs-pgtk (specification->package "emacs-elastic-modes"))
