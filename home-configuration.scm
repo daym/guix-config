@@ -924,6 +924,15 @@ file prettification."))))
              ;; For xenops (or for me)
              (specification->package "texlive-tikz-feynhand") ; without lua
              ;; For xenops (or for me); also Feynman
+             (specification->package "texlive-axodraw2") ; without lua ?
+             ;; Someone uses that--not me.
+             (specification->package "texlive-ulem")
+             ;; Someone uses that--not me.
+             (specification->package "texlive-rsfs")
+             ;; For xenops (or for me)
+             (specification->package "texlive-unicode-math") ; for luatex only.
+             (specification->package "texlive-lualatex-math") ; for luatex only.; lualatex-math.sty missing
+             
              ;; For xenops
              (package-with-emacs-pgtk (specification->package "emacs-aio"))
              ;; For xenops
