@@ -1148,6 +1148,7 @@ file prettification."))))
              ;; This one uses text styling and so makes the user's stuff more editable than svg-tag-mode
              ;; Replaces org-bullets and org-superstar
              (package-with-emacs-pgtk (specification->package "emacs-org-modern"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-modern-indent")) ; can be used without emacs-org-modern
              (package-with-emacs-pgtk (specification->package "emacs-ob-async"))
              (package-with-emacs-pgtk (specification->package "emacs-mixed-pitch"))
              ;; Used by emacs-doom-modeline. Requires nerd font. Can install it via M-x nerd-icons-install-fonts to ~/.local/share/fonts
