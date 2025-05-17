@@ -722,6 +722,7 @@ file prettification."))))
              (specification->package "font-ipa-ex")
              (specification->package "font-wqy-zenhei")
              (specification->package "font-jetbrains-mono")
+             (specification->package "font-aporetic") ; from emacs guy
 
 ;;; Multimedia
 
