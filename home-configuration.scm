@@ -487,37 +487,37 @@ example the one implemented by python-mathics-core.")
   (let ((commit "f12a02b6d4639e07684594a0b4e5e9d862e7a249")
         (revision "0"))
     (package
-      (name "emacs-notebook-mode")
-      (version (git-version "0.2" revision commit))
-      (source
-       (origin
-         (method git-fetch)
-         (uri (git-reference
-               (url "https://github.com/rougier/notebook-mode")
-               (commit commit)))
-         (file-name (git-file-name name version))
-         (sha256
-          (base32
-           "03l9ylpwv7gi4jwc50xl3skni46vd8wb5ybk6bkh823g19rljdkk"))))
-      (build-system emacs-build-system)
-      (arguments
-        (list #:phases
-              #~(modify-phases %standard-phases
-                  (add-after 'unpack 'patch-python-executable
-                    (lambda* (#:key inputs #:allow-other-keys)
-                      (let ((python (assoc-ref inputs "python")))
-                        (make-file-writable "notebook.el")
-                        (substitute* "notebook.el"
-                          (("/opt/anaconda3/bin/python")
-                           (string-append python "/bin/python")))))))))
-      (inputs (list python))
-      (propagated-inputs (list emacs-svg-tag-mode))
-      (home-page "https://github.com/rougier/notebook-mode/")
-      (synopsis "GNU Emacs notebook mode")
-      (description
-"@code{emacs-notebook-mode} provides a modern look for viewing Jupyter
+     (name "emacs-notebook-mode")
+     (version (git-version "0.2" revision commit))
+     (source
+      (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/rougier/notebook-mode")
+             (commit commit)))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32
+         "03l9ylpwv7gi4jwc50xl3skni46vd8wb5ybk6bkh823g19rljdkk"))))
+     (build-system emacs-build-system)
+     (arguments
+      (list #:phases
+            #~(modify-phases %standard-phases
+                             (add-after 'unpack 'patch-python-executable
+                                        (lambda* (#:key inputs #:allow-other-keys)
+                                          (let ((python (assoc-ref inputs "python")))
+                                            (make-file-writable "notebook.el")
+                                            (substitute* "notebook.el"
+                                                         (("/opt/anaconda3/bin/python")
+                                                          (string-append python "/bin/python")))))))))
+     (inputs (list python))
+     (propagated-inputs (list emacs-svg-tag-mode))
+     (home-page "https://github.com/rougier/notebook-mode/")
+     (synopsis "GNU Emacs notebook mode")
+     (description
+      "@code{emacs-notebook-mode} provides a modern look for viewing Jupyter
 notebooks in GNU Emacs.")
-      (license license:gpl3+))))
+     (license license:gpl3+))))
 
 (define emacs-guix
   (specification->package "emacs-guix"))
