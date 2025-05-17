@@ -431,63 +431,55 @@ interfaces.")
 
 (define-public gtkmm-3
   (package
-    (inherit gtkmm)
-    (name "gtkmm")
-    (version "3.24.9-fixed")
-    (source
-     (origin
-       (method url-fetch)
-       (uri
-        (string-append "mirror://gnome/sources/" name "/"
-                       (version-major+minor version)  "/"
-                       name "-" version ".tar.xz"))
-       (sha256
-        (base32 "1kj4mla3z9kxhdby5w88nl744xkmq6xchf79m1kfa72p0kjbzm9h"))))
-    (propagated-inputs
-     (list atkmm-2.28
-           cairomm-1.14
-           glibmm-2.66
-           gtk+
-           pangomm-2.46))))
-
-(define-public cadabra2x
-  (package
-    (inherit (specification->package "cadabra2"))
-    (inputs
-     (list glibmm-2.66 gmp python boost gtkmm-3 sqlite python-gmpy2 python-sympy
-           python-mpmath python-matplotlib texlive-dvipng
-           `(,util-linux "lib")))))
+   (inherit gtkmm)
+   (name "gtkmm")
+   (version "3.24.9-fixed")
+   (source
+    (origin
+     (method url-fetch)
+     (uri
+      (string-append "mirror://gnome/sources/" name "/"
+                     (version-major+minor version)  "/"
+                     name "-" version ".tar.xz"))
+     (sha256
+      (base32 "1kj4mla3z9kxhdby5w88nl744xkmq6xchf79m1kfa72p0kjbzm9h"))))
+   (propagated-inputs
+    (list atkmm-2.28
+          cairomm-1.14
+          glibmm-2.66
+          gtk+
+          pangomm-2.46))))
 
 (define cadabra2 (specification->package "cadabra2"))
 
 (define-public emacs-xah-wolfram-mode
   (package
-    (name "emacs-xah-wolfram-mode")
-    (version "2.19.20241225115617")
-    (source (origin
-              (method git-fetch)
-              (uri (git-reference
-                    (url "https://github.com/xahlee/xah-wolfram-mode.git")
-                    (commit "8baa0bf340ebea965e7eca43a0cd24f2303b96e7")))
-              (file-name (git-file-name name version))
-              (sha256
-               (base32
-                "01xwyzzrivyi40h40zwlja9p2pnp3xklvkax7kb1kj3dbwlwqf87"))))
-    (build-system emacs-build-system)
-    (arguments
-     (list
-      #:phases
-      #~(modify-phases %standard-phases
-          (add-after 'unpack 'patch
-            (lambda _
-              (substitute* "xah-wolfram-mode.el"
-                ;; Or: "mathics" on the right side.
-                (("wolframscript") "wolframscript")))))))
-    (synopsis "Mode for the Wolfram language")
-    (description "This package provides a mode for the WL language--for
+   (name "emacs-xah-wolfram-mode")
+   (version "2.19.20241225115617")
+   (source (origin
+            (method git-fetch)
+            (uri (git-reference
+                  (url "https://github.com/xahlee/xah-wolfram-mode.git")
+                  (commit "8baa0bf340ebea965e7eca43a0cd24f2303b96e7")))
+            (file-name (git-file-name name version))
+            (sha256
+             (base32
+              "01xwyzzrivyi40h40zwlja9p2pnp3xklvkax7kb1kj3dbwlwqf87"))))
+   (build-system emacs-build-system)
+   (arguments
+    (list
+     #:phases
+     #~(modify-phases %standard-phases
+                      (add-after 'unpack 'patch
+                                 (lambda _
+                                   (substitute* "xah-wolfram-mode.el"
+                                                ;; Or: "mathics" on the right side.
+                                                (("wolframscript") "wolframscript")))))))
+   (synopsis "Mode for the Wolfram language")
+   (description "This package provides a mode for the WL language--for
 example the one implemented by python-mathics-core.")
-    (home-page "http://xahlee.info/emacs/misc/xah-wolfram-mode.html")
-    (license license:expat)))
+   (home-page "http://xahlee.info/emacs/misc/xah-wolfram-mode.html")
+   (license license:expat)))
 
 
 ;; Too new version requires svg-tag-mode which is dumb.
