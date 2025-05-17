@@ -1379,6 +1379,7 @@ file prettification."))))
              (specification->package "daikichi") ; fortune
                                         ;(specification->package "fortunes-jkirchartz")
              (specification->package "steam")
+             (specification->package "heroic")
              (specification->package "freeciv")
 
 ;;; Office
