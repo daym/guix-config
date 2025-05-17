@@ -373,61 +373,61 @@
 
 (define-public xdg-desktop-portal-gtk
   (package
-    (name "xdg-desktop-portal-gtk")
-    (version "1.14.1")
-    (source (origin
-              (method url-fetch)
-              (uri (string-append
-                    "https://github.com/flatpak/xdg-desktop-portal-gtk/releases/download/"
-                    version "/xdg-desktop-portal-gtk-" version ".tar.xz"))
-              (sha256
-               (base32
-                "002p19j1q3fc8x338ndzxnicwframpgafw31lwvv5avy329akqiy"))))
-    (build-system glib-or-gtk-build-system)
-    (arguments
-     `(#:phases
-       (modify-phases %standard-phases
-         (add-after 'unpack 'po-chmod
-           (lambda _
-             ;; Make sure 'msgmerge' can modify the PO files.
-             (for-each (lambda (po)
-                         (chmod po #o666))
-                       (find-files "po" "\\.po$"))
-             #t)))
-       ;; Enable Gnome portal backends
-       #:configure-flags
-       (list
-        "--enable-appchooser"
-        "--enable-wallpaper"
-        "--enable-screenshot"
-        "--enable-screencast"
-        "--enable-background"
-        "--enable-settings")))
-    (native-inputs
-     `(("pkg-config" ,pkg-config)
-       ("autoconf" ,autoconf)
-       ("automake" ,automake)
-       ("libtool" ,libtool)
-       ("libxml2" ,libxml2)
-       ("glib:bin" ,glib "bin")
-       ("which" ,which)
-       ("gettext" ,gettext-minimal)))
-    (inputs
-     `(("glib" ,glib)
-       ("gtk" ,gtk+)
-       ("fontconfig" ,fontconfig)
-       ("gnome-desktop" ,gnome-desktop)
-       ("gsettings-desktop-schemas" ,gsettings-desktop-schemas)))
-    (propagated-inputs
-     (list xdg-desktop-portal))
-    (home-page "https://github.com/flatpak/xdg-desktop-portal-gtk")
-    (synopsis "GTK implementation of xdg-desktop-portal")
-    (description
-     "This package provides a backend implementation for xdg-desktop-portal
+   (name "xdg-desktop-portal-gtk")
+   (version "1.14.1")
+   (source (origin
+            (method url-fetch)
+            (uri (string-append
+                  "https://github.com/flatpak/xdg-desktop-portal-gtk/releases/download/"
+                  version "/xdg-desktop-portal-gtk-" version ".tar.xz"))
+            (sha256
+             (base32
+              "002p19j1q3fc8x338ndzxnicwframpgafw31lwvv5avy329akqiy"))))
+   (build-system glib-or-gtk-build-system)
+   (arguments
+    `(#:phases
+      (modify-phases %standard-phases
+                     (add-after 'unpack 'po-chmod
+                                (lambda _
+                                  ;; Make sure 'msgmerge' can modify the PO files.
+                                  (for-each (lambda (po)
+                                              (chmod po #o666))
+                                            (find-files "po" "\\.po$"))
+                                  #t)))
+      ;; Enable Gnome portal backends
+      #:configure-flags
+      (list
+       "--enable-appchooser"
+       "--enable-wallpaper"
+       "--enable-screenshot"
+       "--enable-screencast"
+       "--enable-background"
+       "--enable-settings")))
+   (native-inputs
+    `(("pkg-config" ,pkg-config)
+      ("autoconf" ,autoconf)
+      ("automake" ,automake)
+      ("libtool" ,libtool)
+      ("libxml2" ,libxml2)
+      ("glib:bin" ,glib "bin")
+      ("which" ,which)
+      ("gettext" ,gettext-minimal)))
+   (inputs
+    `(("glib" ,glib)
+      ("gtk" ,gtk+)
+      ("fontconfig" ,fontconfig)
+      ("gnome-desktop" ,gnome-desktop)
+      ("gsettings-desktop-schemas" ,gsettings-desktop-schemas)))
+   (propagated-inputs
+    (list xdg-desktop-portal))
+   (home-page "https://github.com/flatpak/xdg-desktop-portal-gtk")
+   (synopsis "GTK implementation of xdg-desktop-portal")
+   (description
+    "This package provides a backend implementation for xdg-desktop-portal
 which uses GTK+ and various pieces of GNOME infrastructure, such as the
 @code{org.gnome.Shell.Screenshot} or @code{org.gnome.SessionManager} D-Bus
 interfaces.")
-    (license license:lgpl2.1+)))
+   (license license:lgpl2.1+)))
 
 (define-public gtkmm-3
   (package
