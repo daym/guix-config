@@ -137,23 +137,6 @@
   (options->transformation `((with-patch . ,(string-append "emacs-debbugs="
                                                            "patches/emacs-debbugs-mu4e.patch")))))
 
-;; Nope.
-(define issue-30-emacs-window-tool-bar-patch
-  (lambda (p)
-    (package
-      (inherit p)
-      ;(name "emacs-window-tool-bar-patch")
-      
-      (source
-       (origin
-              (method git-fetch)
-              (uri (git-reference
-                    (url "git@github.com:daym/window-tool-bar.git")
-                    (commit "fix-integration-with-tab-line")))
-              ;(file-name (git-file-name name version))
-              (sha256
-               (base32
-                "3khywgals4j751sdp70widkvcsfrfl17y92sg0yyg6n4m5plw791"))))))) ; I need that
 
 (define emacs-window-tool-bar-patch
   (options->transformation `(  ;  (with-debug-info . "libappindicator")
