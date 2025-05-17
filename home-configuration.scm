@@ -639,9 +639,11 @@ file prettification."))))
 
 ;;; System Tools
 
+             (package-with-emacs-pgtk (specification->package "emacs-with-editor")) ; password-store requires this and doesn't have it in its inputs
              (package-with-emacs-pgtk (specification->package "emacs-pinentry"))
              (package-with-emacs-pgtk (specification->package "emacs-enwc")) ; network manager
              (package-with-emacs-pgtk (specification->package "emacs-age")) ; encryption
+             (package-with-emacs-pgtk (emacs-elisp-autofmt-patch emacs-elisp-autofmt))
              (specification->package "pass-age")
              (package-with-emacs-pgtk (specification->package "emacs-password-store")) ; "pass" integration
              (package-with-emacs-pgtk (specification->package "emacs-passage")) ; password mgr
@@ -811,7 +813,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-inf-ruby"))
              (package-with-emacs-pgtk (specification->package "emacs-alchemist")) ; Elixir
              (package-with-emacs-pgtk (specification->package "emacs-xpm"))
-             (package-with-emacs-pgtk (specification->package "emacs-tco-el")) ; macro "defun-tco" for tail class optimized procedures
+             (package-with-emacs-pgtk (specification->package "emacs-tco-el")) ; macro "defun-tco" for tail call optimized procedures
              (package-with-emacs-pgtk (specification->package "emacs-stream"))
              (package-with-emacs-pgtk (specification->package "emacs-flymake"))
              (package-with-emacs-pgtk (patch2 (specification->package "emacs-lean4-mode")))
@@ -855,13 +857,14 @@ file prettification."))))
              (specification->package "jupyter")
              (specification->package "jupyter-guile-kernel")
              (package-with-emacs-pgtk (specification->package "emacs-ctrlf")) ; you've got to be kidding me. Why is this not builtin? ; alternatives: occur[!], swiper, consult-line[terrible]
-             (package-with-emacs-pgtk (specification->package "emacs-swiper")) ; regexp search and group
              ;; You need to use "| ezf" in eshell for this to be any good.
-             (package-with-emacs-pgtk (specification->package "emacs-ezf"))
+             ; HELM (package-with-emacs-pgtk (specification->package "emacs-ezf"))
              (specification->package "python-jupytext") ;; required by code-cells
              ;; Result cells of ipynb files are not retained in the conversion to script format. This means that opening and then saving an ipynb file clears all cell outputs.
              ;; code-cells-write-ipynb to export to ipynb.
              (package-with-emacs-pgtk (specification->package "emacs-code-cells"))
+             (package-with-emacs-pgtk (specification->package "emacs-jupyter"))
+             ;(package-with-emacs-pgtk emacs-notebook-mode)
              (package-with-emacs-pgtk (specification->package "emacs-password-generator"))
              (specification->package "guile-ares-rs")
                                         ;(specification->package "diffoscope") ; requires u-boot-tools--and that doesn't build.
@@ -907,6 +910,7 @@ file prettification."))))
 
                                         ; TODO maybe browse-at-remote (but it REALLY uses a browser)
                                         ; TODO maybe emacs-git-link
+             (package-with-emacs-pgtk (specification->package "emacs-aggressive-indent"))
              (package-with-emacs-pgtk (specification->package "emacs-casual-calc"))
              (package-with-emacs-pgtk (specification->package "emacs-casual-info"))
              (package-with-emacs-pgtk (specification->package "emacs-casual-dired"))
@@ -914,13 +918,12 @@ file prettification."))))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-casual-avy"))
              (specification->package "texlive-digestif")
              ;; For xenops (or for me)
-             (package-with-emacs-pgtk (specification->package "texlive-listings"))
+             (specification->package "texlive-listings")
              ;; For xenops (or for me)
-             (package-with-emacs-pgtk (specification->package "texlive-tikz-feynman"))
+             (specification->package "texlive-tikz-feynman")
              ;; For xenops (or for me)
-             (package-with-emacs-pgtk (specification->package "texlive-tikz-feynhand")) ; without lua
+             (specification->package "texlive-tikz-feynhand") ; without lua
              ;; For xenops (or for me); also Feynman
-             (package-with-emacs-pgtk (specification->package "texlive-axodraw2")) ; without lua ?
              ;; For xenops
              (package-with-emacs-pgtk (specification->package "emacs-aio"))
              ;; For xenops
@@ -980,7 +983,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-orgit")) ; make org links to magit buffers
              (package-with-emacs-pgtk (specification->package "emacs-orgit-forge")) ; make org links to forge topic buffers
                                         ;(package-with-emacs-pgtk (specification->package "emacs-org-roam"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-ref"))
+; HELM            (package-with-emacs-pgtk (specification->package "emacs-org-ref"))
              (package-with-emacs-pgtk (specification->package "emacs-org-super-agenda"))
              (package-with-emacs-pgtk (specification->package "emacs-org-timeblock"))
              (package-with-emacs-pgtk (specification->package "emacs-org-remark")) ; add notes to epub and websites
@@ -999,6 +1002,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-comment-tags"))
              (package-with-emacs-pgtk (specification->package "emacs-csv-mode"))
 
+             (package-with-emacs-pgtk (specification->package "emacs-keycast")) ; shows keys pressed
              (package-with-emacs-pgtk (specification->package "emacs-embark"))
              (package-with-emacs-pgtk (specification->package "emacs-outline-indent")) ; code folding and outlining
              (package-with-emacs-pgtk (specification->package "emacs-rmsbolt")) ; godbolt
@@ -1012,8 +1016,10 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-beacon"))
              (package-with-emacs-pgtk (specification->package "emacs-bar-cursor"))
              (package-with-emacs-pgtk (specification->package "emacs-jinx")) ; spell checker
+             (specification->package "aspell") ; so we get DICPATH set to guix home's profile.  That's ridiculous.
              (specification->package "aspell-dict-en")
              ;(specification->package "aspell-dict-de")
+             (specification->package "hunspell") ; so we get DICPATH set to guix home's profile.  That's ridiculous.
              (specification->package "hunspell-dict-de-at")
              (specification->package "hunspell-dict-de")
              (package-with-emacs-pgtk (specification->package "emacs-wakib-keys"))
@@ -1031,7 +1037,7 @@ file prettification."))))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-tramp")) ; I think that's part of emacs now
              (package-with-emacs-pgtk (specification->package "emacs-agda2-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-treemacs"))
-             (package-with-emacs-pgtk (mu-patch (specification->package "emacs-treemacs-extra"))) ; magit, projectile, tab-bar; but also all-the-icons, memoize, evil, persp-mode, perspective; mu!!!
+             (package-with-emacs-pgtk (mu-patch (specification->package "emacs-treemacs-extra"))) ; magit, projectile, tab-bar; but also all-the-icons, memoize, evil, persp-mode, perspective; mu
              (package-with-emacs-pgtk (specification->package "emacs-magit-gerrit"))
              (package-with-emacs-pgtk (specification->package "emacs-magit-svn"))
              (patch2 (package-with-emacs-pgtk (specification->package "emacs-rustic")))
@@ -1042,7 +1048,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-capf-autosuggest"))
              (package-with-emacs-pgtk (specification->package "ispell")) ; used by built-in emacs flyspell-mode
              (package-with-emacs-pgtk (specification->package "emacs-flycheck"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-helm"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-helm")) ; replaced by vertico
              (package-with-emacs-pgtk (specification->package "emacs-shackle"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-envrc"))
              ;; Understands guix.scm and manifest.scm natively
@@ -1398,8 +1404,9 @@ file prettification."))))
 ;;; Science
 
              (package-with-emacs-pgtk (specification->package "emacs-sage-shell-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-polymode-org"))
              (package-with-emacs-pgtk (specification->package "emacs-gnuplot"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-books"))
+; HELM            (package-with-emacs-pgtk (specification->package "emacs-org-books"))
              (package-with-emacs-pgtk (specification->package "emacs-biblio"))
              (package-with-emacs-pgtk (specification->package "emacs-persid")) ; isbn, doi, ...; (persid-insert-bibtex "arxiv:2008.06030")
                                         ;(specification->package "texlive-pgfopts") ; used by cadabra2 < 2.5.2
