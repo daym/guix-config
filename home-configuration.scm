@@ -844,13 +844,13 @@ file prettification."))))
              (specification->package "jupyter-guile-kernel")
              (package-with-emacs-pgtk (specification->package "emacs-ctrlf")) ; you've got to be kidding me. Why is this not builtin? ; alternatives: occur[!], swiper, consult-line[terrible]
              ;; You need to use "| ezf" in eshell for this to be any good.
-             ; HELM (package-with-emacs-pgtk (specification->package "emacs-ezf"))
+                                        ; HELM (package-with-emacs-pgtk (specification->package "emacs-ezf"))
              (specification->package "python-jupytext") ;; required by code-cells
              ;; Result cells of ipynb files are not retained in the conversion to script format. This means that opening and then saving an ipynb file clears all cell outputs.
              ;; code-cells-write-ipynb to export to ipynb.
              (package-with-emacs-pgtk (specification->package "emacs-code-cells"))
              (package-with-emacs-pgtk (specification->package "emacs-jupyter"))
-             ;(package-with-emacs-pgtk emacs-notebook-mode)
+                                        ;(package-with-emacs-pgtk emacs-notebook-mode)
              (package-with-emacs-pgtk (specification->package "emacs-password-generator"))
              (specification->package "guile-ares-rs")
                                         ;(specification->package "diffoscope") ; requires u-boot-tools--and that doesn't build.
@@ -972,13 +972,13 @@ file prettification."))))
              
              (package-with-emacs-pgtk (specification->package "emacs-org-noter")) ; PDF notes
              (package-with-emacs-pgtk (specification->package "emacs-org-pdftools")) ; PDF notes and links ; for org-noter-pdftools; "lightly maintained" (terrible quality)
-             ;(package-with-emacs-pgtk (specification->package "emacs-org-fragtog")) ; I have xenops already
-             ;(package-with-emacs-pgtk (specification->package "emacs-xenops"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-org-fragtog")) ; I have xenops already
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-xenops"))
              (package-with-emacs-pgtk (specification->package "emacs-org-super-links"))
              (package-with-emacs-pgtk (specification->package "emacs-orgit")) ; make org links to magit buffers
              (package-with-emacs-pgtk (specification->package "emacs-orgit-forge")) ; make org links to forge topic buffers
                                         ;(package-with-emacs-pgtk (specification->package "emacs-org-roam"))
-; HELM            (package-with-emacs-pgtk (specification->package "emacs-org-ref"))
+                                        ; HELM            (package-with-emacs-pgtk (specification->package "emacs-org-ref"))
              (package-with-emacs-pgtk (specification->package "emacs-org-super-agenda"))
              (package-with-emacs-pgtk (specification->package "emacs-org-timeblock"))
              (package-with-emacs-pgtk (specification->package "emacs-org-remark")) ; add notes to epub and websites
@@ -1051,14 +1051,14 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-clojure-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-clojure-snippets"))
 
-             ;(package-with-emacs-pgtk (specification->package "emacs-helm-cider"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-helm-cider"))
              ;; For Clojure. Supports light table via M-x cider-enlighten-mode
              (package-with-emacs-pgtk (specification->package "emacs-cider"))
              (package-with-emacs-pgtk (specification->package "emacs-clj-refactor"))
              (package-with-emacs-pgtk (specification->package "emacs-eval-in-repl-cider"))
              (package-with-emacs-pgtk (specification->package "emacs-haskell-mode"))
-             ;(package-with-emacs-pgtk (specification->package "emacs-flycheck-guile")) ; would use geiser
              ;(package-with-emacs-pgtk (specification->package "emacs-geiser-guile")) ; geiser is worse than arei
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-flycheck-guile")) ; would use geiser
              (package-with-emacs-pgtk (specification->package "emacs-parinfer-rust-mode"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-parinfer-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-web-mode"))
@@ -1307,7 +1307,7 @@ file prettification."))))
              (network-manager-applet-patch (specification->package "network-manager-applet")) ; our system profile also has it... silly enough.
              (specification->package "network-manager-openconnect")
              (specification->package "network-manager-openvpn")
-             ;(ungoogled-chromium-patch )
+                                        ;(ungoogled-chromium-patch )
              (specification->package "ungoogled-chromium")
                                         ;(specification->package "icecat")
                                         ;(specification->package "gfeeds")
