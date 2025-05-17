@@ -9,6 +9,7 @@
              (gnu services)
              (gnu services shepherd)
              (guix transformations)
+             (guix memoization)
              (guix gexp)
              (guix utils)
              (guix describe)
