@@ -969,8 +969,8 @@ file prettification."))))
 
                                         ;(package-with-emacs-pgtk (specification->package "emacs-org-texlive-collection"))
              (package-with-emacs-pgtk (specification->package "emacs-org-edna"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-node"))
-             
+             (package-with-emacs-pgtk (emacs-el-job-patch (specification->package "emacs-org-node")))
+
              (package-with-emacs-pgtk (specification->package "emacs-org-noter")) ; PDF notes
              (package-with-emacs-pgtk (specification->package "emacs-org-pdftools")) ; PDF notes and links ; for org-noter-pdftools; "lightly maintained" (terrible quality)
                                         ;(package-with-emacs-pgtk (specification->package "emacs-org-fragtog")) ; I have xenops already
