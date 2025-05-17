@@ -1129,9 +1129,9 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-bluetooth"))
              (package-with-emacs-pgtk (specification->package "emacs-osm"))
              (package-with-emacs-pgtk (specification->package "emacs-erc-hl-nicks")) ; IRC nick coloring
-             ;old (package-with-emacs-pgtk (specification->package "emacs-counsel")) ; replaced by consult stuff
-             ;old (package-with-emacs-pgtk (specification->package "emacs-counsel-tramp"))
-             ;old (package-with-emacs-pgtk (specification->package "emacs-counsel-projectile"))
+                                        ;old (package-with-emacs-pgtk (specification->package "emacs-counsel")) ; replaced by consult stuff
+                                        ;old (package-with-emacs-pgtk (specification->package "emacs-counsel-tramp"))
+                                        ;old (package-with-emacs-pgtk (specification->package "emacs-counsel-projectile"))
                                         ;old (package-with-emacs-pgtk (specification->package "emacs-counsel-jq"))
                                         ;old (package-with-emacs-pgtk (specification->package "emacs-helm-projectile"))
              (package-with-emacs-pgtk (specification->package "emacs-company-jedi")) ; Python completion
@@ -1234,7 +1234,7 @@ file prettification."))))
 
              (specification->package "pantalaimon")
              (package-with-emacs-pgtk (specification->package "emacs-ement"))
-             (package-with-emacs-pgtk (specification->package "emacs-slack"))
+                                        ; HELM            (package-with-emacs-pgtk (specification->package "emacs-slack"))
              
              ;; Guile IDE
              (package-with-emacs-pgtk (specification->package "emacs-arei"))
