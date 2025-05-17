@@ -175,11 +175,11 @@
 (define waybar-patch
   (lambda (p)
     (package
-      (inherit p)
-      (inputs
-       (modify-inputs (package-inputs p)
-                      (delete "pipewire")
-                      (delete "pulseaudio"))))))
+     (inherit p)
+     (inputs
+      (modify-inputs (package-inputs p)
+                     (delete "pipewire")
+                     (delete "pulseaudio"))))))
 
                                         ;doesn't apply
                                         ;(define patch6
