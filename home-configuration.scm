@@ -1014,7 +1014,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-jinx")) ; spell checker
              (specification->package "aspell") ; so we get DICPATH set to guix home's profile.  That's ridiculous.
              (specification->package "aspell-dict-en")
-             ;(specification->package "aspell-dict-de")
+                                        ;(specification->package "aspell-dict-de")
              (specification->package "hunspell") ; so we get DICPATH set to guix home's profile.  That's ridiculous.
              (specification->package "hunspell-dict-de-at")
              (specification->package "hunspell-dict-de")
