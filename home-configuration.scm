@@ -160,6 +160,13 @@
                                                            ))
                              )))
 
+(define emacs-el-job-patch
+  (options->transformation `(  ;  (with-debug-info . "vorta")
+                             (with-patch . ,(string-append "emacs-el-job="
+                                                           "patches/emacs-el-job-2025.patch"
+                                                           ))
+                             )))
+
 
 (define llama-tune
   (options->transformation `( ; "invalid Git URL replacement specification" (with-git-url . "https://github.com/unslothai/llama.cpp.git") ; dynamic quantization
