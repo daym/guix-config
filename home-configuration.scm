@@ -187,22 +187,23 @@
 
 (define emacs-pgtk (emacs-patch (specification->package "emacs-pgtk")))
 
-(define (package-with-emacs-pgtk p)
-  (package
-    (inherit p)
-    (propagated-inputs
-     (map (match-lambda ((name (? package? q) sub-drvs ...)
-                         `(,name ,(package-with-emacs-pgtk q) ,@sub-drvs)))
-          (package-propagated-inputs p)))
-    (arguments
-     (if (and (eq? 'emacs (build-system-name (package-build-system p)))
-              (not (string=? (package-name p) "emacs-jedi")) ; test failure on native compilation
-              (not (string=? (package-name p) "emacs-dap-mode")) ; native-compiler-error-empty-byte
-              (not (string=? (package-name p) "emacs-yaml"))) ; would hang otherwise
+(define package-with-emacs-pgtk (memoize
+                                 (lambda (p)
+                                   (package
+                                    (inherit p)
+                                    (propagated-inputs
+                                     (map (match-lambda ((name (? package? q) sub-drvs ...)
+                                                         `(,name ,(package-with-emacs-pgtk q) ,@sub-drvs)))
+                                          (package-propagated-inputs p)))
+                                    (arguments
+                                     (if (and (eq? 'emacs (build-system-name (package-build-system p)))
+                                              (not (string=? (package-name p) "emacs-jedi")) ; test failure on native compilation
+                                              (not (string=? (package-name p) "emacs-dap-mode")) ; native-compiler-error-empty-byte
+                                              (not (string=? (package-name p) "emacs-yaml"))) ; would hang otherwise
                                         ; emacs-guix emacs-haskell-mode emacs-pdf-tools
-         `(#:emacs ,emacs-pgtk
-           ,@(package-arguments p))
-         (package-arguments p)))))
+                                         `(#:emacs ,emacs-pgtk
+                                           ,@(package-arguments p))
+                                         (package-arguments p)))))))
 
 (define %source-dir (string-append (getcwd) "/idea"))
 
