@@ -671,7 +671,7 @@ file prettification."))))
              (specification->package "cryptsetup")
              (specification->package "hwinfo")
              (specification->package "strace")
-             (specification->package "screen")
+                                        ; security issues (specification->package "screen")
              (specification->package "fzf")
              (specification->package "tmon") ; temp monitoring
              (specification->package "file")
