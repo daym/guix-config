@@ -361,7 +361,10 @@
 
 (define backup-packages
   (append (specifications->packages '("cryfs" "onedrive"))
-          (list (vorta-patch (specification->package "vorta")))))
+          (list ; (vorta-patch 
+           (specification->package "vorta")
+                                        ;)
+           )))
 
 ;; Rewrites in Rust
                                         ;(specification->package "fish")
