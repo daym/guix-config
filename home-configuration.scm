@@ -216,96 +216,96 @@
                                         ; TODO: e2fsprogs libe2p.so
 (define idea
   (package
-    (name "idea")
-    (version "FIXME")
-    (source (local-file %source-dir #:recursive? #t)) ;  #:select? (git-predicate %source-dir)
-    (build-system gnu-build-system)
-    (arguments
-     `(#:tests? #f
-       #:phases
-       (modify-phases %standard-phases
-         (delete 'configure)
-         (delete 'build)
-         (replace 'install
-           (lambda* (#:key inputs outputs #:allow-other-keys)
-             (let* ((out (assoc-ref outputs "out"))
-                    (out-bin (string-append out "/bin"))
-                    (out-share (string-append out "/share"))
-                    (out-share-applications (string-append out-share "/applications"))
-                    (out-share-icons (string-append out-share "/icons")))
-               (for-each (lambda (file-name)
-                           (let ((full-file-name (string-append "bin/" file-name)))
-                             (install-file full-file-name out-bin)
-                             (chmod (string-append out-bin "/" file-name) #o755)
-                             (wrap-program (string-append out-bin "/" file-name)
-                               `("LD_LIBRARY_PATH" prefix
-                                 (,(string-append
-                                    (assoc-ref inputs "libsecret")
-                                    "/lib:"
-                                    (assoc-ref inputs "e2fsprogs")
-                                    "/lib")))
-                               ;; Otherwise GradleProjectSettings Jvm never get actually resolved when you select "#JAVA_HOME" in the Ctrl-S gradle "Gradle JVM" GUI. The next Gradle sync then will fail with mysterious error message "Invalid Gradle JDK configuration found.". Very unfun.
-                               `("JAVA_HOME" = (,(assoc-ref inputs "openjdk")))
-                               `("JBR21" = (,(assoc-ref inputs "jbr21")))
-                               `("JBR17" = (,(assoc-ref inputs "jbr17")))
-                               `("RIDER_JDK" = (,(assoc-ref inputs "jbr21")))
-                               `("MPS_JDK" = (,(assoc-ref inputs "jbr21")))
-                               `("CLION_JDK" = (,(assoc-ref inputs "jbr21")))
-                               `("IDEA_JDK" = (,(assoc-ref inputs "jbr21")))
-                               `("STUDIO_JDK" = (,(assoc-ref inputs "jbr21")))
-                               `("PYCHARM_JDK" = (,(assoc-ref inputs "jbr21"))))))
-                         '("android-studio" "idea" "pycharm" "rider" "mps"))
-               (for-each (lambda (file-name)
-                           (let ((dir-name
-                                  (string-append out "/"
-                                                 (dirname file-name))))
-                             (install-file file-name dir-name)))
-                         '("share/icons/hicolor/scalable/apps/android-studio.svg"
-                           "share/icons/hicolor/scalable/apps/pycharm.svg"
-                           "share/icons/hicolor/128x128/apps/idea.png"
-                           "share/icons/hicolor/128x128/apps/pycharm.png"
-                           "share/icons/hicolor/64x64/apps/idea.png"))
-               (mkdir-p out-share-applications)
-               (for-each (lambda (file-name)
+   (name "idea")
+   (version "FIXME")
+   (source (local-file %source-dir #:recursive? #t)) ;  #:select? (git-predicate %source-dir)
+   (build-system gnu-build-system)
+   (arguments
+    `(#:tests? #f
+      #:phases
+      (modify-phases %standard-phases
+                     (delete 'configure)
+                     (delete 'build)
+                     (replace 'install
+                              (lambda* (#:key inputs outputs #:allow-other-keys)
+                                (let* ((out (assoc-ref outputs "out"))
+                                       (out-bin (string-append out "/bin"))
+                                       (out-share (string-append out "/share"))
+                                       (out-share-applications (string-append out-share "/applications"))
+                                       (out-share-icons (string-append out-share "/icons")))
+                                  (for-each (lambda (file-name)
+                                              (let ((full-file-name (string-append "bin/" file-name)))
+                                                (install-file full-file-name out-bin)
+                                                (chmod (string-append out-bin "/" file-name) #o755)
+                                                (wrap-program (string-append out-bin "/" file-name)
+                                                              `("LD_LIBRARY_PATH" prefix
+                                                                (,(string-append
+                                                                   (assoc-ref inputs "libsecret")
+                                                                   "/lib:"
+                                                                   (assoc-ref inputs "e2fsprogs")
+                                                                   "/lib")))
+                                                              ;; Otherwise GradleProjectSettings Jvm never get actually resolved when you select "#JAVA_HOME" in the Ctrl-S gradle "Gradle JVM" GUI. The next Gradle sync then will fail with mysterious error message "Invalid Gradle JDK configuration found.". Very unfun.
+                                                              `("JAVA_HOME" = (,(assoc-ref inputs "openjdk")))
+                                                              `("JBR21" = (,(assoc-ref inputs "jbr21")))
+                                                              `("JBR17" = (,(assoc-ref inputs "jbr17")))
+                                                              `("RIDER_JDK" = (,(assoc-ref inputs "jbr21")))
+                                                              `("MPS_JDK" = (,(assoc-ref inputs "jbr21")))
+                                                              `("CLION_JDK" = (,(assoc-ref inputs "jbr21")))
+                                                              `("IDEA_JDK" = (,(assoc-ref inputs "jbr21")))
+                                                              `("STUDIO_JDK" = (,(assoc-ref inputs "jbr21")))
+                                                              `("PYCHARM_JDK" = (,(assoc-ref inputs "jbr21"))))))
+                                            '("android-studio" "idea" "pycharm" "rider" "mps"))
+                                  (for-each (lambda (file-name)
+                                              (let ((dir-name
+                                                     (string-append out "/"
+                                                                    (dirname file-name))))
+                                                (install-file file-name dir-name)))
+                                            '("share/icons/hicolor/scalable/apps/android-studio.svg"
+                                              "share/icons/hicolor/scalable/apps/pycharm.svg"
+                                              "share/icons/hicolor/128x128/apps/idea.png"
+                                              "share/icons/hicolor/128x128/apps/pycharm.png"
+                                              "share/icons/hicolor/64x64/apps/idea.png"))
+                                  (mkdir-p out-share-applications)
+                                  (for-each (lambda (file-name)
                                         ;(substitute* file-name
                                         ; (("^Exec=.*") (string-append "Exec="  "\n")))
                                         ; TODO make-desktop-entry-file
-                           (install-file file-name out-share-applications))
-                         '("share/applications/android-studio.desktop"
-                           "share/applications/idea.desktop"
-                           "share/applications/pycharm.desktop"))))))))
-    (native-inputs
-     (list))
-    (inputs
-     `(("e2fsprogs" ,e2fsprogs)
+                                              (install-file file-name out-share-applications))
+                                            '("share/applications/android-studio.desktop"
+                                              "share/applications/idea.desktop"
+                                              "share/applications/pycharm.desktop"))))))))
+   (native-inputs
+    (list))
+   (inputs
+    `(("e2fsprogs" ,e2fsprogs)
                                         ;("jbr11" ,jbr11 "jdk")
-       ("openjdk" ,openjdk "jdk")
-       ("jbr17" ,jbr17 "jdk")
-       ("jbr21" ,jbr21 "jdk")
-       ("libsecret" ,libsecret)))
-    (synopsis "IDE")
-    (description "This package provides an IDE.")
-    (home-page "https://www.jetbrains.com/idea/")
-    (license license:asl2.0)))
+      ("openjdk" ,openjdk "jdk")
+      ("jbr17" ,jbr17 "jdk")
+      ("jbr21" ,jbr21 "jdk")
+      ("libsecret" ,libsecret)))
+   (synopsis "IDE")
+   (description "This package provides an IDE.")
+   (home-page "https://www.jetbrains.com/idea/")
+   (license license:asl2.0)))
 
 (define emacs-xenops
   (package
-    (name "emacs-xenops")
-    (version "0.0.1")
-    (source (origin
-              (method git-fetch)
-              (uri (git-reference
-                     (url "https://github.com/dandavison/xenops.git")
-                     (commit (string-append "v" version))))
-              (file-name (git-file-name name version))
-              (sha256
-               (base32
-                "1vsrc1s62kv1i84skm6k5zy868gayjck268qwj38rpspc8c5qgih"))))
-    (build-system emacs-build-system)
-    (synopsis "xenops")
-    (description "FIXME")
-    (home-page "FIXME")
-    (license license:expat)))
+   (name "emacs-xenops")
+   (version "0.0.1")
+   (source (origin
+            (method git-fetch)
+            (uri (git-reference
+                  (url "https://github.com/dandavison/xenops.git")
+                  (commit (string-append "v" version))))
+            (file-name (git-file-name name version))
+            (sha256
+             (base32
+              "1vsrc1s62kv1i84skm6k5zy868gayjck268qwj38rpspc8c5qgih"))))
+   (build-system emacs-build-system)
+   (synopsis "xenops")
+   (description "FIXME")
+   (home-page "FIXME")
+   (license license:expat)))
 
 (define xorg-packages
   (specifications->packages '("i3-wm" "openbox" "tint2" "xbindkeys" "xterm")
