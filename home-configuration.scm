@@ -142,12 +142,11 @@
   (options->transformation `(  ;  (with-debug-info . "libappindicator")
                                         ; for header line.
                              (with-patch . ,(string-append "emacs-window-tool-bar="
-                                                           ;"patches/window-tool-bar-header.patch" ; ok but useless
+                                        ;"patches/window-tool-bar-header.patch" ; ok but useless
                                                            "patches/emacs-window-tool-bar-click2.patch" ; I need that
-                                                           ;"patches/32.patch"
+                                        ;"patches/32.patch"
                                                            ))
                              )))
-
 
 (define mu-patch
   (options->transformation `((with-patch . ,(string-append "mu="
