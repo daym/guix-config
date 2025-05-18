@@ -40,8 +40,7 @@ export PATH="${HOME}/.local/bin:${PATH}"
 # FIXME maybe later. npm config set prefix "${HOME}/.local/npm-packages"
 #npm config set prefix "${HOME}/.local/node_modules"
 #PATH="${HOME}/.local/node_modules/.bin:${PATH}"
-# TODO: Maybe use ~/.guix-home/profile/etc/profile.d/flatpak.sh instead.  But that doesn't set PATH.
-export PATH="${HOME}/.local/npm-packages/bin:${HOME}/src/docker-oreboot/docker-oreboot/toolchain/rust/bin:${HOME}/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:${PATH}"
+export PATH="${HOME}/.local/npm-packages/bin:${HOME}/src/docker-oreboot/docker-oreboot/toolchain/rust/bin:${PATH}"
 
 export TERMINAL=foot
 export GTK_CSD=0 # useless?
@@ -53,8 +52,10 @@ export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
 
 #export WII=192.168.10.248
 
-XDG_DATA_DIRS="${HOME}/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
-export XDG_DATA_DIRS
+. ~/.guix-home/profile/etc/profile.d/flatpak.sh
+
+#XDG_DATA_DIRS="${HOME}/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+#export XDG_DATA_DIRS
 
 if [ -z "${GIT_EXEC_PATH}" ]
 then
