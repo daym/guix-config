@@ -40,7 +40,8 @@ export PATH="${HOME}/.local/bin:${PATH}"
 # FIXME maybe later. npm config set prefix "${HOME}/.local/npm-packages"
 #npm config set prefix "${HOME}/.local/node_modules"
 #PATH="${HOME}/.local/node_modules/.bin:${PATH}"
-export PATH="${HOME}/.local/npm-packages/bin:${HOME}/src/docker-oreboot/docker-oreboot/toolchain/rust/bin:/var/lib/flatpak/exports/bin:${PATH}"
+# TODO: Maybe use /etc/profile.d/flatpak.sh instead.
+export PATH="${HOME}/.local/npm-packages/bin:${HOME}/src/docker-oreboot/docker-oreboot/toolchain/rust/bin:${HOME}/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:${PATH}"
 
 export TERMINAL=foot
 export GTK_CSD=0 # useless?
