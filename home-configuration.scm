@@ -201,7 +201,8 @@
                                            ,@(package-arguments p))
                                          (package-arguments p)))))))
 
-(define %source-dir (string-append (getcwd) "/idea"))
+;; Note: Or (current-filename)
+(define %source-dir (string-append (current-source-directory) "/idea"))
 
                                         ; Note: Community edition contains proprietary plugins: https://www.jetbrains.com/legal/community-bundled-plugins (Space Integration, Code With Me, Shared Indexes, Marketplace Licensing Support, Package Checker)
                                         ; Note: Community products: android-studio, idea, pycharm
@@ -1559,9 +1560,9 @@ file prettification."))))
                         ("ll" . "ls -l")
                         ("ls" . "ls -p --color=auto")))
              (bashrc (list (local-file
-                            ".bashrc"
+                            (string-append (current-source-directory) "/.bashrc")
                             "bashrc")))
              (bash-profile (list (local-file
-                                  ".bash_profile"
+                                  (string-append (current-source-directory) "/.bash_profile")
                                   "bash_profile")))))
    %base-home-services)))
