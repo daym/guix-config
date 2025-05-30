@@ -947,6 +947,7 @@ file prettification."))))
              (package-with-emacs-pgtk (specification->package "emacs-magit-org-todos-el"))
              (package-with-emacs-pgtk (specification->package "emacs-org-jira"))
              (package-with-emacs-pgtk (specification->package "emacs-git-email"))
+             (package-with-emacs-pgtk (specification->package "emacs-git-gutter-fringe"))
              (package-with-emacs-pgtk (specification->package "emacs-diff-hl")) ; VC diff in the fringe
              (package-with-emacs-pgtk (emacs-color-theme-solarized-patch (specification->package "emacs-color-theme-solarized")))
              (package-with-emacs-pgtk (specification->package "emacs-dtrt-indent"))
