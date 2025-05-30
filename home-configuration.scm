@@ -72,94 +72,92 @@
 (use-modules ((guix licenses) #:prefix license:))
 (define transform1
   (options->transformation `((with-patch . ,(string-append "libcxx@12.0.1="
-                                                           "patches/libcxx2.patch")))))
+                                                           (current-source-directory)
+                                                           "/patches/libcxx2.patch")))))
 
 ;; TODO: We don't use it anymore--but maybe it would be a good idea for Guix to have it.
 (define patch1
   (options->transformation `((with-patch . ,(string-append "emacs-dap-mode="
-                                                           "patches/dap-mode.patch")))))
+                                                           (current-source-directory)
+                                                           "/patches/dap-mode.patch")))))
 
 (define patch2
   (options->transformation `((with-patch . ,(string-append "emacs-lsp-mode="
-                                                           "patches/lsp-mode.patch")))))
-
-                                        ;(define patch5
-                                        ;  (options->transformation `((with-debug-info . "mogan")
-                                        ;                             (with-patch . ,(string-append "mogan="
-                                        ;                                                          "patches/mogan-wayland.patch")))))
-
-                                        ;(define texmacs-patch
-                                        ;  (options->transformation `( ;(with-debug-info . "qtbase")
-                                        ;                             (with-debug-info . "texmacs-guile3")
-                                        ;                             (with-patch . ,(string-append "texmacs-guile3="
-                                        ;                                                           "patches/texmacs-wayland.patch")))))
+                                                           (current-source-directory)
+                                                           "/patches/lsp-mode.patch")))))
 
 ;; Avoid etc/images/diropen.xpm and diropen.xbm
 (define emacs-patch
   (options->transformation `((with-patch . ,(string-append "emacs-pgtk="
-                                                           "patches/emacs-tab-stops.patch")))))
+                                                           (current-source-directory)
+                                                           "/patches/emacs-tab-stops.patch")))))
 
 (define offlineimap-patch
   (options->transformation `((with-patch . ,(string-append "python-imaplib2="
-                                                           "patches/imaplib2-python3.patch")))))
+                                                           (current-source-directory)
+                                                           "/patches/imaplib2-python3.patch")))))
 
 (define nwg-launchers-patch
   (options->transformation `((with-patch . ,(string-append "nwg-launchers="
-                                                           "patches/nwg-launchers-startup-notification.patch")))))
+                                                           (current-source-directory)
+                                                           "/patches/nwg-launchers-startup-notification.patch")))))
 
 (define sway-patch
   (options->transformation `((with-patch . ,(string-append "sway="
-                                                           "patches/sway-busy-cursor.patch")))))
-
-                                        ;(define emacs-gptel-patch
-                                        ;  (options->transformation `((with-patch . ,(string-append "emacs-gptel="
-                                        ;                             "patches/emacs-gptel.patch")))))
+                                                           (current-source-directory)
+                                                           "/patches/sway-busy-cursor.patch")))))
 
 (define ungoogled-chromium-patch
   (options->transformation `( ;(with-debug-info . "ungoogled-chromium")
                              (with-patch . ,(string-append "ungoogled-chromium="
-                                                           "patches/7b0d7f4.diff")))))
+                                                           (current-source-directory)
+                                                           "/patches/7b0d7f4.diff")))))
 
 (define emacs-spacious-padding-patch
   (options->transformation `((with-patch . ,(string-append "emacs-spacious-padding="
-                                                           "patches/emacs-spacious-padding2.patch")))))
+                                                           (current-source-directory)
+                                                           "/patches/emacs-spacious-padding2.patch")))))
 
 (define emacs-color-theme-solarized-patch
   (options->transformation `((with-patch . ,(string-append "emacs-color-theme-solarized="
-                                                           "patches/emacs-color-theme-solarized2.patch")))))
+                                                           (current-source-directory)
+                                                           "/patches/emacs-color-theme-solarized2.patch")))))
 
 (define network-manager-applet-patch
   (options->transformation `(  ;  (with-debug-info . "libappindicator")
                                         ;(with-debug-info . "gtk+")
                              (with-patch . ,(string-append "network-manager-applet="
-                                                           "patches/network-manager-applet.patch")))))
+                                                           (current-source-directory)
+                                                           "/patches/network-manager-applet.patch")))))
 
 (define emacs-debbugs-patch
   (options->transformation `((with-patch . ,(string-append "emacs-debbugs="
-                                                           "patches/emacs-debbugs-mu4e.patch")))))
+                                                           (current-source-directory)
+                                                           "/patches/emacs-debbugs-mu4e.patch")))))
 
 
 (define emacs-window-tool-bar-patch
   (options->transformation `(  ;  (with-debug-info . "libappindicator")
                                         ; for header line.
                              (with-patch . ,(string-append "emacs-window-tool-bar="
-                                        ;"patches/window-tool-bar-header.patch" ; ok but useless
-                                                           "patches/emacs-window-tool-bar-click2.patch" ; I need that
-                                        ;"patches/32.patch"
+                                                           (current-source-directory)
+                                                           "/patches/emacs-window-tool-bar-click2.patch" ; I need that
                                                            ))
                              )))
 
 (define vorta-patch
   (options->transformation `(  ;  (with-debug-info . "vorta")
                              (with-patch . ,(string-append "vorta="
-                                                           "patches/vorta-2205.patch"
+                                                           (current-source-directory)
+                                                           "/patches/vorta-2205.patch"
                                                            ))
                              )))
 
 (define emacs-el-job-patch
   (options->transformation `(  ;  (with-debug-info . "vorta")
                              (with-patch . ,(string-append "emacs-el-job="
-                                                           "patches/emacs-el-job-2025.patch"
+                                                           (current-source-directory)
+                                                           "/patches/emacs-el-job-2025.patch"
                                                            ))
                              )))
 
