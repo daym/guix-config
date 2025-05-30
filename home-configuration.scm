@@ -353,6 +353,7 @@
                                         ;"scrot" ; screenshot ; supposedly only xorg
                               "maim" ; screenshot; need no hold-drag
                               "grimshot"
+                              "ydotool" ; simulate keyboard stuff
                               )))
 
 (define backup-packages
