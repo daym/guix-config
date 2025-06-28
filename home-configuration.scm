@@ -24,6 +24,7 @@
              (guix build-system pyproject)
              (guix channels)
              (ice-9 match)
+             (gnu home services)
              (gnu home services desktop)
                                         ;(gnu home services dict)
              (gnu home services dotfiles)
@@ -575,6 +576,352 @@ notebooks in GNU Emacs.")
 Note: This is a minimalist variant of emacs-guix, with simply
 file prettification."))))
 
+(define (funmacs-packages config)
+  (list
+             (package-with-emacs-pgtk (specification->package "emacs-with-editor")) ; password-store requires this and doesn't have it in its inputs
+             (package-with-emacs-pgtk (specification->package "emacs-pinentry"))
+             (package-with-emacs-pgtk (specification->package "emacs-enwc")) ; network manager
+             (package-with-emacs-pgtk (specification->package "emacs-age")) ; encryption
+             ; BROKEN (package-with-emacs-pgtk (specification->package "emacs-elisp-autofmt"))
+             (package-with-emacs-pgtk (specification->package "emacs-password-store")) ; "pass" integration
+             (package-with-emacs-pgtk (specification->package "emacs-passage")) ; password mgr
+             (package-with-emacs-pgtk (specification->package "emacs-scad-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-mediainfo-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-iedit")) ; edit all matching text at once
+             (package-with-emacs-pgtk (specification->package "emacs-nyan-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-vhdl-ts-mode"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-vhdl-ext"))
+             (package-with-emacs-pgtk (specification->package "emacs-fpga"))
+             (package-with-emacs-pgtk (emacs-window-tool-bar-patch (specification->package "emacs-window-tool-bar")))
+             (package-with-emacs-pgtk (specification->package "emacs-wgrep"))
+             (package-with-emacs-pgtk (specification->package "emacs-ws-butler")) ; auto trim whitespace from end of MODIFIED lines
+             (package-with-emacs-pgtk (specification->package "emacs-vlf")) ; very large files
+             (package-with-emacs-pgtk (specification->package "emacs-hideshowvis"))
+             (package-with-emacs-pgtk (specification->package "emacs-tuareg")) ; ocaml
+             (package-with-emacs-pgtk (specification->package "emacs-yaml-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-julia-mode")) ; uses yaml which hangs
+             (package-with-emacs-pgtk (specification->package "emacs-julia-repl"))
+             (package-with-emacs-pgtk (specification->package "emacs-julia-snail"))
+             (package-with-emacs-pgtk (specification->package "emacs-inf-ruby"))
+             (package-with-emacs-pgtk (specification->package "emacs-alchemist")) ; Elixir
+             (package-with-emacs-pgtk (specification->package "emacs-xpm"))
+             (package-with-emacs-pgtk (specification->package "emacs-tco-el")) ; macro "defun-tco" for tail call optimized procedures
+             (package-with-emacs-pgtk (specification->package "emacs-stream"))
+             (package-with-emacs-pgtk (specification->package "emacs-flymake"))
+             (package-with-emacs-pgtk (patch2 (specification->package "emacs-lean4-mode")))
+             (package-with-emacs-pgtk (specification->package "emacs-plantuml-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-ctrlf")) ; you've got to be kidding me. Why is this not builtin? ; alternatives: occur[!], swiper, consult-line[terrible]
+                                        ; HELM (package-with-emacs-pgtk (specification->package "emacs-ezf"))
+             (package-with-emacs-pgtk (specification->package "emacs-code-cells"))
+             (package-with-emacs-pgtk (specification->package "emacs-jupyter"))
+                                        ;(package-with-emacs-pgtk emacs-notebook-mode)
+             (package-with-emacs-pgtk (specification->package "emacs-password-generator"))
+             (package-with-emacs-pgtk (specification->package "emacs-kotlin-mode"))
+                                        ; TODO maybe emacs-git-link
+             (package-with-emacs-pgtk (specification->package "emacs-aggressive-indent"))
+             (package-with-emacs-pgtk (specification->package "emacs-casual-calc"))
+             (package-with-emacs-pgtk (specification->package "emacs-casual-info"))
+             (package-with-emacs-pgtk (specification->package "emacs-casual-dired"))
+             (package-with-emacs-pgtk (specification->package "emacs-show-font"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-casual-avy"))
+             (package-with-emacs-pgtk (specification->package "emacs-aio"))
+             (package-with-emacs-pgtk (specification->package "emacs-lsp-booster"))
+             (package-with-emacs-pgtk (specification->package "emacs-undo-tree"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-page-break-lines"))
+             (package-with-emacs-pgtk (specification->package "emacs-form-feed"))
+             (package-with-emacs-pgtk emacs-pgtk) ; overly paranoid
+             (package-with-emacs-pgtk (specification->package "emacs-smartparens"))
+             (package-with-emacs-pgtk (specification->package "emacs-combobulate"))
+             (package-with-emacs-pgtk (specification->package "emacs-indent-bars")) ; maybe overdoing it
+             (package-with-emacs-pgtk (emacs-spacious-padding-patch (specification->package "emacs-spacious-padding"))) ; spacing between windows
+             (package-with-emacs-pgtk (specification->package "emacs-crdt"))
+             (package-with-emacs-pgtk (specification->package "emacs-magit"))
+             (package-with-emacs-pgtk (specification->package "emacs-magit-org-todos-el"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-jira"))
+             ;(package-with-emacs-pgtk (specification->package "emacs-org-mime"))
+             (package-with-emacs-pgtk (specification->package "emacs-git-email"))
+             (package-with-emacs-pgtk (specification->package "emacs-git-gutter-fringe"))
+             (package-with-emacs-pgtk (specification->package "emacs-diff-hl")) ; VC diff in the fringe
+             (package-with-emacs-pgtk (emacs-color-theme-solarized-patch (specification->package "emacs-color-theme-solarized")))
+             (package-with-emacs-pgtk (specification->package "emacs-dtrt-indent"))
+             (package-with-emacs-pgtk (specification->package "emacs-slime-company"))
+             (package-with-emacs-pgtk (specification->package "emacs-eval-in-repl-slime"))
+             ;(package-with-emacs-pgtk (specification->package "emacs-pyvenv")) ; we're not really using that
+             ;; For Lisp and Javascript; Note: emacs-sly is a fork
+             (package-with-emacs-pgtk (specification->package "emacs-slime"))
+             (package-with-emacs-pgtk (specification->package "emacs-eldoc"))
+             (package-with-emacs-pgtk (specification->package "emacs-xref")) ; TODO: emacs-xref-union
+             (package-with-emacs-pgtk (specification->package "emacs-sesman"))
+             (package-with-emacs-pgtk (specification->package "emacs-outshine")) ; org-like stuff outside org
+             (package-with-emacs-pgtk (specification->package "emacs-org")) ; org 9.7.11 is included in emacs
+             (package-with-emacs-pgtk (specification->package "emacs-org-notify"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-org-element")) ; tree
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-org-texlive-collection"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-edna"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-node@3"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-noter")) ; PDF notes
+             (package-with-emacs-pgtk (specification->package "emacs-org-pdftools")) ; PDF notes and links ; for org-noter-pdftools; "lightly maintained" (terrible quality)
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-org-fragtog")) ; I have xenops already
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-xenops"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-super-links"))
+             (package-with-emacs-pgtk (specification->package "emacs-orgit")) ; make org links to magit buffers
+             (package-with-emacs-pgtk (specification->package "emacs-orgit-forge")) ; make org links to forge topic buffers
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-org-roam"))
+                                        ; HELM            (package-with-emacs-pgtk (specification->package "emacs-org-ref"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-super-agenda"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-timeblock"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-remark")) ; add notes to epub and websites
+             (package-with-emacs-pgtk (specification->package "emacs-org-pomodoro"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-emms"))
+             (package-with-emacs-pgtk (specification->package "emacs-mu4e-dashboard")) ; live query mu4e from org
+             (package-with-emacs-pgtk (specification->package "emacs-mu4e-alert"))
+             ;;(package-with-emacs-pgtk (specification->package "emacs-bbdb")) ; contact management (old)
+             (package-with-emacs-pgtk (specification->package "emacs-ebdb")) ; contact management
+             ;; old (package-with-emacs-pgtk (specification->package "emacs-bbdb-vcard"))
+             (package-with-emacs-pgtk (specification->package "emacs-consult-mu")) ; search mails from consult
+             (package-with-emacs-pgtk (specification->package "emacs-org-msg"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-contrib")) ; not that well-maintained
+             (package-with-emacs-pgtk (specification->package "emacs-emms"))
+             (package-with-emacs-pgtk (specification->package "emacs-comment-tags"))
+             (package-with-emacs-pgtk (specification->package "emacs-csv-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-keycast")) ; shows keys pressed
+             (package-with-emacs-pgtk (specification->package "emacs-embark"))
+             (package-with-emacs-pgtk (specification->package "emacs-outline-indent")) ; code folding and outlining
+             (package-with-emacs-pgtk (specification->package "emacs-rmsbolt")) ; godbolt
+             ;; Used by emacs-dap-mode
+             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-treemacs")))
+             ;; Used by emacs-dap-mode
+             (package-with-emacs-pgtk (specification->package "emacs-bui"))
+             ;; Used by emacs-dap-mode (popup)
+             (package-with-emacs-pgtk (specification->package "emacs-posframe"))
+             (package-with-emacs-pgtk (specification->package "emacs-beacon"))
+             (package-with-emacs-pgtk (specification->package "emacs-bar-cursor"))
+             (package-with-emacs-pgtk (specification->package "emacs-jinx")) ; spell checker
+             (package-with-emacs-pgtk (specification->package "emacs-wakib-keys"))
+             (package-with-emacs-pgtk (specification->package "emacs-treemacs-nerd-icons"))
+             (package-with-emacs-pgtk (specification->package "emacs-elastic-modes"))
+             ;; Alternative: emacs-dape
+             (patch2 (package-with-emacs-pgtk (specification->package "emacs-dap-mode")))
+             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-mode")))
+             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-ui")))
+                                        ; doesn't work (package-with-emacs-pgtk (specification->package "emacs-lsp-docker"))
+                                        ; part of emacs since emacs 29 (package-with-emacs-pgtk (specification->package "emacs-csharp-mode"))
+             (patch2 (package-with-emacs-pgtk (specification->package "emacs-ccls"))) ; C LSP; conflicts with our patched dap-mode
+             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-java"))) ; conflicts with our patched dap-mode
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-elpy")) ; just use dap-python ; elpy is unmaintained
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-tramp")) ; I think that's part of emacs now
+             (package-with-emacs-pgtk (specification->package "emacs-agda2-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-treemacs"))
+             (package-with-emacs-pgtk emacs-treemacs-extra) ; magit, projectile, tab-bar; but also all-the-icons, memoize, evil, persp-mode, perspective; mu
+             (package-with-emacs-pgtk (specification->package "emacs-magit-gerrit"))
+             (package-with-emacs-pgtk (specification->package "emacs-magit-svn"))
+             (patch2 (package-with-emacs-pgtk (specification->package "emacs-rustic")))
+             (package-with-emacs-pgtk (specification->package "emacs-projectile"))
+             (package-with-emacs-pgtk (specification->package "emacs-company"))
+             (patch2 (package-with-emacs-pgtk (specification->package "emacs-company-lsp")))
+             (package-with-emacs-pgtk (specification->package "emacs-company-org-block")) ; snippets with "<"
+             (package-with-emacs-pgtk (specification->package "emacs-capf-autosuggest"))
+             (package-with-emacs-pgtk (specification->package "ispell")) ; used by built-in emacs flyspell-mode
+             (package-with-emacs-pgtk (specification->package "emacs-flycheck"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-helm")) ; replaced by vertico
+             (package-with-emacs-pgtk (specification->package "emacs-shackle"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-envrc"))
+             ;; Understands guix.scm and manifest.scm natively
+             (package-with-emacs-pgtk (specification->package "emacs-buffer-env"))
+             (package-with-emacs-pgtk (specification->package "emacs-clojure-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-clojure-snippets"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-helm-cider"))
+             ;; For Clojure. Supports light table via M-x cider-enlighten-mode
+             (package-with-emacs-pgtk (specification->package "emacs-cider"))
+             (package-with-emacs-pgtk (specification->package "emacs-clj-refactor"))
+             (package-with-emacs-pgtk (specification->package "emacs-eval-in-repl-cider"))
+             (package-with-emacs-pgtk (specification->package "emacs-haskell-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-geiser-guile")) ; geiser is worse than arei
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-flycheck-guile")) ; would use geiser
+             (package-with-emacs-pgtk (specification->package "emacs-parinfer-rust-mode"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-parinfer-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-web-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-git-timemachine"))
+             (package-with-emacs-pgtk (specification->package "emacs-markdown-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-geiser")) ; geiser is worse than arei
+             (package-with-emacs-pgtk (specification->package "emacs-go-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-typescript-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-pkg-info"))
+             (package-with-emacs-pgtk (specification->package "emacs-flycheck-rust"))
+             (package-with-emacs-pgtk (specification->package "emacs-rust-mode"))
+             ; REQ OLD emacs-aio (package-with-emacs-pgtk (specification->package "emacs-docker"))
+             (package-with-emacs-pgtk (specification->package "emacs-dired-launch"))
+             (package-with-emacs-pgtk (specification->package "emacs-dirvish")) ; better dired
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-docker-tramp"))
+             (package-with-emacs-pgtk (specification->package "emacs-eat"))
+                                                     ; statistics: R, Julia, and JAGS.
+                                        ; FIXME (package-with-emacs-pgtk (specification->package "emacs-ess"))
+             (specification->package "python-jupyter-client") ; required by emacs-jupyter (for no reason; why not just invoke "jupyter kernel"?)
+             (package-with-emacs-pgtk (specification->package "emacs-jupyter"))
+                                        ; TODO emacs-python-black ?? ; why not format-all-the-code ? The latter already works, I think.
+             (package-with-emacs-pgtk (specification->package "emacs-elixir-mode"))
+             (package-with-emacs-pgtk emacs-guix-minimal)
+             (package-with-emacs-pgtk (specification->package "emacs-bluetooth"))
+             (package-with-emacs-pgtk (specification->package "emacs-osm"))
+             (package-with-emacs-pgtk (specification->package "emacs-erc-hl-nicks")) ; IRC nick coloring
+                                        ;old (package-with-emacs-pgtk (specification->package "emacs-counsel")) ; replaced by consult stuff
+                                        ;old (package-with-emacs-pgtk (specification->package "emacs-counsel-tramp"))
+                                        ;old (package-with-emacs-pgtk (specification->package "emacs-counsel-projectile"))
+                                        ;old (package-with-emacs-pgtk (specification->package "emacs-counsel-jq"))
+                                        ;old (package-with-emacs-pgtk (specification->package "emacs-helm-projectile"))
+             ; BROKEN (package-with-emacs-pgtk (specification->package "emacs-company-jedi")) ; Python completion
+             (package-with-emacs-pgtk (specification->package "emacs-back-button"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-wanderlust")) ; email (POP3, IMAP and Maildir)
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-mew"))
+             (package-with-emacs-pgtk (specification->package "emacs-vertico"))
+             (package-with-emacs-pgtk (specification->package "emacs-consult"))
+             (patch2 (package-with-emacs-pgtk (specification->package "emacs-consult-lsp"))) ; gcc 4.9 build failure
+             (package-with-emacs-pgtk (specification->package "emacs-consult-xdg-recent-files"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-consult-org-roam"))
+             (package-with-emacs-pgtk (specification->package "emacs-consult-flycheck"))
+             (package-with-emacs-pgtk (specification->package "emacs-marginalia"))
+             (package-with-emacs-pgtk (specification->package "emacs-orderless"))
+             (package-with-emacs-pgtk (specification->package "emacs-trashed"))
+             (package-with-emacs-pgtk (specification->package "emacs-qrencode"))
+             (package-with-emacs-pgtk (specification->package "emacs-forge"))
+             (package-with-emacs-pgtk (specification->package "emacs-fj")) ; Forgejo
+             (package-with-emacs-pgtk (specification->package "emacs-taxy-magit-section"))
+             (package-with-emacs-pgtk (specification->package "emacs-ghub"))
+             (package-with-emacs-pgtk (specification->package "emacs-github-review"))
+             (package-with-emacs-pgtk (specification->package "emacs-pr-review"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-svg-tag-mode"))
+             ;; This one uses text styling and so makes the user's stuff more editable than svg-tag-mode
+             ;; Replaces org-bullets and org-superstar
+             (package-with-emacs-pgtk (specification->package "emacs-org-modern"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-modern-indent")) ; can be used without emacs-org-modern
+             (package-with-emacs-pgtk (specification->package "emacs-ob-async"))
+             (package-with-emacs-pgtk (specification->package "emacs-mixed-pitch"))
+             ;; Used by emacs-doom-modeline. Requires nerd font. Can install it via M-x nerd-icons-install-fonts to ~/.local/share/fonts
+             ;; Don't forget to M-x customize-variable lsp-treemacs-theme to "Iconless" without quotes. It will show icons from the font anyway.
+             (package-with-emacs-pgtk (specification->package "emacs-nerd-icons"))
+                                        ;(package-with-emacs-pgtk (specification->package "emacs-doom-modeline"))
+             (package-with-emacs-pgtk (specification->package "emacs-pulsar"))
+             (package-with-emacs-pgtk (specification->package "emacs-rainbow-delimiters"))
+             (package-with-emacs-pgtk (specification->package "emacs-discover-my-major"))
+             (package-with-emacs-pgtk (specification->package "emacs-auctex"))
+             ;; See also M-x cdlatex-command-help
+             (package-with-emacs-pgtk (specification->package "emacs-cdlatex"))
+             (package-with-emacs-pgtk (specification->package "emacs-company-auctex"))
+             (package-with-emacs-pgtk (specification->package "emacs-latex-extra"))
+             (package-with-emacs-pgtk (specification->package "emacs-adoc-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-tempel"))
+             (package-with-emacs-pgtk (emacs-debbugs-patch (specification->package "emacs-debbugs")))
+             (package-with-emacs-pgtk (specification->package "emacs-inheritenv"))
+             ;; Alternative: emacs-reformatter
+             (package-with-emacs-pgtk (specification->package "emacs-format-all-the-code"))
+             ;; For swank-js to use.  But it doesn't work with multiple major modes yet. TODO: css-mode;
+             (package-with-emacs-pgtk (specification->package "emacs-js2-mode"))
+                                        ; typescript mode done by combobulate
+             ;; Allows the user to see/edit a range of a buffer in another buffer.
+             (package-with-emacs-pgtk (specification->package "emacs-edit-indirect"))
+                                        ; shipped by default (package-with-emacs-pgtk (specification->package "emacs-js-mode"))
+             ;; This one works with multiple major modes (and thus with Vue JS, mmm)
+                                        ; shipped by default (package-with-emacs-pgtk (specification->package "emacs-js-mode"))
+             ;; Allows multiple major modes to coexist in one buffer
+             (package-with-emacs-pgtk (specification->package "emacs-mmm-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-vala-mode"))
+             ;; Shows number of search results in status bar
+             (package-with-emacs-pgtk (specification->package "emacs-anzu"))
+             (package-with-emacs-pgtk (specification->package "emacs-dired-rsync"))
+             (package-with-emacs-pgtk (specification->package "emacs-dockerfile-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-emacsql"))
+                                        ; TODO (package-with-emacs-pgtk (specification->package "emacs-graphviz-dot-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-jinja2-mode"))
+             ;; Spaced repetition in org mode.
+             (package-with-emacs-pgtk (specification->package "emacs-org-fc"))
+             ;; vcard vcf
+             (package-with-emacs-pgtk (specification->package "emacs-org-vcard"))
+             ;; Visual undo tree.
+             (package-with-emacs-pgtk (specification->package "emacs-vundo"))
+             ;; Weather info
+             (package-with-emacs-pgtk (specification->package "emacs-wttrin"))
+             ;; org->HTML export
+             (package-with-emacs-pgtk (specification->package "emacs-org-re-reveal"))
+             (package-with-emacs-pgtk (specification->package "emacs-frames-only-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-popper"))
+             ; TODO avy ?
+                                        ; doesn't native compile: (package-with-emacs-pgtk (specification->package "emacs-mastodon"))
+             (package-with-emacs-pgtk (specification->package "emacs-elfeed")) ; RSS/Atom
+             (package-with-emacs-pgtk (specification->package "emacs-elfeed-tube")) ; RSS/Atom Youtube
+             (package-with-emacs-pgtk (specification->package "emacs-elfeed-score"))
+             (package-with-emacs-pgtk (specification->package "emacs-elfeed-org")) ; manage elfeed subscriptions in org mode
+             (package-with-emacs-pgtk (specification->package "emacs-fortran-tags"))
+             ;; or celluloid for gtk
+             (package-with-emacs-pgtk (specification->package "emacs-mpv"))
+             (package-with-emacs-pgtk (specification->package "emacs-empv")) ; ?
+             (package-with-emacs-pgtk (specification->package "fd")) ; used by empv
+                                        ; emacs-ytel
+             (package-with-emacs-pgtk (specification->package "emacs-nov-el")) ; for epub
+             (package-with-emacs-pgtk (specification->package "dvisvgm")) ; for epub
+             (package-with-emacs-pgtk (specification->package "emacs-wallabag")) ; for reading webpage later
+             (package-with-emacs-pgtk (specification->package "emacs-ztree")) ; directory diff
+             (package-with-emacs-pgtk (specification->package "emacs-ement"))
+                                        ; HELM            (package-with-emacs-pgtk (specification->package "emacs-slack"))
+             (package-with-emacs-pgtk (specification->package "emacs-arei"))
+                                        ; I adapt it (package-with-emacs-pgtk (specification->package "emacs-combobulate"))
+                                        ;emacs-consult-notmuch
+                                        ;emacs-consult-yasnippet
+                                        ;emacs-consult-bibtex
+                                        ;emacs-consult-dir
+             (package-with-emacs-pgtk (specification->package "emacs-zotxt"))
+             ;; One of the problems with one-way sync/extract from org-mode files to Anki database is losing out the context (imagine notes from a technical books).
+             ;; I use org-drill in combination with org-sticky-header, which show the path of headings to that particular node.
+             ;; Normally in Anki, this requires to add some extra descriptions or tags for this purpose. In org-mode, we get this for free.
+             ;; But on the other hand, org-drill will fill your org file with scheduling and metadata drawers.
+             ;; Another drawback with org-drill is it manages schedules for one "card" per heading, hence cloze items are not scheduled individually.
+             ;; So, either you remember entirely "Alfred North Whitehead wrote [Principia Mathematica] in [1910]" or not at all.
+             ;; In Anki, not only the book title "[Principia Mathematica]" and the written year "[1910]" are tested separately (same as org-drill),
+             ;; but also scheduled/scored separately too (where org-drill falls short).
+             ;; Use both, org-drill mostly for books, Anki for "standalone" facts.
+             (package-with-emacs-pgtk (specification->package "emacs-anki-editor"))
+             (package-with-emacs-pgtk (specification->package "emacs-gnosis"))
+             ;; https://github.com/louietan/anki-editor
+             (package-with-emacs-pgtk (specification->package "emacs-org-drill"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-sticky-header"))
+                                        ; similar: (package-with-emacs-pgtk (specification->package "emacs-gnosis"))
+             (package-with-emacs-pgtk (specification->package "emacs-pandoc-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-ox-pandoc"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-pandoc-import"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-auto-tangle"))
+             (package-with-emacs-pgtk (specification->package "emacs-howm")) ; minor mode for wiki
+             (package-with-emacs-pgtk (specification->package "emacs-pdf-tools"))
+             (package-with-emacs-pgtk (specification->package "emacs-saveplace-pdf-view"))
+             (package-with-emacs-pgtk emacs-xah-wolfram-mode)
+             (package-with-emacs-pgtk (specification->package "emacs-gptel"))
+             (package-with-emacs-pgtk (specification->package "emacs-sage-shell-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-polymode-org"))
+             (package-with-emacs-pgtk (specification->package "emacs-gnuplot"))
+                                        ; HELM            (package-with-emacs-pgtk (specification->package "emacs-org-books"))
+             (package-with-emacs-pgtk (specification->package "emacs-biblio"))
+             (package-with-emacs-pgtk (specification->package "emacs-persid")) ; isbn, doi, ...; (persid-insert-bibtex "arxiv:2008.06030")
+; emacs-xyz problem in it. (we moved emacs-dash to emacs-build from emacs-xyz; they didn't adapt)
+))
+
+(define (emacs-daemon-service q)
+  (list (shepherd-service (provision '(emacs))
+                    (documentation "Run GNU Emacs in daemon mode")
+                    (start #~(make-forkexec-constructor (list #$(file-append
+                                                                 (package-with-emacs-pgtk emacs-pgtk)
+                                                                 "/bin/emacs")
+                                                              "--fg-daemon")))
+                    (stop #~(make-system-destructor
+                             "emacsclient -e '(save-buffers-kill-emacs)'")))))
+
+(define funmacs-service-type
+  (service-type (name 'fpguix-funmacs-distribution)
+                (description
+                 "A service to install and manage de FunMacs distribution")
+                (extensions (list (service-extension home-profile-service-type
+                                   funmacs-packages)
+                                  (service-extension home-shepherd-service-type
+                                   emacs-daemon-service)))
+                (default-value #f)))
+
 (home-environment
  (packages (append ;;; System
 
@@ -620,14 +967,7 @@ file prettification."))))
 
 ;;; System Tools
 
-             (package-with-emacs-pgtk (specification->package "emacs-with-editor")) ; password-store requires this and doesn't have it in its inputs
-             (package-with-emacs-pgtk (specification->package "emacs-pinentry"))
-             (package-with-emacs-pgtk (specification->package "emacs-enwc")) ; network manager
-             (package-with-emacs-pgtk (specification->package "emacs-age")) ; encryption
-             (package-with-emacs-pgtk (emacs-elisp-autofmt-patch emacs-elisp-autofmt))
              (specification->package "pass-age")
-             (package-with-emacs-pgtk (specification->package "emacs-password-store")) ; "pass" integration
-             (package-with-emacs-pgtk (specification->package "emacs-passage")) ; password mgr
              (specification->package "xrdb")      ; compat for nheko
              (specification->package "gammastep") ; redshift
                                         ;(specification->package "btop")
@@ -747,16 +1087,6 @@ file prettification."))))
                                         ;(specification->package "cdparanoia")
              (specification->package "geeqie")
              (specification->package "mediainfo")
-             (package-with-emacs-pgtk (specification->package "emacs-scad-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-mediainfo-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-iedit")) ; edit all matching text at once
-             (package-with-emacs-pgtk (specification->package "emacs-nyan-mode"))
-
-;;; Hardware programming
-
-             (package-with-emacs-pgtk (specification->package "emacs-vhdl-ts-mode"))
-             ;(package-with-emacs-pgtk (specification->package "emacs-vhdl-ext"))
-             (package-with-emacs-pgtk (specification->package "emacs-fpga"))
 
 ;;; Programming
 
@@ -782,26 +1112,8 @@ file prettification."))))
              (specification->package "subversion")
                                         ; Reverse Engineering
              (specification->package "radare2")
-             (package-with-emacs-pgtk (emacs-window-tool-bar-patch (specification->package "emacs-window-tool-bar")))
-             (package-with-emacs-pgtk (specification->package "emacs-wgrep"))
-             (package-with-emacs-pgtk (specification->package "emacs-ws-butler")) ; auto trim whitespace from end of MODIFIED lines
-             (package-with-emacs-pgtk (specification->package "emacs-vlf")) ; very large files
-             (package-with-emacs-pgtk (specification->package "emacs-hideshowvis"))
-             (package-with-emacs-pgtk (specification->package "emacs-tuareg")) ; ocaml
-             (package-with-emacs-pgtk (specification->package "emacs-yaml-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-julia-mode")) ; uses yaml which hangs
-             (package-with-emacs-pgtk (specification->package "emacs-julia-repl"))
-             (package-with-emacs-pgtk (specification->package "emacs-julia-snail"))
-             (package-with-emacs-pgtk (specification->package "emacs-inf-ruby"))
-             (package-with-emacs-pgtk (specification->package "emacs-alchemist")) ; Elixir
-             (package-with-emacs-pgtk (specification->package "emacs-xpm"))
-             (package-with-emacs-pgtk (specification->package "emacs-tco-el")) ; macro "defun-tco" for tail call optimized procedures
-             (package-with-emacs-pgtk (specification->package "emacs-stream"))
-             (package-with-emacs-pgtk (specification->package "emacs-flymake"))
-             (package-with-emacs-pgtk (patch2 (specification->package "emacs-lean4-mode")))
              ;; We in org mode
              (specification->package "plantuml")
-             (package-with-emacs-pgtk (specification->package "emacs-plantuml-mode"))
 
              (list (specification->package "git") "send-email")
                                         ;(specification->package "nasm")
@@ -838,17 +1150,10 @@ file prettification."))))
                                         ; julia-wayland-jll
              (specification->package "jupyter")
              (specification->package "jupyter-guile-kernel")
-             (package-with-emacs-pgtk (specification->package "emacs-ctrlf")) ; you've got to be kidding me. Why is this not builtin? ; alternatives: occur[!], swiper, consult-line[terrible]
              ;; You need to use "| ezf" in eshell for this to be any good.
-                                        ; HELM (package-with-emacs-pgtk (specification->package "emacs-ezf"))
              (specification->package "python-jupytext") ;; required by code-cells
              ;; Result cells of ipynb files are not retained in the conversion to script format. This means that opening and then saving an ipynb file clears all cell outputs.
              ;; code-cells-write-ipynb to export to ipynb.
-             (package-with-emacs-pgtk (specification->package "emacs-code-cells"))
-             (package-with-emacs-pgtk (specification->package "emacs-jupyter"))
-                                        ;(package-with-emacs-pgtk emacs-notebook-mode)
-             (package-with-emacs-pgtk (specification->package "emacs-password-generator"))
-             (specification->package "guile-ares-rs")
                                         ;(specification->package "diffoscope") ; requires u-boot-tools--and that doesn't build.
              (specification->package "diffstat")
                                         ;(specification->package "hugs") ; build failure with gcc 4.9.4
@@ -858,7 +1163,6 @@ file prettification."))))
                                         ;(specification->package "esbuild")
                                         ;(specification->package "ocaml")
              (specification->package "ocaml-merlin") ; LSP for ocaml
-             (package-with-emacs-pgtk (specification->package "emacs-kotlin-mode"))
                                         ;(specification->package "gforth") ; also has emacs support
                                         ;(specification->package "clojure")
                                         ;(specification->package "clojure-tools")
@@ -891,13 +1195,6 @@ file prettification."))))
 ;;; Emacs
 
                                         ; TODO maybe browse-at-remote (but it REALLY uses a browser)
-                                        ; TODO maybe emacs-git-link
-             (package-with-emacs-pgtk (specification->package "emacs-aggressive-indent"))
-             (package-with-emacs-pgtk (specification->package "emacs-casual-calc"))
-             (package-with-emacs-pgtk (specification->package "emacs-casual-info"))
-             (package-with-emacs-pgtk (specification->package "emacs-casual-dired"))
-             (package-with-emacs-pgtk (specification->package "emacs-show-font"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-casual-avy"))
              (specification->package "texlive-digestif")
              ;; For xenops (or for me)
              (specification->package "texlive-listings")
@@ -916,8 +1213,6 @@ file prettification."))))
              (specification->package "texlive-lualatex-math") ; for luatex only.; lualatex-math.sty missing
              
              ;; For xenops
-             (package-with-emacs-pgtk (specification->package "emacs-aio"))
-             ;; For xenops
              (specification->package "texlive-scheme-basic")
              ;; For me (and org)
              (specification->package "texlive-esint") ; \oiint
@@ -933,147 +1228,17 @@ file prettification."))))
              (specification->package "texlive-dvipng")
              ;; Content-oriented latex.  Examples: \D{f}{x}, \D[n]{f}{x}, \D{f}{x,y,z}, \D[2,n,3]{f}{x,y,z}, \pderiv{f}{x}, ..., \Integrate{f}{x}, \Int{f(x)}{x}, \Int{f}{S,C}, \Int{f(x)}{x,a,b}, \Sum{a(k)}{k}, \Sum{a(k)}{k,1,n}, \Prod{a(k)}{k}, \IdentityMatrix\Style{IdentityMatrixParen=p}, \IdentityMatrix[2], ...
              (specification->package "texlive-cool")
-             (package-with-emacs-pgtk (specification->package "emacs-lsp-booster"))
-             (package-with-emacs-pgtk (specification->package "emacs-undo-tree"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-page-break-lines"))
-             (package-with-emacs-pgtk (specification->package "emacs-form-feed"))
-             (package-with-emacs-pgtk emacs-pgtk) ; overly paranoid
-             (package-with-emacs-pgtk (specification->package "emacs-smartparens"))
-             (package-with-emacs-pgtk (specification->package "emacs-indent-bars")) ; maybe overdoing it
-             (package-with-emacs-pgtk (emacs-spacious-padding-patch (specification->package "emacs-spacious-padding"))) ; spacing between windows
-             (package-with-emacs-pgtk (specification->package "emacs-crdt"))
-             (package-with-emacs-pgtk (specification->package "emacs-magit"))
-             (package-with-emacs-pgtk (specification->package "emacs-magit-org-todos-el"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-jira"))
-             (package-with-emacs-pgtk (specification->package "emacs-git-email"))
-             (package-with-emacs-pgtk (specification->package "emacs-git-gutter-fringe"))
-             (package-with-emacs-pgtk (specification->package "emacs-diff-hl")) ; VC diff in the fringe
-             (package-with-emacs-pgtk (emacs-color-theme-solarized-patch (specification->package "emacs-color-theme-solarized")))
-             (package-with-emacs-pgtk (specification->package "emacs-dtrt-indent"))
-             (package-with-emacs-pgtk (specification->package "emacs-slime-company"))
-             (package-with-emacs-pgtk (specification->package "emacs-eval-in-repl-slime"))
-             (package-with-emacs-pgtk (specification->package "emacs-pyvenv")) ; we're not really using that
-             ;; For Lisp and Javascript; Note: emacs-sly is a fork
-             (package-with-emacs-pgtk (specification->package "emacs-slime"))
-             (package-with-emacs-pgtk (specification->package "emacs-eldoc"))
-             (package-with-emacs-pgtk (specification->package "emacs-xref")) ; TODO: emacs-xref-union
-             (package-with-emacs-pgtk (specification->package "emacs-sesman"))
-             (package-with-emacs-pgtk (specification->package "emacs-outshine")) ; org-like stuff outside org
-             (package-with-emacs-pgtk (specification->package "emacs-org")) ; org 9.7.11 is included in emacs
-             (package-with-emacs-pgtk (specification->package "emacs-org-notify"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-org-element")) ; tree
-
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-org-texlive-collection"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-edna"))
-             (package-with-emacs-pgtk (emacs-el-job-patch (specification->package "emacs-org-node")))
-
-             (package-with-emacs-pgtk (specification->package "emacs-org-noter")) ; PDF notes
-             (package-with-emacs-pgtk (specification->package "emacs-org-pdftools")) ; PDF notes and links ; for org-noter-pdftools; "lightly maintained" (terrible quality)
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-org-fragtog")) ; I have xenops already
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-xenops"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-super-links"))
-             (package-with-emacs-pgtk (specification->package "emacs-orgit")) ; make org links to magit buffers
-             (package-with-emacs-pgtk (specification->package "emacs-orgit-forge")) ; make org links to forge topic buffers
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-org-roam"))
-                                        ; HELM            (package-with-emacs-pgtk (specification->package "emacs-org-ref"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-super-agenda"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-timeblock"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-remark")) ; add notes to epub and websites
-             (package-with-emacs-pgtk (specification->package "emacs-org-pomodoro"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-emms"))
-             (package-with-emacs-pgtk (specification->package "emacs-mu4e-dashboard")) ; live query mu4e from org
-             (package-with-emacs-pgtk (specification->package "emacs-mu4e-alert"))
-             ;;(package-with-emacs-pgtk (specification->package "emacs-bbdb")) ; contact management (old)
-             (package-with-emacs-pgtk (specification->package "emacs-ebdb")) ; contact management
-             ;; old (package-with-emacs-pgtk (specification->package "emacs-bbdb-vcard"))
-
-             (package-with-emacs-pgtk (specification->package "emacs-consult-mu")) ; search mails from consult
-             (package-with-emacs-pgtk (specification->package "emacs-org-msg"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-contrib")) ; not that well-maintained
-             (package-with-emacs-pgtk (specification->package "emacs-emms"))
-             (package-with-emacs-pgtk (specification->package "emacs-comment-tags"))
-             (package-with-emacs-pgtk (specification->package "emacs-csv-mode"))
-
-             (package-with-emacs-pgtk (specification->package "emacs-keycast")) ; shows keys pressed
-             (package-with-emacs-pgtk (specification->package "emacs-embark"))
-             (package-with-emacs-pgtk (specification->package "emacs-outline-indent")) ; code folding and outlining
-             (package-with-emacs-pgtk (specification->package "emacs-rmsbolt")) ; godbolt
-             ;; Used by emacs-dap-mode
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-treemacs")))
-             ;; Used by emacs-dap-mode
-             (package-with-emacs-pgtk (specification->package "emacs-bui"))
-             ;; Used by emacs-dap-mode (popup)
-             (package-with-emacs-pgtk (specification->package "emacs-posframe"))
-
-             (package-with-emacs-pgtk (specification->package "emacs-beacon"))
-             (package-with-emacs-pgtk (specification->package "emacs-bar-cursor"))
-             (package-with-emacs-pgtk (specification->package "emacs-jinx")) ; spell checker
              (specification->package "aspell") ; so we get DICPATH set to guix home's profile.  That's ridiculous.
              (specification->package "aspell-dict-en")
                                         ;(specification->package "aspell-dict-de")
              (specification->package "hunspell") ; so we get DICPATH set to guix home's profile.  That's ridiculous.
              (specification->package "hunspell-dict-de-at")
              (specification->package "hunspell-dict-de")
-             (package-with-emacs-pgtk (specification->package "emacs-wakib-keys"))
-             (package-with-emacs-pgtk (specification->package "emacs-treemacs-nerd-icons"))
-             (package-with-emacs-pgtk (specification->package "emacs-elastic-modes"))
-             ;; Alternative: emacs-dape
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-dap-mode")))
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-mode")))
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-ui")))
-                                        ; doesn't work (package-with-emacs-pgtk (specification->package "emacs-lsp-docker"))
-                                        ; part of emacs since emacs 29 (package-with-emacs-pgtk (specification->package "emacs-csharp-mode"))
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-ccls"))) ; C LSP; conflicts with our patched dap-mode
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-java"))) ; conflicts with our patched dap-mode
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-elpy")) ; just use dap-python ; elpy is unmaintained
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-tramp")) ; I think that's part of emacs now
-             (package-with-emacs-pgtk (specification->package "emacs-agda2-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-treemacs"))
-             (package-with-emacs-pgtk (specification->package "emacs-treemacs-extra")) ; magit, projectile, tab-bar; but also all-the-icons, memoize, evil, persp-mode, perspective; mu
-             (package-with-emacs-pgtk (specification->package "emacs-magit-gerrit"))
-             (package-with-emacs-pgtk (specification->package "emacs-magit-svn"))
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-rustic")))
-             (package-with-emacs-pgtk (specification->package "emacs-projectile"))
-             (package-with-emacs-pgtk (specification->package "emacs-company"))
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-company-lsp")))
-             (package-with-emacs-pgtk (specification->package "emacs-company-org-block")) ; snippets with "<"
-             (package-with-emacs-pgtk (specification->package "emacs-capf-autosuggest"))
              (package-with-emacs-pgtk (specification->package "ispell")) ; used by built-in emacs flyspell-mode
-             (package-with-emacs-pgtk (specification->package "emacs-flycheck"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-helm")) ; replaced by vertico
-             (package-with-emacs-pgtk (specification->package "emacs-shackle"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-envrc"))
-             ;; Understands guix.scm and manifest.scm natively
-             (package-with-emacs-pgtk (specification->package "emacs-buffer-env"))
-             (package-with-emacs-pgtk (specification->package "emacs-clojure-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-clojure-snippets"))
 
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-helm-cider"))
-             ;; For Clojure. Supports light table via M-x cider-enlighten-mode
-             (package-with-emacs-pgtk (specification->package "emacs-cider"))
-             (package-with-emacs-pgtk (specification->package "emacs-clj-refactor"))
-             (package-with-emacs-pgtk (specification->package "emacs-eval-in-repl-cider"))
-             (package-with-emacs-pgtk (specification->package "emacs-haskell-mode"))
-             ;(package-with-emacs-pgtk (specification->package "emacs-geiser-guile")) ; geiser is worse than arei
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-flycheck-guile")) ; would use geiser
-             (package-with-emacs-pgtk (specification->package "emacs-parinfer-rust-mode"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-parinfer-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-web-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-git-timemachine"))
-             (package-with-emacs-pgtk (specification->package "emacs-markdown-mode"))
-             ;(package-with-emacs-pgtk (specification->package "emacs-geiser")) ; geiser is worse than arei
-             (package-with-emacs-pgtk (specification->package "emacs-go-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-typescript-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-pkg-info"))
-             (package-with-emacs-pgtk (specification->package "emacs-flycheck-rust"))
-             (package-with-emacs-pgtk (specification->package "emacs-rust-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-docker"))
-             (package-with-emacs-pgtk (specification->package "emacs-dired-launch"))
-             (package-with-emacs-pgtk (specification->package "emacs-dirvish")) ; better dired
              (specification->package "ditaa") ; ASCII art -> bitmap
                                         ;(specification->package "dvisvgm") ; TODO: Move that to manifest.scm of your project
                                         ; obsolete in favor of integrated tramp-container
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-docker-tramp"))
              (specification->package "tree-sitter-cli")
              (specification->package "tree-sitter-clojure")
              (specification->package "tree-sitter-gomod")
@@ -1099,152 +1264,16 @@ file prettification."))))
              (specification->package "tree-sitter-cpp")
              (specification->package "tree-sitter-verilog")
              (specification->package "tree-sitter-vhdl")
-             (package-with-emacs-pgtk (specification->package "emacs-eat"))
-                                        ; statistics: R, Julia, and JAGS.
-                                        ; FIXME (package-with-emacs-pgtk (specification->package "emacs-ess"))
 
              (specification->package "python-jupyter-client") ; required by emacs-jupyter (for no reason; why not just invoke "jupyter kernel"?)
-             (package-with-emacs-pgtk (specification->package "emacs-jupyter"))
              (specification->package "python-black")
-                                        ; TODO emacs-python-black ?? ; why not format-all-the-code ? The latter already works, I think.
-             (package-with-emacs-pgtk (specification->package "emacs-elixir-mode"))
-             (package-with-emacs-pgtk emacs-guix-minimal)
-             (package-with-emacs-pgtk (specification->package "emacs-bluetooth"))
-             (package-with-emacs-pgtk (specification->package "emacs-osm"))
-             (package-with-emacs-pgtk (specification->package "emacs-erc-hl-nicks")) ; IRC nick coloring
-                                        ;old (package-with-emacs-pgtk (specification->package "emacs-counsel")) ; replaced by consult stuff
-                                        ;old (package-with-emacs-pgtk (specification->package "emacs-counsel-tramp"))
-                                        ;old (package-with-emacs-pgtk (specification->package "emacs-counsel-projectile"))
-                                        ;old (package-with-emacs-pgtk (specification->package "emacs-counsel-jq"))
-                                        ;old (package-with-emacs-pgtk (specification->package "emacs-helm-projectile"))
-             (package-with-emacs-pgtk (specification->package "emacs-company-jedi")) ; Python completion
-             (package-with-emacs-pgtk (specification->package "emacs-back-button"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-wanderlust")) ; email (POP3, IMAP and Maildir)
-                                        ;I moved from wanderlust to mew because I find mew has better support for encryption, particularly S/MIME.
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-mew"))
-             (specification->package "mu") ; maildir indexer, mu4e
-             (package-with-emacs-pgtk (specification->package "emacs-vertico"))
-             (package-with-emacs-pgtk (specification->package "emacs-consult"))
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-consult-lsp"))) ; gcc 4.9 build failure
-             (package-with-emacs-pgtk (specification->package "emacs-consult-xdg-recent-files"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-consult-org-roam"))
-             (package-with-emacs-pgtk (specification->package "emacs-consult-flycheck"))
-             (package-with-emacs-pgtk (specification->package "emacs-marginalia"))
-             (package-with-emacs-pgtk (specification->package "emacs-orderless"))
-             (package-with-emacs-pgtk (specification->package "emacs-trashed"))
-             (package-with-emacs-pgtk (specification->package "emacs-qrencode"))
-             (package-with-emacs-pgtk (specification->package "emacs-forge"))
-             (package-with-emacs-pgtk (specification->package "emacs-fj")) ; Forgejo
-                                        ; Columns
-             (package-with-emacs-pgtk (specification->package "emacs-taxy-magit-section"))
-             (package-with-emacs-pgtk (specification->package "emacs-ghub"))
-             (package-with-emacs-pgtk (specification->package "emacs-github-review"))
-             (package-with-emacs-pgtk (specification->package "emacs-pr-review"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-svg-tag-mode"))
-             ;; This one uses text styling and so makes the user's stuff more editable than svg-tag-mode
-             ;; Replaces org-bullets and org-superstar
-             (package-with-emacs-pgtk (specification->package "emacs-org-modern"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-modern-indent")) ; can be used without emacs-org-modern
-             (package-with-emacs-pgtk (specification->package "emacs-ob-async"))
-             (package-with-emacs-pgtk (specification->package "emacs-mixed-pitch"))
-             ;; Used by emacs-doom-modeline. Requires nerd font. Can install it via M-x nerd-icons-install-fonts to ~/.local/share/fonts
-             ;; Don't forget to M-x customize-variable lsp-treemacs-theme to "Iconless" without quotes. It will show icons from the font anyway.
-             (package-with-emacs-pgtk (specification->package "emacs-nerd-icons"))
-                                        ;(package-with-emacs-pgtk (specification->package "emacs-doom-modeline"))
-             (package-with-emacs-pgtk (specification->package "emacs-pulsar"))
-             (package-with-emacs-pgtk (specification->package "emacs-rainbow-delimiters"))
-             ;; What's the difference to which-key ??
-             (package-with-emacs-pgtk (specification->package "emacs-discover-my-major"))
-             (package-with-emacs-pgtk (specification->package "emacs-which-key"))
-             (package-with-emacs-pgtk (specification->package "emacs-auctex"))
-             ;; See also M-x cdlatex-command-help
-             (package-with-emacs-pgtk (specification->package "emacs-cdlatex"))
-             (package-with-emacs-pgtk (specification->package "emacs-company-auctex"))
-             (package-with-emacs-pgtk (specification->package "emacs-latex-extra"))
-             (package-with-emacs-pgtk (specification->package "emacs-adoc-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-tempel"))
-             (package-with-emacs-pgtk (emacs-debbugs-patch (specification->package "emacs-debbugs")))
-             (package-with-emacs-pgtk (specification->package "emacs-inheritenv"))
-             ;; Alternative: emacs-reformatter
-             (package-with-emacs-pgtk (specification->package "emacs-format-all-the-code"))
-
-             ;; For swank-js to use.  But it doesn't work with multiple major modes yet. TODO: css-mode;
-             (package-with-emacs-pgtk (specification->package "emacs-js2-mode"))
-                                        ; typescript mode done by combobulate
-             ;; Allows the user to see/edit a range of a buffer in another buffer.
-             (package-with-emacs-pgtk (specification->package "emacs-edit-indirect"))
-             ;; This one works with multiple major modes (and thus with Vue JS, mmm)
-                                        ; shipped by default (package-with-emacs-pgtk (specification->package "emacs-js-mode"))
-             ;; Allows multiple major modes to coexist in one buffer
-             (package-with-emacs-pgtk (specification->package "emacs-mmm-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-vala-mode"))
-             ;; Shows number of search results in status bar
-             (package-with-emacs-pgtk (specification->package "emacs-anzu"))
-             (package-with-emacs-pgtk (specification->package "emacs-dired-rsync"))
-             (package-with-emacs-pgtk (specification->package "emacs-dockerfile-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-emacsql"))
-                                        ; TODO (package-with-emacs-pgtk (specification->package "emacs-graphviz-dot-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-jinja2-mode"))
-             ;; Spaced repetition in org mode.
-             (package-with-emacs-pgtk (specification->package "emacs-org-fc"))
-             ;; vcard vcf
-             (package-with-emacs-pgtk (specification->package "emacs-org-vcard"))
-             ;; Visual undo tree.
-             (package-with-emacs-pgtk (specification->package "emacs-vundo"))
-             ;; Weather info
-             (package-with-emacs-pgtk (specification->package "emacs-wttrin"))
-             ;; org->HTML export
-             (package-with-emacs-pgtk (specification->package "emacs-org-re-reveal"))
-                                        ; unused
-             (package-with-emacs-pgtk (specification->package "emacs-frames-only-mode"))
-                                        ; https://github.com/karthink/popper special-case popup windows in general.
-             (package-with-emacs-pgtk (specification->package "emacs-popper"))
-                                        ; TODO avy
-                                        ; doesn't native compile: (package-with-emacs-pgtk (specification->package "emacs-mastodon"))
-
-             (package-with-emacs-pgtk (specification->package "emacs-elfeed")) ; RSS/Atom
-             (package-with-emacs-pgtk (specification->package "emacs-elfeed-tube")) ; RSS/Atom Youtube
-             (package-with-emacs-pgtk (specification->package "emacs-elfeed-score"))
-             (package-with-emacs-pgtk (specification->package "emacs-elfeed-org")) ; manage elfeed subscriptions in org mode
-             (package-with-emacs-pgtk (specification->package "emacs-fortran-tags"))
-                                        ; or celluloid for gtk
-             (package-with-emacs-pgtk (specification->package "emacs-mpv"))
-             (package-with-emacs-pgtk (specification->package "emacs-empv")) ; ?
              (package-with-emacs-pgtk (specification->package "fd")) ; used by empv
-                                        ; emacs-ytel
-             (package-with-emacs-pgtk (specification->package "emacs-nov-el")) ; for epub
              (package-with-emacs-pgtk (specification->package "dvisvgm")) ; for epub
-             (package-with-emacs-pgtk (specification->package "emacs-ztree")) ; directory diff
 
              (specification->package "pantalaimon")
-             (package-with-emacs-pgtk (specification->package "emacs-ement"))
-                                        ; HELM            (package-with-emacs-pgtk (specification->package "emacs-slack"))
              
-             ;; Guile IDE
-             (package-with-emacs-pgtk (specification->package "emacs-arei"))
-             (specification->package "guile-ares-rs")
-                                        ; I adapt it (package-with-emacs-pgtk (specification->package "emacs-combobulate"))
-                                        ; FIXME https://github.com/mclear-tools/consult-notes
-                                        ; and then (consult-notes-org-roam-mode)
-                                        ; HELM!?
-                                        ;emacs-consult-notmuch
-                                        ;emacs-consult-yasnippet
-                                        ;emacs-consult-bibtex
-                                        ;emacs-consult-dir
-                                        ; Ivy[built-in]
-                                        ; company-mode
-                                        ; consult: Either use the default completion UI or ensure that exactly one of vertico-mode, mct-mode, or icomplete-mode is enabled. The unsupported modes selectrum-mode, ivy-mode, helm-mode, ido-mode and ido-ubiquitous-mode must be disabled.
-                                        ; emacs vertico uses built-in completion; better than helm
-                                        ;(let ((base (specification->package "mogan")))
-                                        ;          (package (inherit base)
-                                        ;            (inputs
-                                        ;             (modify-inputs (package-inputs base)
-                                        ;                            ;(prepend qtwayland-5)
-                                        ;                            ))))
-
              ;; Scientist.
              (specification->package "texmacs-guile3")
-             (package-with-emacs-pgtk (specification->package "emacs-zotxt"))
              (specification->package "zotero")
 
 ;;; Theorem Proving
@@ -1257,32 +1286,7 @@ file prettification."))))
 ;;; Learning
              
              (specification->package "anki")
-             ;; One of the problems with one-way sync/extract from org-mode files to Anki database is losing out the context (imagine notes from a technical books).
-             ;; I use org-drill in combination with org-sticky-header, which show the path of headings to that particular node.
-             ;; Normally in Anki, this requires to add some extra descriptions or tags for this purpose. In org-mode, we get this for free.
-             ;; But on the other hand, org-drill will fill your org file with scheduling and metadata drawers.
-             ;; Another drawback with org-drill is it manages schedules for one "card" per heading, hence cloze items are not scheduled individually.
-             ;; So, either you remember entirely "Alfred North Whitehead wrote [Principia Mathematica] in [1910]" or not at all.
-             ;; In Anki, not only the book title "[Principia Mathematica]" and the written year "[1910]" are tested separately (same as org-drill),
-             ;; but also scheduled/scored separately too (where org-drill falls short).
-             ;; Use both, org-drill mostly for books, Anki for "standalone" facts.
-             (package-with-emacs-pgtk (specification->package "emacs-anki-editor"))
-             (package-with-emacs-pgtk (specification->package "emacs-gnosis"))
-             ;; https://github.com/louietan/anki-editor
-             (package-with-emacs-pgtk (specification->package "emacs-org-drill"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-sticky-header"))
-                                        ; similar: (package-with-emacs-pgtk (specification->package "emacs-gnosis"))
-
              (specification->package "pandoc")
-             (package-with-emacs-pgtk (specification->package "emacs-pandoc-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-ox-pandoc"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-pandoc-import"))
-             (package-with-emacs-pgtk (specification->package "emacs-org-auto-tangle"))
-             (package-with-emacs-pgtk (specification->package "emacs-howm")) ; minor mode for wiki
-
-             (package-with-emacs-pgtk (specification->package "emacs-pdf-tools"))
-             (package-with-emacs-pgtk (specification->package "emacs-saveplace-pdf-view"))
-             (package-with-emacs-pgtk emacs-xah-wolfram-mode)
              
 ;;; Network
 
@@ -1342,7 +1346,6 @@ file prettification."))))
 ;;; AI
 
              (llama-tune (specification->package "llama-cpp")) ; can be tuned
-             (package-with-emacs-pgtk (specification->package "emacs-gptel"))
 
 ;;; Android
              
@@ -1398,12 +1401,6 @@ file prettification."))))
 
 ;;; Science
 
-             (package-with-emacs-pgtk (specification->package "emacs-sage-shell-mode"))
-             (package-with-emacs-pgtk (specification->package "emacs-polymode-org"))
-             (package-with-emacs-pgtk (specification->package "emacs-gnuplot"))
-                                        ; HELM            (package-with-emacs-pgtk (specification->package "emacs-org-books"))
-             (package-with-emacs-pgtk (specification->package "emacs-biblio"))
-             (package-with-emacs-pgtk (specification->package "emacs-persid")) ; isbn, doi, ...; (persid-insert-bibtex "arxiv:2008.06030")
                                         ;(specification->package "texlive-pgfopts") ; used by cadabra2 < 2.5.2
                                         ;(specification->package "texlive-ytableau") ; used by cadabra2 < 2.5.2
                                         ;(specification->package "texlive-setspace") ; used by cadabra2 < 2.5.2
