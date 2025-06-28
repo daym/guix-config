@@ -1507,6 +1507,7 @@ file prettification."))))
    (service home-xdg-mime-applications-service-type)
                                         ; automatic (service home-fontconfig-service-type)
                                         ;    (service home-channels-service-type)
+
    (simple-service 'nonguix-packages-service
                    home-channels-service-type
                    (list
@@ -1562,4 +1563,8 @@ file prettification."))))
              (bash-profile (list (local-file
                                   (string-append (current-source-directory) "/.bash_profile")
                                   "bash_profile")))))
-   %base-home-services)))
+    (service home-shepherd-service-type
+       (home-shepherd-configuration
+         ;; I can start my own shepherd, thanks.
+         (auto-start? #f)))
+     %base-home-services)))
