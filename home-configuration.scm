@@ -1546,8 +1546,10 @@ file prettification."))))
                                         ; "1EFB 0909 1F17 D28C CBF9  B13A 53D4 57B2 D636 EE82")))
                      )))
 
-   ;; Screencasting
-   (simple-service 'custom-dbus-services home-dbus-service-type (map specification->package (list "xdg-desktop-portal-wlr" "xdg-desktop-portal" "blueman")))
+   ;; Screencasting etc.  I think this does nothing at all and those are found as a side effect of being in the guix home profile (via XDG_DATA_DIRS).
+   (simple-service 'custom-dbus-services home-dbus-service-type (map specification->package
+                                                                  (list "xdg-desktop-portal-wlr" "xdg-desktop-portal" "blueman")))
+   (service funmacs-service-type)
 
    (service home-bash-service-type
             (home-bash-configuration
