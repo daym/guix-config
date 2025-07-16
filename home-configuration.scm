@@ -989,6 +989,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
                                         ; similar: (package-with-emacs-pgtk (specification->package "emacs-gnosis"))
              (package-with-emacs-pgtk (specification->package "emacs-pandoc-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-ox-pandoc"))
+             (package-with-emacs-pgtk (specification->package "emacs-org-asciidoc"))
              (package-with-emacs-pgtk (specification->package "emacs-org-pandoc-import"))
              (package-with-emacs-pgtk (specification->package "emacs-org-auto-tangle"))
              (package-with-emacs-pgtk (specification->package "emacs-howm")) ; minor mode for wiki
