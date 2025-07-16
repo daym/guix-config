@@ -1079,6 +1079,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
 ;;; System Tools
 
              (specification->package "pass-age")
+             tpm-fido ; see also: autostart.
              (specification->package "xrdb")      ; compat for nheko
              (specification->package "gammastep") ; redshift
                                         ;(specification->package "btop")
