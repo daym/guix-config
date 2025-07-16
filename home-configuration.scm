@@ -1046,7 +1046,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
             wayland-packages
 
             ;; <https://github.com/swaywm/swaylock/issues/395>
-            (list (specification->package "swaylock"))
+            (list (specification->package "swaylock-effects"))
 
             (list (nwg-launchers-patch (specification->package "nwg-launchers")))
             (list (sway-patch (specification->package "sway")))
