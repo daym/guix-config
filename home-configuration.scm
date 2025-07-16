@@ -1121,6 +1121,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (specification->package "hwinfo")
              (specification->package "strace")
                                         ; security issues (specification->package "screen")
+             (specification->package "eternalterminal")
              (specification->package "fzf")
              (specification->package "tmon") ; temp monitoring
              (specification->package "file")
