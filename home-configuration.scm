@@ -45,6 +45,7 @@
                                         ;(gnu home services syncthing)
              (gnu home services xdg)
              (gnu packages linux) ; e2fsprogs
+             (gnu packages emacs) ; emacs
              (gnu packages emacs-xyz)
              (guix build-system glib-or-gtk)
              (gnu packages gnome) ; libsecret
