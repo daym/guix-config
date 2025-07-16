@@ -1568,7 +1568,6 @@ protects the token keys by using your system's TPM.  It uses Linux's
 ;;;(service home-pulseaudio-rtp-sink-service-type)
    (service home-fish-service-type)
    (service home-pipewire-service-type)
-   (service home-shepherd-service-type)
                                         ; (home-shepherd-configuration
                                         ;   (services (list (@ (shepherd service repl) repl-service))))
                                         ;(simple-service 'battery-threshold shepherd-root-service-type
@@ -1685,5 +1684,8 @@ protects the token keys by using your system's TPM.  It uses Linux's
     (service home-shepherd-service-type
        (home-shepherd-configuration
          ;; I can start my own shepherd, thanks.
-         (auto-start? #f)))
+         (auto-start? #f)
+         ;; If you want it tied to the window manager (you don't).
+         ;(daemonize? #f)
+))
      %base-home-services)))
