@@ -105,6 +105,9 @@ then
 	# Hinting; User has to use DejaVu Sans and DejaVu Sans Mono that has good hinting support
 	export FREETYPE_PROPERTIES="truetype:interpreter-version=35"
 
+    # Not sure what SDL2 does when it sees that
+	export SDL_VIDEODRIVER=wayland
+
     # For sway ICC color profiles, see <https://github.com/swaywm/sway/issues/1486>
 	export WLR_RENDERER=vulkan
 fi
