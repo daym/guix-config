@@ -4,6 +4,8 @@
 . ~/.guix-home/profile/etc/profile.d/flatpak.sh
 export XDG_DATA_DIRS
 
+export GUIX_DISTRO_AGE_WARNING=30 # days
+
 
 #set > /tmp/goo-`/run/current-system/profile/bin/id  -u`-"`date`"
 
