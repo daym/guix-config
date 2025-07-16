@@ -127,3 +127,6 @@ export LSP_USE_PLISTS=true
 # Debug wireplumber hang
 #export PIPEWIRE_DEBUG=3
 #export WIREPLUMBER_DEBUG=3
+
+# Otherwise lin.bat or automatic
+#export MCPHASE_NOFTHREADS=15
