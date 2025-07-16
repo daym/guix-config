@@ -1206,6 +1206,10 @@ protects the token keys by using your system's TPM.  It uses Linux's
 
              idea
 
+             (specification->package "python-numpy@1")
+             (specification->package "python-scipy@1")
+             ; TODO: python-pythran
+
              (specification->package "gnu-standards") ; info manuals
 
              ;; Typescript compiler.
