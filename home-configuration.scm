@@ -577,6 +577,108 @@ notebooks in GNU Emacs.")
 Note: This is a minimalist variant of emacs-guix, with simply
 file prettification."))))
 
+(define-public go-github-com-foxcpp-go-assuan
+  (package
+    (name "go-github-com-foxcpp-go-assuan")
+    (version "1.0.0")
+    (source
+      (origin
+        (method git-fetch)
+        (uri (git-reference
+               (url "https://github.com/foxcpp/go-assuan")
+               (commit (string-append "v" version))))
+        (file-name (git-file-name name version))
+        (sha256
+         (base32 "0xp51yf2wb70zb8irj28gf7jzp380bwjycd8kkj45jrvm0gzll2c"))
+        ;(patches
+        ; (search-patches "go-assuan-1.0.0-fix-tests.patch"))
+         ))
+    (build-system go-build-system)
+    (arguments
+     (list #:tests? #f
+           #:skip-build? #t 
+           #:import-path "github.com/foxcpp/go-assuan"))
+    (home-page "https://github.com/foxcpp/go-assuan")
+    (synopsis "Pure Go implementation of Assuan IPC protocol")
+    (description "This package provides a pure Go implementation of the
+Assuan IPC protocol, which is used in the GnuPG suite for communication
+between components like gpg, gpg-agent, and pinentry.") 
+    (license license:expat)))
+
+(define-public go-github-com-google-go-tpm-0.3 
+  (package
+    (inherit go-github-com-google-go-tpm)
+    (name "go-github-com-google-go-tpm")
+    (version "0.3.3")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/google/go-tpm")
+             (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "0y9w9xkvm1lqda7y56dgclmadywp3q9d12p5pd62l9l18g6kbl5b"))))))
+
+(define-public go-github-com-psanford-uhid
+  (let ((commit "a7c1e481958d6d8861a35d61a3f0734b94848283")
+        (revision "0"))
+  (package
+    (name "go-github-com-psanford-uhid")
+    (version (git-version "0.0.0" revision commit))
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/psanford/uhid")
+              (commit commit)))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1jybcj69nrjzlmamk21hl8avmv3lp0ph7kkqnxail52ynlzfn4wv"))))
+    (build-system go-build-system)
+    (native-inputs
+     (list go-github-com-pkg-term))
+    (arguments
+     (list #:skip-build? #t
+           #:import-path "github.com/psanford/uhid"))
+    (home-page "https://github.com/psanford/uhid")
+    (synopsis "Linux uhid api in Go") 
+    (description "This package provides a Go library for creating user space
+HID devices on Linux.  It is a fork of the uhid implementation from the
+Chromium OS @code{tast-tests} repository.")
+    (license license:bsd-3))))
+
+(define-public tpm-fido
+  (let ((commit "5f8828b82b58f9badeed65718fca72bc31358c5c")
+        (revision "0"))
+    (package
+      (name "tpm-fido")
+      (version (git-version "0.0.0" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+                (url "https://github.com/psanford/tpm-fido")
+                (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "17p76rryh2zfg5v2rx426l8asqkalk5kll3x1wf1nw0zh03zkyk1"))))
+      (build-system go-build-system)
+      (arguments
+       (list #:import-path "github.com/psanford/tpm-fido"))
+      (propagated-inputs
+       (list go-github-com-foxcpp-go-assuan
+             go-github-com-google-go-tpm-0.3
+             go-github-com-psanford-uhid
+             go-golang-org-x-crypto))
+      (home-page "https://github.com/psanford/tpm-fido")
+      (synopsis "WebAuthn/U2F token protected by a TPM")
+      (description "This package provides a FIDO token implementation that
+protects the token keys by using your system's TPM.  It uses Linux's
+@code{uhid} facility to emulate a USB HID device so that it is properly
+ detected by web browsers.")
+      (license license:expat)))) 
+
 (define (funmacs-packages config)
   (list
              (package-with-emacs-pgtk (specification->package "emacs-with-editor")) ; password-store requires this and doesn't have it in its inputs
