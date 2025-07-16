@@ -708,7 +708,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (package-with-emacs-pgtk (specification->package "emacs-inf-ruby"))
              (package-with-emacs-pgtk (specification->package "emacs-alchemist")) ; Elixir
              (package-with-emacs-pgtk (specification->package "emacs-xpm"))
-             (package-with-emacs-pgtk (specification->package "emacs-tco-el")) ; macro "defun-tco" for tail call optimized procedures
+             (package-with-emacs-pgtk (specification->package "emacs-tco")) ; macro "defun-tco" for tail call optimized procedures
              (package-with-emacs-pgtk (specification->package "emacs-stream"))
              (package-with-emacs-pgtk (specification->package "emacs-flymake"))
              (package-with-emacs-pgtk (patch2 (specification->package "emacs-lean4-mode")))
