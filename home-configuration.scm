@@ -727,7 +727,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (package-with-emacs-pgtk (specification->package "emacs-casual-dired"))
              (package-with-emacs-pgtk (specification->package "emacs-show-font"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-casual-avy"))
-             (package-with-emacs-pgtk (specification->package "emacs-aio"))
+             (package-with-emacs-pgtk (specification->package "emacs-aio")) ; for xenops
              (package-with-emacs-pgtk (specification->package "emacs-lsp-booster"))
              (package-with-emacs-pgtk (specification->package "emacs-undo-tree"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-page-break-lines"))
