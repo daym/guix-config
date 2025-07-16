@@ -15,6 +15,7 @@ export GUIX_DISTRO_AGE_WARNING=30 # days
 # Not sure where else I would set that in time!
 #export WAYLAND_DISPLAY=wayland-1
 
+# Show error code.
 trap 'echo -ne "\033]2;$(history 1 | sed "s/^[ ]*[0-9]*[ ]*//g") | ${USER}@${HOSTNAME}\007"' DEBUG
 alias ls='ls -p --color'
 alias ll='ls -l'
