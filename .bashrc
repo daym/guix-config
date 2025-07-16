@@ -97,8 +97,8 @@ nnano () {
 }
 
 # Oxide
-TARGET_HOSTSPEC=daym@atrium.eng.oxide.computer
-export TARGET_HOSTSPEC
+#TARGET_HOSTSPEC=daym@atrium.eng.oxide.computer
+#export TARGET_HOSTSPEC
 
 # Make venv mandatory for using pip
 #export PIP_REQUIRE_VIRTUALENV=1
