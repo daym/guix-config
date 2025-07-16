@@ -1,5 +1,9 @@
-# Honor per-interactive-shell startup file
-if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
+# Honor per-interactive-shell startup file; WTF?
+#if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
+
+. ~/.guix-home/profile/etc/profile.d/flatpak.sh
+export XDG_DATA_DIRS
+
 
 #set > /tmp/goo-`/run/current-system/profile/bin/id  -u`-"`date`"
 
