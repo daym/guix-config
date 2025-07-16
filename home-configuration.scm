@@ -815,7 +815,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
                                         ;(package-with-emacs-pgtk (specification->package "emacs-tramp")) ; I think that's part of emacs now
              (package-with-emacs-pgtk (specification->package "emacs-agda2-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-treemacs"))
-             (package-with-emacs-pgtk emacs-treemacs-extra) ; magit, projectile, tab-bar; but also all-the-icons, memoize, evil, persp-mode, perspective; mu
+             (package-with-emacs-pgtk (specification->package "emacs-treemacs-extra")) ; magit, projectile, tab-bar; but also all-the-icons, memoize, evil, persp-mode, perspective; mu
              (package-with-emacs-pgtk (specification->package "emacs-magit-gerrit"))
              (package-with-emacs-pgtk (specification->package "emacs-magit-svn"))
              (patch2 (package-with-emacs-pgtk (specification->package "emacs-rustic")))
