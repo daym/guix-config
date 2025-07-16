@@ -1007,7 +1007,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
 ; emacs-xyz problem in it. (we moved emacs-dash to emacs-build from emacs-xyz; they didn't adapt)
 ))
 
-(define (emacs-daemon-service q)
+(define (emacs-daemon-services q)
   (list (shepherd-service (provision '(emacs))
                     (documentation "Run GNU Emacs in daemon mode")
                     (start #~(make-forkexec-constructor (list #$(file-append
@@ -1024,7 +1024,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
                 (extensions (list (service-extension home-profile-service-type
                                    funmacs-packages)
                                   (service-extension home-shepherd-service-type
-                                   emacs-daemon-service)))
+                                   emacs-daemon-services)))
                 (default-value #f)))
 
 (home-environment
