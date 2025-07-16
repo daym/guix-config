@@ -1389,7 +1389,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (package-with-emacs-pgtk (specification->package "fd")) ; used by empv
              (package-with-emacs-pgtk (specification->package "dvisvgm")) ; for epub
 
-             (specification->package "pantalaimon")
+                                        ;(specification->package "pantalaimon") ; requires python-pydbus, but it's broken.
              
              ;; Scientist.
              (specification->package "texmacs-guile3")
