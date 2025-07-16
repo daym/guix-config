@@ -1080,6 +1080,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
 
              (specification->package "pass-age")
              tpm-fido ; see also: autostart.
+             (specification->package "patool") ; universal archiver
              (specification->package "xrdb")      ; compat for nheko
              (specification->package "gammastep") ; redshift
                                         ;(specification->package "btop")
