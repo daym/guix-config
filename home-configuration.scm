@@ -58,6 +58,7 @@
              (gnu packages gtk)
              (gnu packages autotools)
              (gnu packages xml)
+             (gnu packages mail)
              (gnu packages base)
              (gnu packages gettext)
              (gnu packages perl)
