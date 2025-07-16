@@ -352,6 +352,7 @@
                               "slurp" ; screenshot
                                         ;"scrot" ; screenshot ; supposedly only xorg
                               "maim" ; screenshot; need no hold-drag
+                              "grim" ; org-download uses that.
                               "grimshot"
                               "ydotool" ; simulate keyboard stuff
                               )))
