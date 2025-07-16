@@ -52,6 +52,9 @@
              (gnu packages qt) ; qtwayland-5
              (gnu packages guile)
              (gnu packages glib)
+             (gnu packages golang-build)
+             (gnu packages golang-crypto)
+             (gnu packages golang-xyz)
              (gnu packages gtk)
              (gnu packages autotools)
              (gnu packages xml)
