@@ -6,6 +6,9 @@ export XDG_DATA_DIRS
 
 export GUIX_DISTRO_AGE_WARNING=30 # days
 
+#/run/current-system/profile/bin/pgrep --uid $USER shepherd > /dev/null || 
+# Will fail when started concurrently anyway.
+"${HOME}/.guix-home/profile/bin/shepherd"
 
 #set > /tmp/goo-`/run/current-system/profile/bin/id  -u`-"`date`"
 
