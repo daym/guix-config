@@ -739,7 +739,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (package-with-emacs-pgtk (emacs-spacious-padding-patch (specification->package "emacs-spacious-padding"))) ; spacing between windows
              (package-with-emacs-pgtk (specification->package "emacs-crdt"))
              (package-with-emacs-pgtk (specification->package "emacs-magit"))
-             (package-with-emacs-pgtk (specification->package "emacs-magit-org-todos-el"))
+             (package-with-emacs-pgtk (specification->package "emacs-magit-org-todos"))
              (package-with-emacs-pgtk (specification->package "emacs-org-jira"))
              (package-with-emacs-pgtk (specification->package "emacs-org-mime"))
              (package-with-emacs-pgtk (specification->package "emacs-git-email"))
