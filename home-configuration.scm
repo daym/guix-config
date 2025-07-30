@@ -88,11 +88,6 @@
                                                            (current-source-directory)
                                                            "/patches/dap-mode.patch")))))
 
-(define patch2
-  (options->transformation `((with-patch . ,(string-append "emacs-lsp-mode="
-                                                           (current-source-directory)
-                                                           "/patches/lsp-mode.patch")))))
-
 ;; Avoid etc/images/diropen.xpm and diropen.xbm
 (define emacs-patch
   (options->transformation `((with-patch . ,(string-append "emacs-pgtk="
@@ -717,7 +712,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (package-with-emacs-pgtk (specification->package "emacs-tco")) ; macro "defun-tco" for tail call optimized procedures
              (package-with-emacs-pgtk (specification->package "emacs-stream"))
              (package-with-emacs-pgtk (specification->package "emacs-flymake"))
-             (package-with-emacs-pgtk (patch2 (specification->package "emacs-lean4-mode")))
+             (package-with-emacs-pgtk (specification->package "emacs-lean4-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-plantuml-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-ctrlf")) ; you've got to be kidding me. Why is this not builtin? ; alternatives: occur[!], swiper, consult-line[terrible]
                                         ; HELM (package-with-emacs-pgtk (specification->package "emacs-ezf"))
@@ -798,7 +793,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (package-with-emacs-pgtk (specification->package "emacs-outline-indent")) ; code folding and outlining
              (package-with-emacs-pgtk (specification->package "emacs-rmsbolt")) ; godbolt
              ;; Used by emacs-dap-mode
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-treemacs")))
+             (package-with-emacs-pgtk (specification->package "emacs-lsp-treemacs"))
              ;; Used by emacs-dap-mode
              (package-with-emacs-pgtk (specification->package "emacs-bui"))
              ;; Used by emacs-dap-mode (popup)
@@ -810,13 +805,13 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (package-with-emacs-pgtk (specification->package "emacs-treemacs-nerd-icons"))
              (package-with-emacs-pgtk (specification->package "emacs-elastic-modes"))
              ;; Alternative: emacs-dape
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-dap-mode")))
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-mode")))
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-ui")))
+             (package-with-emacs-pgtk (specification->package "emacs-dap-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-lsp-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-lsp-ui"))
                                         ; doesn't work (package-with-emacs-pgtk (specification->package "emacs-lsp-docker"))
                                         ; part of emacs since emacs 29 (package-with-emacs-pgtk (specification->package "emacs-csharp-mode"))
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-ccls"))) ; C LSP; conflicts with our patched dap-mode
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-lsp-java"))) ; conflicts with our patched dap-mode
+             (package-with-emacs-pgtk (specification->package "emacs-ccls")) ; C LSP; conflicts with our patched dap-mode
+             (package-with-emacs-pgtk (specification->package "emacs-lsp-java")) ; conflicts with our patched dap-mode
                                         ;(package-with-emacs-pgtk (specification->package "emacs-elpy")) ; just use dap-python ; elpy is unmaintained
                                         ;(package-with-emacs-pgtk (specification->package "emacs-tramp")) ; I think that's part of emacs now
              (package-with-emacs-pgtk (specification->package "emacs-agda2-mode"))
@@ -824,10 +819,10 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (package-with-emacs-pgtk (specification->package "emacs-treemacs-extra")) ; magit, projectile, tab-bar; but also all-the-icons, memoize, evil, persp-mode, perspective; mu
              (package-with-emacs-pgtk (specification->package "emacs-magit-gerrit"))
              (package-with-emacs-pgtk (specification->package "emacs-magit-svn"))
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-rustic")))
+             (package-with-emacs-pgtk (specification->package "emacs-rustic"))
              (package-with-emacs-pgtk (specification->package "emacs-projectile"))
              (package-with-emacs-pgtk (specification->package "emacs-company"))
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-company-lsp")))
+             (package-with-emacs-pgtk (specification->package "emacs-company-lsp"))
              (package-with-emacs-pgtk (specification->package "emacs-company-org-block")) ; snippets with "<"
              (package-with-emacs-pgtk (specification->package "emacs-capf-autosuggest"))
              (package-with-emacs-pgtk (specification->package "ispell")) ; used by built-in emacs flyspell-mode
@@ -884,7 +879,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
                                         ;(package-with-emacs-pgtk (specification->package "emacs-mew"))
              (package-with-emacs-pgtk (specification->package "emacs-vertico"))
              (package-with-emacs-pgtk (specification->package "emacs-consult"))
-             (patch2 (package-with-emacs-pgtk (specification->package "emacs-consult-lsp"))) ; gcc 4.9 build failure
+             (package-with-emacs-pgtk (specification->package "emacs-consult-lsp"))
              (package-with-emacs-pgtk (specification->package "emacs-consult-xdg-recent-files"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-consult-org-roam"))
              (package-with-emacs-pgtk (specification->package "emacs-consult-flycheck"))
