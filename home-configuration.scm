@@ -1219,6 +1219,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
                                         ;(specification->package "racket")
              (specification->package "gdb")
              (specification->package "rr")
+             (specification->package "thunar")
                                         ;(specification->package "mercurial")
              (specification->package "git")
              ;; For texmacs. Seriously?
