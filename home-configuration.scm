@@ -1415,7 +1415,6 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (specification->package "nftables")
                                         ;(specification->package "mpop") ; TODO: guix home service
              (offlineimap-patch (specification->package "offlineimap3"))
-             (specification->package "freerdp") ; TODO: split off include/crypto.h since it uses openssl and that's why we need to propagate openssl
              ;; Namespace "Gst" is not available
              ;; xpra needs to be installed on the remote host as well!
              (specification->package "openvpn")
@@ -1449,6 +1448,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (specification->package "curl")
              (specification->package "qrencode")
              (specification->package "remmina")
+             (specification->package "freerdp")
              (specification->package "rtorrent")
                                         ;(specification->package "telegram-desktop")
              
