@@ -1312,6 +1312,10 @@ protects the token keys by using your system's TPM.  It uses Linux's
              ;; For xenops (or for me)
              (specification->package "texlive-listings")
              ;; For xenops (or for me)
+             (specification->package "texlive-physics-patch")
+             ;; For xenops (or for me)
+             (specification->package "texlive-siunitx")
+             ;; For xenops (or for me)
              (specification->package "texlive-tikz-feynman")
              ;; For xenops (or for me)
              (specification->package "texlive-tikz-feynhand") ; without lua
