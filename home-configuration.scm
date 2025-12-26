@@ -1330,6 +1330,8 @@ protects the token keys by using your system's TPM.  It uses Linux's
 ;;; Emacs
 
                                         ; TODO maybe browse-at-remote (but it REALLY uses a browser)
+             ;; Often I need that for scanning and OCRing.
+             (specification->package "pdftk")
              (specification->package "texlive-digestif")
              ;; For xenops (or for me)
              (specification->package "texlive-listings")
