@@ -1,6 +1,3 @@
-# Honor per-interactive-shell startup file; WTF?
-#if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
-
 . ~/.guix-home/profile/etc/profile.d/flatpak.sh
 export XDG_DATA_DIRS
 
@@ -130,3 +127,6 @@ export LSP_USE_PLISTS=true
 
 # Otherwise lin.bat or automatic
 #export MCPHASE_NOFTHREADS=15
+
+# Honor per-interactive-shell startup file
+if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
