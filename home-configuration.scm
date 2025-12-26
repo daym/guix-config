@@ -1527,7 +1527,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (specification->package "daikichi") ; fortune
                                         ;(specification->package "fortunes-jkirchartz")
              (specification->package "steam")
-             (specification->package "heroic")
+             (specification->package "heroic") ; system i686-linux
              (specification->package "freeciv")
 
 ;;; Office
