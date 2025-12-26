@@ -1516,6 +1516,12 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (specification->package "fuse-overlayfs")
              (specification->package "podman-compose")
 
+;;; VHDL
+
+             (specification->package "gtkwave")
+             (specification->package "make")
+             (specification->package "vhdl-ls") ; LSP
+
 ;;; Games
 
              (specification->package "daikichi") ; fortune
