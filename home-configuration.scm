@@ -386,7 +386,7 @@
 (define-public xdg-desktop-portal-gtk
   (package
    (name "xdg-desktop-portal-gtk")
-   (version "1.14.1")
+   (version "1.15.3")
    (source (origin
             (method url-fetch)
             (uri (string-append
@@ -394,8 +394,8 @@
                   version "/xdg-desktop-portal-gtk-" version ".tar.xz"))
             (sha256
              (base32
-              "002p19j1q3fc8x338ndzxnicwframpgafw31lwvv5avy329akqiy"))))
-   (build-system glib-or-gtk-build-system)
+              "0drvlanj4pydcmq1fhk8nbj5mb2zpf2pxcqxd4g61a0r4hyp98s7"))))
+   (build-system meson-build-system)
    (arguments
     `(#:phases
       (modify-phases %standard-phases
@@ -407,14 +407,17 @@
                                             (find-files "po" "\\.po$"))
                                   #t)))
       ;; Enable Gnome portal backends
-      #:configure-flags
-      (list
-       "--enable-appchooser"
-       "--enable-wallpaper"
-       "--enable-screenshot"
-       "--enable-screencast"
-       "--enable-background"
-       "--enable-settings")))
+      ;#:configure-flags
+      ; TODO: dbus-service-dir systemd-user-unit-dir datarootdir wallpaper settings appchooser lockdown ; TODO: dependencies for that.
+      ;(list
+      ; "--enable-appchooser"
+      ; "--enable-wallpaper"
+      ; "--enable-screenshot"
+      ; "--enable-screencast"
+      ; "--enable-background"
+      ; "--enable-settings")
+
+       ))
    (native-inputs
     `(("pkg-config" ,pkg-config)
       ("autoconf" ,autoconf)
@@ -431,7 +434,7 @@
       ("gnome-desktop" ,gnome-desktop)
       ("gsettings-desktop-schemas" ,gsettings-desktop-schemas)))
    (propagated-inputs
-    (list xdg-desktop-portal))
+    (list xdg-desktop-portal-next))
    (home-page "https://github.com/flatpak/xdg-desktop-portal-gtk")
    (synopsis "GTK implementation of xdg-desktop-portal")
    (description
@@ -1047,10 +1050,12 @@ protects the token keys by using your system's TPM.  It uses Linux's
             (list (specification->package "xdg-dbus-proxy"))
 
                                         ;(list (@ (gnu packages freedesktop) xdg-desktop-portal)) ; otherwise it would pick up xdg-desktop-portal-next
-            (specifications->packages '("xdg-desktop-portal"
-                                        ;"xdg-desktop-portal-gtk" ; required for Access--which is required for ScreenCast
+            (specifications->packages '("xdg-desktop-portal@1.18"
+                                        "xdg-desktop-portal-gtk" ; required for Access--which is required for ScreenCast ; todo removed
                                         "xdg-desktop-portal-wlr"))
-            (list xdg-desktop-portal-gtk)
+            (list ;xdg-desktop-portal-gtk 
+            ;dummy-settings-portal
+            )
             wayland-packages
 
             ;; <https://github.com/swaywm/swaylock/issues/395>
