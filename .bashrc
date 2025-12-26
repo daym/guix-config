@@ -105,3 +105,7 @@ nnano () {
 #export MOZ_ENABLE_WAYLAND=1
 ## For emacs-lsp-booster
 #export LSP_USE_PLISTS=true
+
+# Anaconda
+#export CONDA_CHANNELS=defaults,conda-forge,mantid"
+export CONDA_CHANNELS="mantid,defaults"
