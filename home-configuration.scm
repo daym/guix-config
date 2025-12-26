@@ -183,10 +183,22 @@
 
 (define emacs-pgtk (emacs-patch (specification->package "emacs-pgtk")))
 
+(define (emacs-package? p)
+  (and (package? p)
+       (let ((name (package-name p)))
+         (or (string=? name "emacs")
+             (string=? name "emacs-minimal")))))
+
 (define package-with-emacs-pgtk (memoize
                                  (lambda (p)
                                    (package
                                     (inherit p)
+                                    (native-inputs
+                                     (map (match-lambda ((name (? emacs-package? q) sub-drvs ...)
+                                                         `(,name ,emacs-pgtk ,@sub-drvs))
+                                                        ((name q sub-drvs ...)
+                                                         `(,name ,q ,@sub-drvs)))
+                                          (package-native-inputs p)))
                                     (propagated-inputs
                                      (map (match-lambda ((name (? package? q) sub-drvs ...)
                                                          `(,name ,(package-with-emacs-pgtk q) ,@sub-drvs)))
