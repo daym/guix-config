@@ -21,6 +21,7 @@
              (guix build-system emacs)
              (guix build-system gnu)
              (guix build-system go)
+             (guix build-system meson)
              (guix build-system python)
              (guix build-system pyproject)
              (guix channels)
