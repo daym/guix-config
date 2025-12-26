@@ -361,8 +361,8 @@
                               "wl-clipboard"
                               "cliphist" ; or maybe wl-clip-persist ; in any case requires wl-clipboard
                                         ;"nwg-launchers"
-                              "rofi-wayland"
                               "waypipe"
+                              "rofi"
                               "slurp" ; screenshot
                                         ;"scrot" ; screenshot ; supposedly only xorg
                               "maim" ; screenshot; need no hold-drag
