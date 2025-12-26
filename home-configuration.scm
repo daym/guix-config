@@ -871,6 +871,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (package-with-emacs-pgtk (specification->package "emacs-pkg-info"))
              (package-with-emacs-pgtk (specification->package "emacs-flycheck-rust"))
              (package-with-emacs-pgtk (specification->package "emacs-rust-mode"))
+             (package-with-emacs-pgtk (specification->package "emacs-vhdl-ext"))
              ; REQ OLD emacs-aio (package-with-emacs-pgtk (specification->package "emacs-docker"))
              (package-with-emacs-pgtk (specification->package "emacs-dired-launch"))
              (package-with-emacs-pgtk (specification->package "emacs-dirvish")) ; better dired
