@@ -75,39 +75,6 @@ then
 	export R_LIBS_SITE
 fi
 
-if [ "${XDG_SESSION_TYPE}" = "wayland" ]
-then
-	# sway and mpe and turbovnc:
-	export _JAVA_AWT_WM_NONREPARENTING=1
-	# FIXME: All the others except xcb; This is mostly to avoid X11 on HiDPI displays
-	# FIXME: vkkhrdisplay doesn't do tray icon in sway (try with vorta--which uses pyqt6)
-	# FIXME: Qt 5 doesn't have vkkhrdisplay; also, *egl* don't work either.
-	# ./src/vorta/utils.py:def is_system_tray_available():
-	# vorta:         elif SettingsModel.get(key='foreground').value:
-	# QSG_RHI_BACKEND=vulkan for vkkhrdisplay; otherwise it's not very usable.  See <https://doc.qt.io/qt-6/embedded-linux.html>; also, vkkhrdisplay has no mouse cursor
-	export QT_QPA_PLATFORM="wayland;vkkhrdisplay;vnc"
-	export GDK_BACKEND=wayland # possible: wayland,x11
-	# sway:
-	export XDG_CURRENT_DESKTOP=sway
-	#export WAYLAND_DISPLAY=wayland-1
-	#XDG_SESSION_TYPE=wayland
-	export MOZ_ENABLE_WAYLAND=1
-	export ELECTRON_OZONE_PLATFORM_HINT=auto
-	# or --load-extension etc
-	# TODO --ozone-hint=auto
-	# Also has other stuff
-	export CHROMIUM_FLAGS="--enable-remote-extensions --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapture --ozone-platform-hint=auto --allow-file-access-from-files"
-	# The actual ssh-agent is started by shepherd and/or autostart (see guix home)
-
-	# Hinting; User has to use DejaVu Sans and DejaVu Sans Mono that has good hinting support
-	export FREETYPE_PROPERTIES="truetype:interpreter-version=35"
-
-    # Not sure what SDL2 does when it sees that
-	export SDL_VIDEODRIVER=wayland
-
-    # For sway ICC color profiles, see <https://github.com/swaywm/sway/issues/1486>
-	export WLR_RENDERER=vulkan
-fi
 export SSH_AUTH_SOCK=/run/user/`id -u`/ssh-agent/socket
 
 # Give me a break.
