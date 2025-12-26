@@ -742,9 +742,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (package-with-emacs-pgtk (specification->package "emacs-kotlin-mode"))
                                         ; TODO maybe emacs-git-link
              (package-with-emacs-pgtk (specification->package "emacs-aggressive-indent"))
-             (package-with-emacs-pgtk (specification->package "emacs-casual-calc"))
-             (package-with-emacs-pgtk (specification->package "emacs-casual-info"))
-             (package-with-emacs-pgtk (specification->package "emacs-casual-dired"))
+             (package-with-emacs-pgtk (specification->package "emacs-casual"))
              (package-with-emacs-pgtk (specification->package "emacs-show-font"))
                                         ;(package-with-emacs-pgtk (specification->package "emacs-casual-avy"))
              (package-with-emacs-pgtk (specification->package "emacs-aio")) ; for xenops
