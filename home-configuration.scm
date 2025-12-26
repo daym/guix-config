@@ -1110,6 +1110,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (specification->package "udiskie")
              (specification->package "efibootmgr")
              ;;(specification->package "roxterm")
+             (specification->package "alacritty")
              (specification->package "foot")
              (specification->package "p7zip")
              (specification->package "zip")
