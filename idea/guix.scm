@@ -47,6 +47,8 @@
                                    "/lib:"
                                    (assoc-ref inputs "e2fsprogs")
                                    "/lib")))
+                              ;; Otherwise GradleProjectSettings Jvm never get actually resolved when you select "#JAVA_HOME" in the Ctrl-S gradle "Gradle JVM" GUI. Very unfun.
+                              `("JAVA_HOME" = (,(assoc-ref inputs "jbr21")))xxx2@
                               `("JBR21" = (,(assoc-ref inputs "jbr21")))
                               `("JBR17" = (,(assoc-ref inputs "jbr17")))
                               `("CLION_JDK" = (,(assoc-ref inputs "jbr21")))
