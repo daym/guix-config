@@ -20,6 +20,15 @@
             "d031d039b1e5473b030fa0f272f693b469d0ac0e"
             (openpgp-fingerprint
               "1EFB 0909 1F17 D28C CBF9  B13A 53D4 57B2 D636 EE82"))))
+(channel
+  (name 'guix-science)
+  (url "https://codeberg.org/guix-science/guix-science.git")
+  (introduction
+   (make-channel-introduction
+    "b1fe5aaff3ab48e798a4cce02f0212bc91f423dc"
+    (openpgp-fingerprint
+     "CA4F 8CF4 37D7 478F DA05  5FD4 4213 7701 1A37 8446"))))
+     
       (channel
         (name 'nonguix)
         (url "https://gitlab.com/nonguix/nonguix")
