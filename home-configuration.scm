@@ -795,11 +795,12 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (package-with-emacs-pgtk (specification->package "emacs-org-pomodoro"))
              (package-with-emacs-pgtk (specification->package "emacs-org-emms"))
              (package-with-emacs-pgtk (specification->package "emacs-mu4e-dashboard")) ; live query mu4e from org
-             (package-with-emacs-pgtk (specification->package "emacs-mu4e-alert"))
+             (package-with-emacs-pgtk (specification->package "emacs-mu4e-alert")) ; requires mu4e-dbus
+
              ;;(package-with-emacs-pgtk (specification->package "emacs-bbdb")) ; contact management (old)
              (package-with-emacs-pgtk (specification->package "emacs-ebdb")) ; contact management
              ;; old (package-with-emacs-pgtk (specification->package "emacs-bbdb-vcard"))
-             (package-with-emacs-pgtk (specification->package "emacs-consult-mu")) ; search mails from consult
+             (package-with-emacs-pgtk (specification->package "emacs-consult-mu")) ; search mails from consult; requires mu4e-dbus
              (package-with-emacs-pgtk (specification->package "emacs-org-msg"))
              (package-with-emacs-pgtk (specification->package "emacs-org-contrib")) ; not that well-maintained
              (package-with-emacs-pgtk (specification->package "emacs-emms"))
@@ -833,7 +834,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
                                         ;(package-with-emacs-pgtk (specification->package "emacs-tramp")) ; I think that's part of emacs now
              (package-with-emacs-pgtk (specification->package "emacs-agda2-mode"))
              (package-with-emacs-pgtk (specification->package "emacs-treemacs"))
-             (package-with-emacs-pgtk (specification->package "emacs-treemacs-extra")) ; magit, projectile, tab-bar; but also all-the-icons, memoize, evil, persp-mode, perspective; mu
+             (package-with-emacs-pgtk (specification->package "emacs-treemacs-extra")) ; magit, projectile, tab-bar; but also all-the-icons, memoize, evil, persp-mode, perspective; mu; requires mu4e-dbus
              (package-with-emacs-pgtk (specification->package "emacs-magit-gerrit"))
              (package-with-emacs-pgtk (specification->package "emacs-magit-svn"))
              (package-with-emacs-pgtk (specification->package "emacs-rustic"))
