@@ -701,6 +701,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
 (define (funmacs-packages config)
   (list
              (package-with-emacs-pgtk (specification->package "emacs-with-editor")) ; password-store requires this and doesn't have it in its inputs
+             (package-with-emacs-pgtk (specification->package "emacs-ultra-scroll"))
              (package-with-emacs-pgtk (specification->package "emacs-pinentry"))
              (package-with-emacs-pgtk (specification->package "emacs-enwc")) ; network manager
              (package-with-emacs-pgtk (specification->package "emacs-age")) ; encryption
