@@ -1508,6 +1508,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (specification->package "libvirt")
              (specification->package "flatpak")
              (specification->package "dosbox")
+             (specification->package "wine")
                                         ; (specification->package "docker-compose") ; buggy with podman
              (specification->package "podman")
              (specification->package "kubectl")
