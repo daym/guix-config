@@ -368,6 +368,7 @@
                               "grim" ; org-download uses that.
                               "grimshot"
                               "ydotool" ; simulate keyboard stuff
+                              "wayland-utils"
                               )))
 
 (define backup-packages
