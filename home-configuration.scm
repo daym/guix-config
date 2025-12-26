@@ -1408,7 +1408,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
 
              (specification->package "python-jupyter-client") ; required by emacs-jupyter (for no reason; why not just invoke "jupyter kernel"?)
              (specification->package "python-black")
-             (specification->package "mu") ; maildir indexer, mu4e; used by emacs-mu4e
+             (package-with-emacs-pgtk (specification->package "mu")) ; maildir indexer, mu4e; used by emacs-mu4e
              (package-with-emacs-pgtk (specification->package "fd")) ; used by empv
              (package-with-emacs-pgtk (specification->package "dvisvgm")) ; for epub
 
