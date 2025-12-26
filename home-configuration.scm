@@ -490,7 +490,8 @@ interfaces.")
                                  (lambda _
                                    (substitute* "xah-wolfram-mode.el"
                                                 ;; Or: "mathics" on the right side.
-                                                (("wolframscript") "wolframscript")))))))
+                                                (("wolframscript")
+                                                 "wolframscript")))))))
    (synopsis "Mode for the Wolfram language")
    (description "This package provides a mode for the WL language--for
 example the one implemented by python-mathics-core.")
