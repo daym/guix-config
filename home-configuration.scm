@@ -1181,6 +1181,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
 ;;; Fonts
 
              ;; FIXME use weird "ttf" targets etc
+             (specification->package "font-gnu-unifont") ; BITMAP font, with all of Unicode Basic Multilingual Plane
              (specification->package "font-google-noto")
              (specification->package "font-dejavu")
              (specification->package "font-google-noto-sans-cjk")
