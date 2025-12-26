@@ -1221,6 +1221,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
 ;;; Programming
 
              idea
+             (package-with-emacs-pgtk (specification->package "emacs-claude-code"))
 
              (specification->package "python-numpy@1")
              (specification->package "python-scipy@1")
