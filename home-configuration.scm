@@ -1433,6 +1433,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
 ;;; Network
 
              (specification->package "wireguard-tools")
+             (specification->package "opensnitch-ui")
              (specification->package "mailutils")
              (specification->package "iptables")
              (specification->package "nftables")
