@@ -1451,7 +1451,7 @@ protects the token keys by using your system's TPM.  It uses Linux's
              (specification->package "network-manager-openconnect")
              (specification->package "network-manager-openvpn")
                                         ;(ungoogled-chromium-patch )
-             ;(specification->package "ungoogled-chromium")
+             (specification->package "ungoogled-chromium")
              (specification->package "librewolf")
                                         ;(specification->package "icecat")
                                         ;(specification->package "gfeeds")
